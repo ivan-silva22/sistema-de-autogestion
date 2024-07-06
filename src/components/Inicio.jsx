@@ -1,4 +1,5 @@
-import { Button, Container, ListGroup } from "react-bootstrap";
+import { Container, ListGroup } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 
 const Inicio = () => {
   return (
@@ -9,32 +10,55 @@ const Inicio = () => {
         </section>
         <section className="mt-5">
           <ListGroup>
-            <ListGroup.Item action  href="#link1">
-            <i class="bi bi-caret-right-square-fill"></i> Materias del plan
+            <ListGroup.Item action>
+              <NavLink className="nav-link" to={"/materiasdelplan"}>
+                <i class="bi bi-caret-right-square-fill"></i> Materias del plan
+              </NavLink>
             </ListGroup.Item>
-            <ListGroup.Item action href="#link2" >
-            <i class="bi bi-caret-right-square-fill"></i> Estado académico
+            <ListGroup.Item action>
+              <NavLink className="nav-link" to={"/estadoacademico"}>
+                <i class="bi bi-caret-right-square-fill"></i> Estado académico
+              </NavLink>
             </ListGroup.Item>
-            <ListGroup.Item action href="#link3">
-            <i class="bi bi-caret-right-square-fill"></i> Notas de parciales
+            <ListGroup.Item action>
+              <NavLink className="nav-link" to={"/cursado"}>
+                <i class="bi bi-caret-right-square-fill"></i> Cursando
+              </NavLink>
             </ListGroup.Item>
-            <ListGroup.Item action href="#link3">
-            <i class="bi bi-caret-right-square-fill"></i> Correlatividad para cursar
+            <ListGroup.Item action>
+              <NavLink className="nav-link" to={"/correlatividadcursar"}>
+                <i class="bi bi-caret-right-square-fill"></i> Correlatividad
+                para cursar
+              </NavLink>
             </ListGroup.Item>
-            <ListGroup.Item action href="#link3">
-            <i class="bi bi-caret-right-square-fill"></i> Correlatividad para rendir
+            <ListGroup.Item action>
+              <NavLink className="nav-link" to={"/correlatividadrendir"}>
+                <i class="bi bi-caret-right-square-fill"></i> Correlatividad
+                para rendir
+              </NavLink>
             </ListGroup.Item>
-            <ListGroup.Item action href="#link3">
-            <i class="bi bi-caret-right-square-fill"></i> Inscripción a examen 
+            <ListGroup.Item action>
+              <NavLink className="nav-link" to={"/inscripcionexamen"}>
+                <i class="bi bi-caret-right-square-fill"></i> Inscripción a
+                examen
+              </NavLink>
             </ListGroup.Item>
-            <ListGroup.Item action href="#link3">
-            <i class="bi bi-caret-right-square-fill"></i> Inscripción a cursado
+            <ListGroup.Item action>
+              <NavLink className="nav-link" to={"/inscripcioncursado"}>
+                <i class="bi bi-caret-right-square-fill"></i> Inscripción a
+                cursado
+              </NavLink>
             </ListGroup.Item>
-            <ListGroup.Item action href="#link3">
-            <i class="bi bi-caret-right-square-fill"></i> Cambio de contraseña
+            <ListGroup.Item action>
+              <NavLink className="nav-link" to={"/cambiarcontraseña"}>
+                <i class="bi bi-caret-right-square-fill"></i> Cambio de
+                contraseña
+              </NavLink>
             </ListGroup.Item>
-            <ListGroup.Item action href="#link3">
-            <i class="bi bi-caret-right-square-fill"></i> Salir
+            <ListGroup.Item action>
+              <NavLink className="nav-link" to={"/login"}>
+                <i class="bi bi-caret-right-square-fill"></i> Salir
+              </NavLink>
             </ListGroup.Item>
           </ListGroup>
         </section>

@@ -1,0 +1,16 @@
+body{
+  font-family: sans-serif;
+}
+
+
+.btn-login{
+  background-color: #ef0808 !important;
+  border: 0 !important;
+  width: 100%;
+  padding: 10px !important;
+  font-size: 18px !important;
+}
+
+.btn-login:hover{
+  background-color: #812a2a !important;
+}

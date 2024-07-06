@@ -14,3 +14,13 @@ body{
 .btn-login:hover{
   background-color: #812a2a !important;
 }
+
+.contenedor-opc{
+  display: flex;
+  justify-content: space-around;
+  gap: 4px;
+}
+
+.bi-caret-right-square-fill{
+  color: #812a2a;
+}

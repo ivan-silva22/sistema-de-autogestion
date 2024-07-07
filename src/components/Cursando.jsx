@@ -1,48 +1,48 @@
-import { Button, Container, Table } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { Container, Table } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 
-const Cursando = () => {
-    return (
-        <main>
-        <Container>
-          <section className="text-center my-4">
-            <h3>Materias que se encuentra cursando</h3>
-          </section>
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>Año</th>
-                <th>Materia</th>
-                <th>Comisión</th>
-                <th>Horarios</th>
+const Cursando = ({ alumnoLogueado = { alumnoLogueado } }) => {
+  const [materiasCursando, setMateriasCursando] = useState([]);
+
+  useEffect(() => {
+    setMateriasCursando(alumnoLogueado.cursando);
+  }, []);
+
+  return (
+    <main>
+      <Container>
+        <section className="text-center my-4">
+          <h3>Materias que se encuentra cursando</h3>
+        </section>
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>Año</th>
+              <th>Materia</th>
+              <th>Comisión</th>
+              <th>Horarios</th>
+            </tr>
+          </thead>
+          <tbody>
+            {materiasCursando.map((materia) => (
+              <tr key={materia.id}>
+                <td>{materia.Año}</td>
+                <td>{materia.nombreMateria}</td>
+                <td>{materia.comision}</td>
+                <td>{materia.horarios}</td>
               </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>Ciudadanía y espacio publíco</td>
-                <td>46</td>
-                <td>18:20 - 19:45</td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>Introducción a la informática</td>
-                <td>46</td>
-                <td>19:45 - 20:30</td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>Introducción a redes</td>
-                <td>46</td>
-                <td>20:40 - 22:00</td>
-              </tr>
-            </tbody>
-          </Table>
-          <section className="mt-5 text-center">
-                <Button type="button">Volver</Button>
-          </section>
-        </Container>
-      </main>
-    );
+            ))}
+          </tbody>
+        </Table>
+        <section className="mt-5 text-center">
+          <NavLink type="button" className=" btn btn-volver" to={"/inicio"}>
+            Volver
+          </NavLink>
+        </section>
+      </Container>
+    </main>
+  );
 };
 
 export default Cursando;

@@ -50,3 +50,40 @@ export const obtenerMaterias = async (alumno) => {
     return false;
   }
 };
+
+const obtenerFecha =()=>{
+    const dia = new Date().getDate();
+    const mes = new Date().getMonth() + 1;
+    const anio = new Date().getFullYear();
+    return `${dia}/${mes}/${anio}`;
+}
+
+export const incribirExamen = async(materia, alumno) =>{
+
+    let datosExamen = {
+        nombreMateria: materia,
+        fecha: obtenerFecha(),
+        alumnosInscriptos:[{
+            nombres: alumno.nombres,
+            apellido: alumno.apellido,
+            dni: alumno.dni,
+            carrera: alumno.carrera,
+            legajo: alumno.legajo,
+        }],
+    }
+    try {
+        
+        const respuesta = await fetch(URLExamen, {
+            method: "POST",
+            headers:{
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(datosExamen),
+        });
+        
+        return respuesta;
+        
+    } catch (error) {
+        console.log(error)
+    }
+}

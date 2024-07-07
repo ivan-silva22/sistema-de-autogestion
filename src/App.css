@@ -38,3 +38,13 @@ body{
 .btn-volver:hover{
   background-color: #812a2a !important;
 }
+
+.btn-inscripcion{
+  background-color: #ef0808 !important;
+  color: #ffff !important;
+  border: 0 !important;
+}
+
+.btn-inscripcion:hover{
+  background-color: #812a2a !important;
+}

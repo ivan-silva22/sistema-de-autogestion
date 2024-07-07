@@ -23,3 +23,30 @@ export const login = async (alumno) => {
     return false;
   }
 };
+
+export const obtenerMaterias = async (alumno) => {
+  try {
+    const respuesta = await fetch(URLAlumno);
+    const listaAlumnos = await respuesta.json();
+    const buscarAlumno = listaAlumnos.find(
+      (itemAlumno) => itemAlumno.legajo === alumno.legajo
+    );
+    if (buscarAlumno) {
+      const respuesta = await fetch(URLCarrera);
+      const listaCarreras = await respuesta.json();
+      const buscarCarrera = listaCarreras.find(
+        (carrera) => carrera.nombreCarrera === buscarAlumno.carrera
+      );
+      if (buscarCarrera) {
+        return buscarCarrera;
+      } else {
+        return null;
+      }
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};

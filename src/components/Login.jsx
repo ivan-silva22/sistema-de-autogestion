@@ -19,6 +19,7 @@ const Login = ({setAlumnoLogueado}) => {
         nombres: respuesta.nombres,
         apellido: respuesta.apellido,
         legajo: respuesta.legajo,
+        carrera: respuesta.carrera,
       }
       sessionStorage.setItem("alumno", JSON.stringify(datosAlumno));
       Swal.fire({

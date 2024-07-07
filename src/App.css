@@ -28,3 +28,13 @@ body{
 .col{
   flex: none;
 }
+
+.btn-volver{
+  background-color: #ef0808 !important;
+  color: #ffff !important;
+  border: 0 !important;
+}
+
+.btn-volver:hover{
+  background-color: #812a2a !important;
+}

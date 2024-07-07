@@ -1,12 +1,29 @@
 import { Container, ListGroup } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
-const Inicio = () => {
+const Inicio = ({alumnoLogueado, setAlumnoLogueado}) => {
+
+  const navegacion = useNavigate();
+
+  const cerrarSesion =() =>{
+    sessionStorage.removeItem("alumno");
+    setAlumnoLogueado({});
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "Cerrando Sesión",
+      showConfirmButton: false,
+      timer: 1500
+    });
+    navegacion('/login');
+  }
+
   return (
     <main className="my-5">
       <Container>
         <section className="text-center">
-          <h3>ALUMNO: Silva Ivan Jesus Alberto</h3>
+          <h3>ALUMNO: {alumnoLogueado.nombres} {alumnoLogueado.apellido}</h3>
         </section>
         <section className="mt-5">
           <ListGroup>
@@ -55,10 +72,8 @@ const Inicio = () => {
                 contraseña
               </NavLink>
             </ListGroup.Item>
-            <ListGroup.Item action>
-              <NavLink className="nav-link" to={"/inicio/login"}>
-                <i className="bi bi-caret-right-square-fill"></i> Salir
-              </NavLink>
+            <ListGroup.Item action onClick={cerrarSesion}>
+            <i className="bi bi-caret-right-square-fill"></i> Salir
             </ListGroup.Item>
           </ListGroup>
         </section>

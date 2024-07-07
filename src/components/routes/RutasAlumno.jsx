@@ -9,12 +9,21 @@ import InscripcionExamen from "../InscripcionExamen";
 import InscripcionCursado from "../InscripcionCursado";
 import CambiarPassword from "../CambiarPassword";
 
-const RutasAlumno = () => {
+const RutasAlumno = ({ alumnoLogueado, setAlumnoLogueado }) => {
   return (
     <>
       <Routes>
-        <Route exact path="/" element={<Inicio />} />
-        <Route exact path="/materiasdelplan" element={<MateriasPlan />} />
+        <Route
+          exact
+          path="/"
+          element={
+            <Inicio
+              alumnoLogueado={alumnoLogueado}
+              setAlumnoLogueado={setAlumnoLogueado}
+            />
+          }
+        />
+        <Route exact path="/materiasdelplan" element={<MateriasPlan alumnoLogueado={alumnoLogueado} />} />
         <Route exact path="/estadoacademico" element={<EstadoAcademico />} />
         <Route exact path="/cursado" element={<Cursando />} />
         <Route

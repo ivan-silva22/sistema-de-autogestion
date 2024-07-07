@@ -116,3 +116,34 @@ export const inscribirMateria = async(materia, alumno) =>{
   }
   
 }
+
+export const obtenerMateriasCursando = async(alumno) =>{
+  try {
+    const respuesta = await fetch(URLAlumno);
+    const listaAlumnos = await respuesta.json();
+     const buscarAlumno = listaAlumnos.find((itemAlumno) => itemAlumno.legajo === alumno.legajo);
+     if(buscarAlumno){
+      return buscarAlumno.cursando;
+     }
+  } catch (error) {
+    console.log(error)
+  }
+} 
+
+export const correlatividad = async(alumno) =>{
+  try {
+    const respuesta = await fetch(URLAlumno);
+    const listaAlumnos = await respuesta.json();
+    const buscarAlumno = listaAlumnos.find((itemAlumno) => itemAlumno.legajo === alumno.legajo);
+    if(buscarAlumno){
+      const respuesta = await fetch(URLCarrera);
+      const listaCarreras = await respuesta.json();
+      const buscarCarrera = listaCarreras.find((itemCarrera) => itemCarrera.nombreCarrera === buscarAlumno.carrera);
+      if(buscarCarrera){
+        return buscarCarrera.materias;
+      }
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}

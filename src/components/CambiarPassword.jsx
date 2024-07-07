@@ -4,8 +4,9 @@ const CambiarPassword = () => {
   return (
     <main className="my-5">
       <Container>
-        <section>
-          <h4>Cambiar Contraseña</h4>
+        <section className="text-center"> 
+          <h3>Cambiar Contraseña</h3>
+          <hr />
         </section>
         <section>
           <Form>

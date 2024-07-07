@@ -39,10 +39,11 @@ const InscripcionExamen = ({ alumnoLogueado }) => {
   }
  
   return (
-    <main>
+    <main className="my-5">
       <Container>
         <section className="text-center my-4">
           <h3>Inscripción a examenes finales</h3>
+          <hr />
         </section>
         <Table striped bordered hover>
           <thead>

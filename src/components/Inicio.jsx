@@ -16,7 +16,7 @@ const Inicio = ({alumnoLogueado, setAlumnoLogueado}) => {
       showConfirmButton: false,
       timer: 1500
     });
-    navegacion('/login');
+    navegacion('/');
   }
 
   return (

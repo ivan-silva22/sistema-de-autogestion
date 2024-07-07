@@ -18,11 +18,66 @@
       ],
       "cursando": [
         {
-          "id": "1",
           "Año": "1",
           "Dic": "Anual",
           "nombreMateria": "Ciudadanía y Espacio Público",
-          "comision": "46",
+          "comision": 46,
+          "horarios": "18:20 - 19:45"
+        },
+        {
+          "Año": "1",
+          "Dic": "Anual",
+          "nombreMateria": "Introducción a la Informática",
+          "comision": 46,
+          "horarios": "18:20 - 19:45"
+        },
+        {
+          "Año": 1,
+          "Dic": "Anual",
+          "nombreMateria": "Introducción a Redes",
+          "comision": 46,
+          "horarios": "18:20 - 19:45"
+        },
+        {
+          "Año": 1,
+          "Dic": "Anual",
+          "nombreMateria": "Bases de Datos I",
+          "comision": 46,
+          "horarios": "18:20 - 19:45"
+        },
+        {
+          "Año": 1,
+          "Dic": "Anual",
+          "nombreMateria": "Matemática I",
+          "comision": 46,
+          "horarios": "18:20 - 19:45"
+        },
+        {
+          "Año": 1,
+          "Dic": "Anual",
+          "nombreMateria": "Programación I",
+          "comision": 46,
+          "horarios": "18:20 - 19:45"
+        },
+        {
+          "Año": 1,
+          "Dic": "Anual",
+          "nombreMateria": "Inglés Técnico I",
+          "comision": 46,
+          "horarios": "18:20 - 19:45"
+        },
+        {
+          "Año": "1",
+          "Dic": "Anual",
+          "nombreMateria": "Estructura de Datos y Algoritmo",
+          "comision": 46,
+          "horarios": "18:20 - 19:45"
+        },
+        {
+          "Año": 1,
+          "Dic": "Anual",
+          "nombreMateria": "Taller de Programación I",
+          "comision": 46,
           "horarios": "18:20 - 19:45"
         }
       ]
@@ -64,63 +119,252 @@
           "Año": "1",
           "Dic": "Anual",
           "nombreMateria": "Ciudadanía y Espacio Público",
-          "Acreditacion": "Promoción Directa"
+          "Acreditacion": "Promoción Directa",
+          "correlatividadCursar": "-",
+          "correlatividadRendir": "-"
         },
         {
           "id": "2",
           "Año": "1",
           "Dic": "Anual",
           "nombreMateria": "Introducción a la Informática",
-          "Acreditacion": "Examen Final"
+          "Acreditacion": "Examen Final",
+          "correlatividadCursar": "-",
+          "correlatividadRendir": "-"
         },
         {
           "id": "3",
           "Año": 1,
           "Dic": "Anual",
           "nombreMateria": "Introducción a Redes",
-          "Acreditacion": "Examen Final"
+          "Acreditacion": "Examen Final",
+          "correlatividadCursar": "-",
+          "correlatividadRendir": "-"
         },
         {
           "id": "4",
           "Año": 1,
           "Dic": "Anual",
           "nombreMateria": "Bases de Datos I",
-          "Acreditacion": "Examen Final"
+          "Acreditacion": "Examen Final",
+          "correlatividadCursar": "-",
+          "correlatividadRendir": "-"
         },
         {
           "id": "5",
           "Año": 1,
           "Dic": "Anual",
           "nombreMateria": "Matemática I",
-          "Acreditacion": "Promoción Directa"
+          "Acreditacion": "Promoción Directa",
+          "correlatividadCursar": "-",
+          "correlatividadRendir": "-"
         },
         {
           "id": "6",
           "Año": 1,
           "Dic": "Anual",
           "nombreMateria": "Programación I",
-          "Acreditacion": "Examen Final"
+          "Acreditacion": "Examen Final",
+          "correlatividadCursar": "-",
+          "correlatividadRendir": "-"
         },
         {
           "id": "7",
           "Año": 1,
           "Dic": "Anual",
           "nombreMateria": "Inglés Técnico I",
-          "Acreditacion": "Promoción Directa"
+          "Acreditacion": "Promoción Directa",
+          "correlatividadCursar": "-",
+          "correlatividadRendir": "-"
         },
         {
           "id": "8",
           "Año": "1",
           "Dic": "Anual",
           "nombreMateria": "Estructura de Datos y Algoritmo",
-          "Acreditacion": "Examen Final"
+          "Acreditacion": "Examen Final",
+          "correlatividadCursar": "-",
+          "correlatividadRendir": "-"
         },
         {
           "id": "9",
           "Año": 1,
           "Dic": "Anual",
           "nombreMateria": "Taller de Programación I",
-          "Acreditacion": "Examen Final"
+          "Acreditacion": "Examen Final",
+          "correlatividadCursar": "-",
+          "correlatividadRendir": "-"
+        },
+        {
+          "id": "10",
+          "Año": 2,
+          "Dic": "Anual",
+          "nombreMateria": "Programación II",
+          "Acreditacion": "Examen Final",
+          "correlatividadCursar": "Regular Introducción a la Informática - Programación I",
+          "correlatividadRendir": "Aprobada Introducción a la Informática - Programación I" 
+        },
+        {
+          "id": "11",
+          "Año": 2,
+          "Dic": "Anual",
+          "nombreMateria": "Estadistica Aplicada",
+          "Acreditacion": "Promoción Directa",
+          "correlatividadCursar": "Regular Matemática I",
+          "correlatividadRendir": "Aprobada Matemática I"
+        },
+        {
+          "id": "12",
+          "Año": 2,
+          "Dic": "Anual",
+          "nombreMateria": "Bases de Datos II",
+          "Acreditacion": "Examen Final",
+          "correlatividadCursar": "Regular Introducción a la Informática - Base de Datos I",
+          "correlatividadRendir": "Aprobada Introducción a la Informática - Base de Datos I"
+        },
+        {
+          "id": "13",
+          "Año": 2,
+          "Dic": "Anual",
+          "nombreMateria": "Matemática II",
+          "Acreditacion": "Promoción Directa",
+          "correlatividadCursar": "Regular Introducción a la Informática - Matemática I",
+          "correlatividadRendir": "Aprobada Introducción a la Informática - Matemática I"
+        },
+        {
+          "id": "14",
+          "Año": 2,
+          "Dic": "Anual",
+          "nombreMateria": "Sistema de Información Empresarial",
+          "Acreditacion": "Promoción Directa",
+          "correlatividadCursar": "Regular Introducción a la Informática",
+          "correlatividadRendir": "Aprobada Introducción a la Informática"
+        },
+        {
+          "id": "15",
+          "Año": 2,
+          "Dic": "Anual",
+          "nombreMateria": "Inglés Técnico II",
+          "Acreditacion": "Promoción Directa",
+          "correlatividadCursar": "Regular Inglés Técnico I",
+          "correlatividadRendir": "Aprobada Inglés Técnico I"
+        },
+        {
+          "id": "16",
+          "Año": 2,
+          "Dic": "Anual",
+          "nombreMateria": "Redes y Seguridad Informática",
+          "Acreditacion": "Examen Final",
+          "correlatividadCursar": "Regular Introducción a la Informática - Introducción a Redes",
+          "correlatividadRendir": "Aprobada Introducción a la Informática - Introducción a Redes"
+        },
+        {
+          "id": "17",
+          "Año": 2,
+          "Dic": "Anual",
+          "nombreMateria": "Análisis y Diseño de Sistemas",
+          "Acreditacion": "Examen Final",
+          "correlatividadCursar": "Regular Introducción a la Informática - Introducción a Redes",
+          "correlatividadRendir": "Aprobada Introducción a la Informática - Introducción a Redes"
+        },
+        {
+          "id": "18",
+          "Año": 2,
+          "Dic": "Anual",
+          "nombreMateria": "Laboratorio de Programación",
+          "Acreditacion": "Examen Final",
+          "correlatividadCursar": "Regular Introducción a la Informática - Programación I",
+          "correlatividadRendir": "Aprobada Introducción a la Informática - Programación I"
+        },
+        {
+          "id": "19",
+          "Año": 2,
+          "Dic": "Anual",
+          "nombreMateria": "Taller de Programación II",
+          "Acreditacion": "Examen Final",
+          "correlatividadCursar": "Regular Introducción a la Informática - Programación I - Taller de Programación I",
+          "correlatividadRendir": "Regular Introducción a la Informática - Programación I - Taller de Programación I"
+        },
+        {
+          "id": "20",
+          "Año": 3,
+          "Dic": "Anual",
+          "nombreMateria": "Emprendimientos Tecnológicos",
+          "Acreditacion": "Promoción Directa",
+          "correlatividadCursar": "-",
+          "correlatividadRendir": "-"
+        },
+        {
+          "id": "21",
+          "Año": 3,
+          "Dic": "Anual",
+          "nombreMateria": "Gestión de Proyectos y Software de Calidad",
+          "Acreditacion": "Examen Final",
+          "correlatividadCursar": "Regular Estadistica Aplicada - Análisis y Diseño de Sistemas",
+          "correlatividadRendir": "Aprobada Estadistica Aplicada - Análisis y Diseño de Sistemas"
+        },
+        {
+          "id": "22",
+          "Año": 3,
+          "Dic": "Anual",
+          "nombreMateria": "Desarrollo Empresarial",
+          "Acreditacion": "Promoción Directa",
+          "correlatividadCursar": "-",
+          "correlatividadRendir": "-"
+        },
+        {
+          "id": "23",
+          "Año": 3,
+          "Dic": "Anual",
+          "nombreMateria": "Programación III",
+          "Acreditacion": "Examen Final",
+          "correlatividadCursar": "Regular Laboratorio de Programación - Taller de Programación II",
+          "correlatividadRendir": "Aprobada Laboratorio de Programación - Taller de Programación II"
+        },
+        {
+          "id": "24",
+          "Año": 3,
+          "Dic": "Anual",
+          "nombreMateria": "Inglés Técnico III",
+          "Acreditacion": "Promoción Directa",
+          "correlatividadCursar": "Regular Inglés Técnico II",
+          "correlatividadRendir": "Aprobada Inglés Técnico II"
+        },
+        {
+          "id": "25",
+          "Año": 3,
+          "Dic": "Anual",
+          "nombreMateria": "Ética y Deontología Profesional",
+          "Acreditacion": "Promoción Directa",
+          "correlatividadCursar": "-",
+          "correlatividadRendir": "-"
+        },
+        {
+          "id": "26",
+          "Año": 3,
+          "Dic": "Anual",
+          "nombreMateria": "Legislación de Software",
+          "Acreditacion": "Promoción Directa",
+          "correlatividadCursar": "-",
+          "correlatividadRendir": "-"
+        },
+        {
+          "id": "27",
+          "Año": 3,
+          "Dic": "Anual",
+          "nombreMateria": "Técnicas Avanzadas de Programación",
+          "Acreditacion": "Examen Final",
+          "correlatividadCursar": "Regular Laboratorio de Programación - Taller de Programación II",
+          "correlatividadRendir": "Aprobada Laboratorio de Programación - Taller de Programación II"
+        },
+        {
+          "id": "28",
+          "Año": 3,
+          "Dic": "Anual",
+          "nombreMateria": "Taller de Programación III",
+          "Acreditacion": "Examen Final",
+          "correlatividadCursar": "Regular Laboratorio de Programación - Taller de Programación II",
+          "correlatividadRendir": "Aprobada Laboratorio de Programación - Taller de Programación II"
         }
       ]
     }
@@ -138,6 +382,58 @@
           "dni": 42007328,
           "carrera": "Tecnicatura Superior en Desarrollo de Software",
           "lejago": 4150
+        }
+      ]
+    },
+    {
+      "id": "79f5",
+      "nombreMateria": "1",
+      "fecha": "7/7/2024",
+      "alumnosInscriptos": [
+        {
+          "nombres": "Iván Jesus Alberto",
+          "apellido": "Silva",
+          "carrera": "Tecnicatura Superior en Desarrollo de Software",
+          "legajo": "4150"
+        }
+      ]
+    },
+    {
+      "id": "9e53",
+      "nombreMateria": "2",
+      "fecha": "7/7/2024",
+      "alumnosInscriptos": [
+        {
+          "nombres": "Iván Jesus Alberto",
+          "apellido": "Silva",
+          "carrera": "Tecnicatura Superior en Desarrollo de Software",
+          "legajo": "4150"
+        }
+      ]
+    },
+    {
+      "id": "d10c",
+      "nombreMateria": "2",
+      "fecha": "7/7/2024",
+      "alumnosInscriptos": [
+        {
+          "nombres": "Iván Jesus Alberto",
+          "apellido": "Silva",
+          "carrera": "Tecnicatura Superior en Desarrollo de Software",
+          "legajo": "4150"
+        }
+      ]
+    },
+    {
+      "id": "01c7",
+      "nombreMateria": "2",
+      "fecha": "7/7/2024",
+      "alumnosInscriptos": [
+        {
+          "nombres": "Iván Jesus Alberto",
+          "apellido": "Silva",
+          "carrera": "Tecnicatura Superior en Desarrollo de Software",
+          "legajo": "4150"
         }
       ]
     }

@@ -26,6 +26,7 @@ const MateriasPlan = ({ alumnoLogueado }) => {
       <Container>
         <section className="text-center my-4">
           <h3>Materias de {alumnoLogueado.carrera}</h3>
+          <hr />
         </section>
         <Table striped bordered hover>
           <thead>

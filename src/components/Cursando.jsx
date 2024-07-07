@@ -1,19 +1,25 @@
 import { useEffect, useState } from "react";
 import { Container, Table } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+import { obtenerMateriasCursando } from "./helpers/queries";
 
-const Cursando = ({ alumnoLogueado = { alumnoLogueado } }) => {
+const Cursando = ({ alumnoLogueado }) => {
   const [materiasCursando, setMateriasCursando] = useState([]);
 
   useEffect(() => {
-    setMateriasCursando(alumnoLogueado.cursando);
+    obtenerMateriasCursando(alumnoLogueado).then((respuesta) =>{
+      setMateriasCursando(respuesta)
+    })
   }, []);
 
+  
+
   return (
-    <main>
+    <main className="my-5">
       <Container>
         <section className="text-center my-4">
           <h3>Materias que se encuentra cursando</h3>
+          <hr />
         </section>
         <Table striped bordered hover>
           <thead>
@@ -25,8 +31,8 @@ const Cursando = ({ alumnoLogueado = { alumnoLogueado } }) => {
             </tr>
           </thead>
           <tbody>
-            {materiasCursando.map((materia) => (
-              <tr key={materia.id}>
+            {materiasCursando.map((materia, index) => (
+              <tr key={index}>
                 <td>{materia.Año}</td>
                 <td>{materia.nombreMateria}</td>
                 <td>{materia.comision}</td>

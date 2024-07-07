@@ -1,47 +1,53 @@
-import { Button, Container, Table } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { Container, Table } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
+import { correlatividad } from "./helpers/queries";
 
-const CorrelatividadRendir = () => {
-    return (
-        <main>
-        <Container>
-          <section className="text-center my-4">
-            <h3>Correlatividades para rendir</h3>
-          </section>
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Materia</th>
-                <th>Correlatividad</th>
+const CorrelatividadRendir = ({ alumnoLogueado }) => {
+  const [materiasCorrelativasRendir, setMateriasCorrelativasRendir] = useState(
+    []
+  );
+
+  useEffect(() => {
+    correlatividad(alumnoLogueado).then((respuesta) => {
+      setMateriasCorrelativasRendir(respuesta);
+      console.log(respuesta);
+    });
+  }, []);
+
+  return (
+    <main className="my-5">
+      <Container>
+        <section className="text-center my-4">
+          <h3>Correlatividad para rendir</h3>
+          <hr />
+        </section>
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Materia</th>
+              <th>Correlatividad</th>
+            </tr>
+          </thead>
+          <tbody>
+            {materiasCorrelativasRendir.map((materia) => (
+              <tr key={materia.id}>
+                <td>{materia.Año}</td>
+                <td>{materia.nombreMateria}</td>
+                <td>{materia.correlatividadRendir}</td>
               </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>Ciudadanía y espacio publíco</td>
-                <td>-</td>
-             
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Introducción a la informática</td>
-                <td>-</td>
-             
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Introducción a redes</td>
-                <td>-</td>
-                
-              </tr>
-            </tbody>
-          </Table>
-          <section className="mt-5 text-center">
-                <Button type="button">Volver</Button>
-          </section>
-        </Container>
-      </main>
-    );
+            ))}
+          </tbody>
+        </Table>
+        <section className="mt-5 text-center">
+          <NavLink type="button" className=" btn btn-volver" to={"/inicio"}>
+            Volver
+          </NavLink>
+        </section>
+      </Container>
+    </main>
+  );
 };
 
 export default CorrelatividadRendir;

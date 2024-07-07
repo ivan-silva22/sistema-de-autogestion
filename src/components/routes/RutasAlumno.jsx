@@ -29,12 +29,12 @@ const RutasAlumno = ({ alumnoLogueado, setAlumnoLogueado }) => {
         <Route
           exact
           path="/correlatividadcursar"
-          element={<CorrelatividadCursar />}
+          element={<CorrelatividadCursar alumnoLogueado={alumnoLogueado} />}
         />
         <Route
           exact
           path="/correlatividadrendir"
-          element={<CorrelatividadRendir />}
+          element={<CorrelatividadRendir alumnoLogueado={alumnoLogueado} />}
         />
         <Route
           exact

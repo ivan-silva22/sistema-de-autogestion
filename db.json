@@ -1,13 +1,144 @@
 {
-    "posts": [
-      { "id": "1", "title": "a title", "views": 100 },
-      { "id": "2", "title": "another title", "views": 200 }
-    ],
-    "comments": [
-      { "id": "1", "text": "a comment about post 1", "postId": "1" },
-      { "id": "2", "text": "another comment about post 1", "postId": "1" }
-    ],
-    "profile": {
-      "name": "typicode"
+  "alumnos": [
+    {
+      "id": "1",
+      "nombres": "Iván Jesus Alberto",
+      "apellido": "Silva",
+      "dni": "42007328",
+      "carrera": "Tecnicatura Superior en Desarrollo de Software",
+      "legajo": "4150",
+      "password": "Ivansilva18",
+      "estadoAcademico": [
+        {
+          "id": 1,
+          "nombreMateria": "Ciudadanía y Espacio Público",
+          "estado": "Aprobada con 9, Tomo: 1, Folio: 57"
+        }
+      ],
+      "cursando": [
+        {
+          "id": "1",
+          "Año": "1",
+          "Dic": "Anual",
+          "nombreMateria": "Ciudadanía y Espacio Público",
+          "comision": "46",
+          "horarios": "18:20 - 19:45"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "nombres": "Juan Carlos",
+      "apellido": "Perez",
+      "dni": 40102394,
+      "carrera": "Tecnicatura Superior en Desarrollo de Software",
+      "legajo": 2020,
+      "password": "Juancarlos18",
+      "estadoAcademico": [
+        {
+          "id": 1,
+          "nombreMateria": "Ciudadanía y Espacio Público",
+          "estado": "Aprobada con 9, Tomo: 1, Folio: 57"
+        }
+      ],
+      "cursando": [
+        {
+          "id": "1",
+          "Año": "1",
+          "Dic": "Anual",
+          "nombreMateria": "Ciudadanía y Espacio Público",
+          "comision": "46",
+          "horarios": "18:20 - 19:45"
+        }
+      ]
     }
-  }
+  ],
+  "carreras": [
+    {
+      "id": "1",
+      "nombreCarrera": "Tecnicatura Superior en Desarrollo de Software",
+      "materias": [
+        {
+          "id": "1",
+          "Año": "1",
+          "Dic": "Anual",
+          "nombreMateria": "Ciudadanía y Espacio Público",
+          "Acreditacion": "Promoción Directa"
+        },
+        {
+          "id": "2",
+          "Año": "1",
+          "Dic": "Anual",
+          "nombreMateria": "Introducción a la Informática",
+          "Acreditacion": "Examen Final"
+        },
+        {
+          "id": "3",
+          "Año": 1,
+          "Dic": "Anual",
+          "nombreMateria": "Introducción a Redes",
+          "Acreditacion": "Examen Final"
+        },
+        {
+          "id": "4",
+          "Año": 1,
+          "Dic": "Anual",
+          "nombreMateria": "Bases de Datos I",
+          "Acreditacion": "Examen Final"
+        },
+        {
+          "id": "5",
+          "Año": 1,
+          "Dic": "Anual",
+          "nombreMateria": "Matemática I",
+          "Acreditacion": "Promoción Directa"
+        },
+        {
+          "id": "6",
+          "Año": 1,
+          "Dic": "Anual",
+          "nombreMateria": "Programación I",
+          "Acreditacion": "Examen Final"
+        },
+        {
+          "id": "7",
+          "Año": 1,
+          "Dic": "Anual",
+          "nombreMateria": "Inglés Técnico I",
+          "Acreditacion": "Promoción Directa"
+        },
+        {
+          "id": "8",
+          "Año": "1",
+          "Dic": "Anual",
+          "nombreMateria": "Estructura de Datos y Algoritmo",
+          "Acreditacion": "Examen Final"
+        },
+        {
+          "id": "9",
+          "Año": 1,
+          "Dic": "Anual",
+          "nombreMateria": "Taller de Programación I",
+          "Acreditacion": "Examen Final"
+        }
+      ]
+    }
+  ],
+  "examenes": [
+    {
+      "id": "1",
+      "nombreMateria": "Bases de Datos I",
+      "fecha": "2024-07-10",
+      "alumnosInscriptos": [
+        {
+          "id": 1,
+          "nombres": "Iván Jesus Alberto",
+          "apellido": "Silva",
+          "dni": 42007328,
+          "carrera": "Tecnicatura Superior en Desarrollo de Software",
+          "lejago": 4150
+        }
+      ]
+    }
+  ]
+}

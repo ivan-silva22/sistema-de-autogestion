@@ -12,52 +12,52 @@ const Inicio = () => {
           <ListGroup>
             <ListGroup.Item action>
               <NavLink className="nav-link" to={"/materiasdelplan"}>
-                <i class="bi bi-caret-right-square-fill"></i> Materias del plan
+                <i className="bi bi-caret-right-square-fill"></i> Materias del plan
               </NavLink>
             </ListGroup.Item>
             <ListGroup.Item action>
               <NavLink className="nav-link" to={"/estadoacademico"}>
-                <i class="bi bi-caret-right-square-fill"></i> Estado académico
+                <i className="bi bi-caret-right-square-fill"></i> Estado académico
               </NavLink>
             </ListGroup.Item>
             <ListGroup.Item action>
               <NavLink className="nav-link" to={"/cursado"}>
-                <i class="bi bi-caret-right-square-fill"></i> Cursando
+                <i className="bi bi-caret-right-square-fill"></i> Cursando
               </NavLink>
             </ListGroup.Item>
             <ListGroup.Item action>
               <NavLink className="nav-link" to={"/correlatividadcursar"}>
-                <i class="bi bi-caret-right-square-fill"></i> Correlatividad
+                <i className="bi bi-caret-right-square-fill"></i> Correlatividad
                 para cursar
               </NavLink>
             </ListGroup.Item>
             <ListGroup.Item action>
               <NavLink className="nav-link" to={"/correlatividadrendir"}>
-                <i class="bi bi-caret-right-square-fill"></i> Correlatividad
+                <i className="bi bi-caret-right-square-fill"></i> Correlatividad
                 para rendir
               </NavLink>
             </ListGroup.Item>
             <ListGroup.Item action>
               <NavLink className="nav-link" to={"/inscripcionexamen"}>
-                <i class="bi bi-caret-right-square-fill"></i> Inscripción a
+                <i className="bi bi-caret-right-square-fill"></i> Inscripción a
                 examen
               </NavLink>
             </ListGroup.Item>
             <ListGroup.Item action>
               <NavLink className="nav-link" to={"/inscripcioncursado"}>
-                <i class="bi bi-caret-right-square-fill"></i> Inscripción a
+                <i className="bi bi-caret-right-square-fill"></i> Inscripción a
                 cursado
               </NavLink>
             </ListGroup.Item>
             <ListGroup.Item action>
               <NavLink className="nav-link" to={"/cambiarcontraseña"}>
-                <i class="bi bi-caret-right-square-fill"></i> Cambio de
+                <i className="bi bi-caret-right-square-fill"></i> Cambio de
                 contraseña
               </NavLink>
             </ListGroup.Item>
             <ListGroup.Item action>
               <NavLink className="nav-link" to={"/login"}>
-                <i class="bi bi-caret-right-square-fill"></i> Salir
+                <i className="bi bi-caret-right-square-fill"></i> Salir
               </NavLink>
             </ListGroup.Item>
           </ListGroup>

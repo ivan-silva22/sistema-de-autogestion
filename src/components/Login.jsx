@@ -1,26 +1,78 @@
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import logo from "../assets/logo.png";
+import { useForm } from "react-hook-form";
+import { login } from "./helpers/queries";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 
 const Login = () => {
+
+  const {register, handleSubmit, formState: {errors}} = useForm(); 
+
+  const navegacion = useNavigate();
+
+  const onSubmit = (alumno) =>{
+  login(alumno).then((respuesta) =>{
+    if(respuesta){
+      const datosAlumno = {
+        nombres: respuesta.nombres,
+        apellido: respuesta.apellido,
+        legajo: respuesta.legajo,
+      }
+      sessionStorage.setItem("alumno", JSON.stringify(datosAlumno));
+      Swal.fire({
+        title: "Bienvenido",
+        text: `${datosAlumno.nombres} ${datosAlumno.apellido} iniciaste sesión correctamente`,
+        icon: "success",
+        confirmButtonColor: '#ef0808'
+      });
+      navegacion("/");
+    }else{
+      Swal.fire({
+        title: "Error",
+        text: "Legajo o contraseña incorrecto.",
+        icon: "error",
+        confirmButtonColor: '#ef0808'
+      });
+    }
+  })
+  }
+
   return (
     <main className="my-5">
       <Container>
         <Row>
-          <Col>
-            <Form className="mx-auto">
+          <Col className="col-md-6 col-sm-12 mb-5">
+            <Form className="mx-auto" onSubmit={handleSubmit(onSubmit)}>
               <Form.Group className="mb-3" controlId="formBasicLegajo">
                 <Form.Label>N° Legajo:</Form.Label>
-                <Form.Control type="text" placeholder="Ingrese su número de legajo" />
+                <Form.Control type="number" placeholder="Ingrese su número de legajo" 
+                {...register("legajo",{
+                  required: "El legajo es un campo obligatorio",
+                  minLength:{
+                    value: 4,
+                    message: "El legajo es un numero de 4 caracteres", 
+                  }
+                })}
+                 />
                 <Form.Text className="text-danger">
-                  El número de legajo es un campo obligatorio
+                  {errors.legajo?.message}
                 </Form.Text>
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>Contraseña:</Form.Label>
-                <Form.Control type="password" placeholder="********" />
+                <Form.Control type="password" placeholder="********"
+                {...register("password",{
+                  required: "La contraseña es un dato obligatorio",
+                  pattern:{
+                    value: /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/,
+                    message: "La contraseña debe tener al entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula."
+                  }
+                })}
+                />
                 <Form.Text className="text-danger">
-                  La contraseña es un campo obligatorio
+                  {errors.password?.message}
                 </Form.Text>
               </Form.Group>
               <div>
@@ -28,7 +80,7 @@ const Login = () => {
               </div>
             </Form>
           </Col>
-          <Col>
+          <Col className="col-md-6 col-sm-12 ">
             <article className="text-center">
                 <h1>MiIES</h1>
                 <p>Sistema Académico de Autogestión</p>

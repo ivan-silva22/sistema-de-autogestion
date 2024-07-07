@@ -24,3 +24,7 @@ body{
 .bi-caret-right-square-fill{
   color: #812a2a;
 }
+
+.col{
+  flex: none;
+}

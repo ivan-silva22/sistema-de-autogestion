@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
 
-const Login = () => {
+const Login = ({setAlumnoLogueado}) => {
 
   const {register, handleSubmit, formState: {errors}} = useForm(); 
 
@@ -27,7 +27,8 @@ const Login = () => {
         icon: "success",
         confirmButtonColor: '#ef0808'
       });
-      navegacion("/");
+      setAlumnoLogueado(respuesta);
+      navegacion("/inicio");
     }else{
       Swal.fire({
         title: "Error",

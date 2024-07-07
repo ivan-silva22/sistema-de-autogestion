@@ -72,7 +72,7 @@ export const incribirExamen = async(materia, alumno) =>{
         }],
     }
     try {
-        
+
         const respuesta = await fetch(URLExamen, {
             method: "POST",
             headers:{
@@ -86,4 +86,33 @@ export const incribirExamen = async(materia, alumno) =>{
     } catch (error) {
         console.log(error)
     }
+}
+
+export const inscribirMateria = async(materia, alumno) =>{
+  try {
+    let nuevaMateria = {
+      Año: materia.Año,
+      Dic: materia.Dic,
+      nombreMateria: materia.nombreMateria,
+      comision: 46,
+      horarios: "18:20 - 19:45",
+    }
+    const respuesta = await fetch(`${URLAlumno}`);
+    const listaAlumnos = await respuesta.json();
+    const buscarAlumno = listaAlumnos.find((itemAlumno) => itemAlumno.legajo === alumno.legajo);
+    if(buscarAlumno){
+     buscarAlumno.cursando.push(nuevaMateria);
+     const respuesta = await fetch(`${URLAlumno}/${buscarAlumno.id}`, {
+      method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(buscarAlumno),
+     })
+     return respuesta
+    }
+  } catch (error) {
+    console.log(error)
+  }
+  
 }

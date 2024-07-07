@@ -44,7 +44,7 @@ const RutasAlumno = ({ alumnoLogueado, setAlumnoLogueado }) => {
         <Route
           exact
           path="/inscripcioncursado"
-          element={<InscripcionCursado />}
+          element={<InscripcionCursado alumnoLogueado={alumnoLogueado} />}
         />
         <Route exact path="/cambiarcontraseña" element={<CambiarPassword />} />
       </Routes>

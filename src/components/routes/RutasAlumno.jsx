@@ -24,7 +24,7 @@ const RutasAlumno = ({ alumnoLogueado, setAlumnoLogueado }) => {
           }
         />
         <Route exact path="/materiasdelplan" element={<MateriasPlan alumnoLogueado={alumnoLogueado} />} />
-        <Route exact path="/estadoacademico" element={<EstadoAcademico />} />
+        <Route exact path="/estadoacademico" element={<EstadoAcademico alumnoLogueado={alumnoLogueado} />} />
         <Route exact path="/cursado" element={<Cursando />} />
         <Route
           exact

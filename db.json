@@ -11,8 +11,9 @@
       "estadoAcademico": [
         {
           "id": 1,
+          "Año": "1",
           "nombreMateria": "Ciudadanía y Espacio Público",
-          "estado": "Aprobada con 9, Tomo: 1, Folio: 57"
+          "estado": "Aprobada con 9, Tomo: 1, Folio: 100"
         }
       ],
       "cursando": [

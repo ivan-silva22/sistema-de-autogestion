@@ -1,11 +1,22 @@
+import { useEffect, useState } from "react";
 import { Container, Table } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 
-const EstadoAcademico = () => {
+const EstadoAcademico = ({ alumnoLogueado }) => {
+  const [materias, setMaterias] = useState([]);
+
+  useEffect(() => {
+    setMaterias(alumnoLogueado.estadoAcademico);
+  }, []);
+
   return (
     <main>
       <Container>
         <section className="text-center my-4">
-          <h3>Estado académico de Silva Ivan Jesus Alberto</h3>
+          <h3>
+            Estado académico de {alumnoLogueado.nombres}{" "}
+            {alumnoLogueado.apellido}{" "}
+          </h3>
         </section>
         <Table striped bordered hover>
           <thead>
@@ -16,23 +27,20 @@ const EstadoAcademico = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Ciudadanía y espacio publíco</td>
-              <td>Aprobada con 9, Tomo: 1, Folio: 57</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>Introducción a la informática</td>
-              <td>Aprobada con 10, Tomo: 1, Folio: 47</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>Introducción a redes</td>
-              <td>Aprobada con 10, Tomo: 1, Folio: 47</td>
-            </tr>
+            {materias.map((materia) => (
+              <tr key={materia.id}>
+                <td>{materia.Año}</td>
+                <td>{materia.nombreMateria}</td>
+                <td>{materia.estado}</td>
+              </tr>
+            ))}
           </tbody>
         </Table>
+        <section className="mt-5 text-center">
+          <NavLink type="button" className=" btn btn-volver" to={"/inicio"}>
+            Volver
+          </NavLink>
+        </section>
       </Container>
     </main>
   );

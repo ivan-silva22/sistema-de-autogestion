@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { login } from "./helpers/queries";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import EstadoAcademico from "./EstadoAcademico";
 
 
 const Login = ({setAlumnoLogueado}) => {
@@ -20,6 +21,7 @@ const Login = ({setAlumnoLogueado}) => {
         apellido: respuesta.apellido,
         legajo: respuesta.legajo,
         carrera: respuesta.carrera,
+        estadoAcademico: respuesta.estadoAcademico,
       }
       sessionStorage.setItem("alumno", JSON.stringify(datosAlumno));
       Swal.fire({

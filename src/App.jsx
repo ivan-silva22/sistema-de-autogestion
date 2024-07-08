@@ -6,6 +6,10 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useState } from "react";
 import RutasProtegidas from "./components/routes/RutasProtegidas";
 import RutasAlumno from "./components/routes/RutasAlumno";
+import Administrador from "./components/panelAdministrador/Administrador";
+import RutasProtegidasAdmin from "./components/routes/RutasProtegidasAdmin";
+import RutasAdmin from "./components/routes/RutasAdmin";
+
 
 function App() {
   const alumno = JSON.parse(sessionStorage.getItem("alumno")) || {};
@@ -19,6 +23,15 @@ function App() {
             exact
             path="/"
             element={<Login setAlumnoLogueado={setAlumnoLogueado} />}
+          />
+          <Route exact path="/administrador" element={<Administrador />} />
+          <Route
+            path="/inicioadmin/*"
+            element={
+              <RutasProtegidasAdmin>
+                <RutasAdmin></RutasAdmin>
+              </RutasProtegidasAdmin>
+            }
           />
           <Route
             path="/inicio/*"

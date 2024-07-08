@@ -8,6 +8,7 @@ import CorrelatividadRendir from "../CorrelatividadRendir";
 import InscripcionExamen from "../InscripcionExamen";
 import InscripcionCursado from "../InscripcionCursado";
 import CambiarPassword from "../CambiarPassword";
+import InicioAdmin from "../InicioAdmin";
 
 const RutasAlumno = ({ alumnoLogueado, setAlumnoLogueado }) => {
   return (
@@ -47,6 +48,7 @@ const RutasAlumno = ({ alumnoLogueado, setAlumnoLogueado }) => {
           element={<InscripcionCursado alumnoLogueado={alumnoLogueado} />}
         />
         <Route exact path="/cambiarcontraseña" element={<CambiarPassword />} />
+        <Route exact path="/inicio-admin" element={<InicioAdmin/>}/>
       </Routes>
     </>
   );

@@ -202,7 +202,7 @@
           "nombreMateria": "Programación II",
           "Acreditacion": "Examen Final",
           "correlatividadCursar": "Regular Introducción a la Informática - Programación I",
-          "correlatividadRendir": "Aprobada Introducción a la Informática - Programación I" 
+          "correlatividadRendir": "Aprobada Introducción a la Informática - Programación I"
         },
         {
           "id": "11",
@@ -436,6 +436,14 @@
           "legajo": "4150"
         }
       ]
+    }
+  ],
+  "administrador": [
+    {
+      "id": "1",
+      "nombreAdmin": "Jesus",
+      "email": "silvaivan280@gmail.com",
+      "password": "Ivansilva18"
     }
   ]
 }

@@ -208,16 +208,33 @@ export const obtenerExamenes = async() =>{
   try {
     const respuesta = await fetch(URLExamen);
     const listaExamenes = await respuesta.json();
-    
     let datosExamen = listaExamenes.flatMap(examen => examen.alumnosInscriptos.map(alumno => ({
       ...alumno,
       nombreMateria: examen.nombreMateria,
       fecha: examen.fecha
     })))
-   
     return datosExamen;
   } catch (error) {
     console.log(error);
     return false;
+  }
+}
+
+export const obtenerAlumnosCursando = async() =>{
+  try {
+    const respuesta = await fetch(URLAlumno);
+    const listaAlumnos = await respuesta.json();
+    const datos = listaAlumnos.flatMap(dato => dato.cursando.map(item => ({
+      ...item,
+      nombres: dato.nombres,
+      apellido: dato.apellido,
+      dni: dato.dni,
+      Año: item.Año,
+      carrera: dato.carrera
+    })));
+    return datos;
+  } catch (error) {
+    console.log(error);
+    return error;
   }
 }

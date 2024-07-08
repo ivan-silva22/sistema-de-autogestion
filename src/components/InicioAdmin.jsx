@@ -23,8 +23,8 @@ const InicioAdmin = () => {
               </NavLink>
             </ListGroup.Item>
             <ListGroup.Item action>
-              <NavLink className="nav-link" to={"/inicio/cursado"}>
-                <i className="bi bi-caret-right-square-fill"></i> Cursando
+              <NavLink className="nav-link" to={"/inicioadmin/listaalumnoscursando"}>
+                <i className="bi bi-caret-right-square-fill"></i> Alumnos cursando
               </NavLink>
             </ListGroup.Item>
             <ListGroup.Item action>

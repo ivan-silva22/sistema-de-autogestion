@@ -1,37 +1,41 @@
 import { useEffect, useState } from "react";
 import { Container, Form, Table } from "react-bootstrap";
-import { obtenerExamenes } from "../helpers/queries";
 import { NavLink } from "react-router-dom";
+import { obtenerAlumnosCursando } from "../helpers/queries";
 
-const ListaEstudiantesExamenes = () => {
-  const [datosExamenes, setDatosExamenes] = useState([]);
-  const [filtroCarrera, setFiltroCarrera] = useState("");
+const ListaEstudiantesCursando = () => {
+  const [alumnosCursando, setAlumnosCursando] = useState([]);
+  const [filtroCursado, setFiltroCursado] = useState("");
   const [cargando, setCargando] = useState(true);
 
   useEffect(() => {
-    obtenerExamenes().then((respuesta) => {
-      setDatosExamenes(respuesta);
-      setCargando(false);
+    obtenerAlumnosCursando().then((respuesta) => {
+      if (respuesta) {
+        setAlumnosCursando(respuesta);
+        setCargando(false);
+      }
     });
   }, []);
 
-  const handleFiltroChange = (event) => {
-    setFiltroCarrera(event.target.value);
-  };
+  const alumnosFiltrados = filtroCursado
+    ? alumnosCursando.filter((alumno) => alumno.carrera === filtroCursado)
+    : alumnosCursando;
 
-  const alumnosFiltrados = filtroCarrera
-    ? datosExamenes.filter(alumno => alumno.carrera === filtroCarrera)
-    : datosExamenes;
+  const handleFiltroChange = (event) => {
+    setFiltroCursado(event.target.value);
+  };
 
   return (
     <main className="my-4">
       <Container>
         <section>
-          <h3 className="text-center">Lista de alumnos</h3>
+          <h3 className="text-center">Lista de alumnos inscriptos en las carreras</h3>
           <hr />
         </section>
         <section className="my-3 text-end">
-        <NavLink className="btn btn-regresar" to={"/inicioadmin"}>Volver</NavLink>
+          <NavLink className="btn btn-regresar" to={"/inicioadmin"}>
+            Volver
+          </NavLink>
         </section>
         <section className="my-4">
           <Form>
@@ -39,19 +43,23 @@ const ListaEstudiantesExamenes = () => {
               <Form.Label>Filtrar por Carrera:</Form.Label>
               <Form.Select
                 aria-label="Default select example"
-                value={filtroCarrera}
+                value={filtroCursado}
                 onChange={handleFiltroChange}
               >
                 <option value="">Seleccione una opción</option>
-              {[...new Set(datosExamenes.map(alumno => alumno.carrera))].map(carrera => (
-                <option key={carrera} value={carrera}>{carrera}</option>
-              ))}
+                {[
+                  ...new Set(alumnosCursando.map((alumno) => alumno.carrera)),
+                ].map((carrera) => (
+                  <option key={carrera} value={carrera}>
+                    {carrera}
+                  </option>
+                ))}
               </Form.Select>
               <Form.Text className="text-muted"></Form.Text>
             </Form.Group>
           </Form>
         </section>
-        {cargando  ? (
+        {cargando ? (
           <p>Cargando datos...</p>
         ) : (
           <Table striped bordered hover responsive className="table-scroll">
@@ -61,8 +69,7 @@ const ListaEstudiantesExamenes = () => {
                 <th>Nombres</th>
                 <th>Apellido</th>
                 <th>DNI</th>
-                <th>Materia</th>
-                <th>Fecha</th>
+                <th>Año</th>
                 <th>Carrera</th>
               </tr>
             </thead>
@@ -73,8 +80,7 @@ const ListaEstudiantesExamenes = () => {
                   <td>{dato.nombres}</td>
                   <td>{dato.apellido}</td>
                   <td>{dato.dni}</td>
-                  <td>{dato.nombreMateria}</td>
-                  <td>{dato.fecha}</td>
+                  <td>{dato.Año}</td>
                   <td>{dato.carrera}</td>
                 </tr>
               ))}
@@ -86,4 +92,4 @@ const ListaEstudiantesExamenes = () => {
   );
 };
 
-export default ListaEstudiantesExamenes;
+export default ListaEstudiantesCursando;

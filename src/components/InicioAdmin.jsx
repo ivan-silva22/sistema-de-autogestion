@@ -18,9 +18,8 @@ const InicioAdmin = () => {
               </NavLink>
             </ListGroup.Item>
             <ListGroup.Item action>
-              <NavLink className="nav-link" to={"/inicio/estadoacademico"}>
-                <i className="bi bi-caret-right-square-fill"></i> Estado
-                académico
+              <NavLink className="nav-link" to={"/inicioadmin/inscriptosexamen"}>
+                <i className="bi bi-caret-right-square-fill"></i> Alumnos inscriptos a examenes
               </NavLink>
             </ListGroup.Item>
             <ListGroup.Item action>

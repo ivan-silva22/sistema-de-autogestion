@@ -202,3 +202,22 @@ export const crearAlumno = async (alumno) => {
     return false;
   }
 };
+
+
+export const obtenerExamenes = async() =>{
+  try {
+    const respuesta = await fetch(URLExamen);
+    const listaExamenes = await respuesta.json();
+    
+    let datosExamen = listaExamenes.flatMap(examen => examen.alumnosInscriptos.map(alumno => ({
+      ...alumno,
+      nombreMateria: examen.nombreMateria,
+      fecha: examen.fecha
+    })))
+   
+    return datosExamen;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+}

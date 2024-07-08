@@ -48,3 +48,20 @@ body{
 .btn-inscripcion:hover{
   background-color: #812a2a !important;
 }
+
+.btn-regresar{
+  background-color: #812a2a !important;
+  color: #ffff !important;
+  font-size: 18px !important;
+}
+
+.btn-regresar:hover{
+  background-color: #ef0808 !important;
+  color: #ffff !important;
+  font-size: 18px !important;
+}
+
+.table-scroll {
+  max-height: 400px;
+  overflow-y: auto;
+}

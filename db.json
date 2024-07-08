@@ -373,13 +373,13 @@
     {
       "id": "1",
       "nombreMateria": "Bases de Datos I",
-      "fecha": "2024-07-10",
+      "fecha": "7/7/2024",
       "alumnosInscriptos": [
         {
           "id": 1,
           "nombres": "Iván Jesus Alberto",
           "apellido": "Silva",
-          "dni": 42007328,
+          "dni": "42007328",
           "carrera": "Tecnicatura Superior en Desarrollo de Software",
           "lejago": 4150
         }
@@ -387,12 +387,13 @@
     },
     {
       "id": "79f5",
-      "nombreMateria": "1",
+      "nombreMateria": "Desarrollo Empresarial",
       "fecha": "7/7/2024",
       "alumnosInscriptos": [
         {
           "nombres": "Iván Jesus Alberto",
           "apellido": "Silva",
+          "dni": "42007328",
           "carrera": "Tecnicatura Superior en Desarrollo de Software",
           "legajo": "4150"
         }
@@ -400,12 +401,13 @@
     },
     {
       "id": "9e53",
-      "nombreMateria": "2",
+      "nombreMateria": "Programación I",
       "fecha": "7/7/2024",
       "alumnosInscriptos": [
         {
           "nombres": "Iván Jesus Alberto",
           "apellido": "Silva",
+          "dni": "42007328",
           "carrera": "Tecnicatura Superior en Desarrollo de Software",
           "legajo": "4150"
         }
@@ -413,12 +415,13 @@
     },
     {
       "id": "d10c",
-      "nombreMateria": "2",
+      "nombreMateria": "Taller de Programación I",
       "fecha": "7/7/2024",
       "alumnosInscriptos": [
         {
           "nombres": "Iván Jesus Alberto",
           "apellido": "Silva",
+          "dni": "42007328",
           "carrera": "Tecnicatura Superior en Desarrollo de Software",
           "legajo": "4150"
         }
@@ -426,13 +429,14 @@
     },
     {
       "id": "01c7",
-      "nombreMateria": "2",
+      "nombreMateria": "Taller de Programación III",
       "fecha": "7/7/2024",
       "alumnosInscriptos": [
         {
           "nombres": "Iván Jesus Alberto",
           "apellido": "Silva",
-          "carrera": "Tecnicatura Superior en Desarrollo de Software",
+          "dni": "42007328",
+          "carrera": "Tecnicatura en Agroindustria de los Alimentos",
           "legajo": "4150"
         }
       ]

@@ -2,6 +2,7 @@ import { Button, Container, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { crearAlumno } from "../helpers/queries";
 import Swal from "sweetalert2";
+import { NavLink } from "react-router-dom";
 
 const AgregaAlumno = () => {
   const {
@@ -38,6 +39,10 @@ const AgregaAlumno = () => {
         <section className="text-center">
           <h3>Agregar alumno</h3>
           <hr />
+          
+        </section>
+        <section className="my-3 text-end">
+        <NavLink className="btn btn-regresar" to={"/inicioadmin"}>Volver</NavLink>
         </section>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <Form.Group className="mb-3" controlId="formBasicNombres">

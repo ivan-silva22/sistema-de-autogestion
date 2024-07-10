@@ -10,7 +10,7 @@ import InscripcionCursado from "../InscripcionCursado";
 import CambiarPassword from "../CambiarPassword";
 import InicioAdmin from "../InicioAdmin";
 
-const RutasAlumno = ({ alumnoLogueado, setAlumnoLogueado, habilitarExamenes }) => {
+const RutasAlumno = ({ alumnoLogueado, setAlumnoLogueado, habilitarExamenes, habilitarMaterias }) => {
   return (
     <>
       <Routes>
@@ -45,7 +45,7 @@ const RutasAlumno = ({ alumnoLogueado, setAlumnoLogueado, habilitarExamenes }) =
         <Route
           exact
           path="/inscripcioncursado"
-          element={<InscripcionCursado alumnoLogueado={alumnoLogueado} />}
+          element={<InscripcionCursado alumnoLogueado={alumnoLogueado} habilitarMaterias={habilitarMaterias} />}
         />
         <Route exact path="/cambiarcontraseña" element={<CambiarPassword />} />
         <Route exact path="/inicio-admin" element={<InicioAdmin/>}/>

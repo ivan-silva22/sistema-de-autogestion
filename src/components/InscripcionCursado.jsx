@@ -4,15 +4,19 @@ import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { NavLink } from "react-router-dom";
 
-const InscripcionCursado = ({ alumnoLogueado }) => {
+const InscripcionCursado = ({ alumnoLogueado, habilitarMaterias }) => {
   const [materias, setMaterias] = useState([]);
   const [botonesDeshabilitados, setBotonesDeshabilitados] = useState(() => {
-    const botonesGuardados = localStorage.getItem('botonesDeshabilitadosCursado');
+    const botonesGuardados = localStorage.getItem(
+      "botonesDeshabilitadosCursado"
+    );
     return botonesGuardados ? JSON.parse(botonesGuardados) : [];
   });
-  
+
   useEffect(() => {
-    const botonesGuardados = localStorage.getItem('botonesDeshabilitadosCursado');
+    const botonesGuardados = localStorage.getItem(
+      "botonesDeshabilitadosCursado"
+    );
     if (botonesGuardados) {
       setBotonesDeshabilitados(JSON.parse(botonesGuardados));
     }
@@ -33,23 +37,25 @@ const InscripcionCursado = ({ alumnoLogueado }) => {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('botonesDeshabilitadosCursado', JSON.stringify(botonesDeshabilitados));
+    localStorage.setItem(
+      "botonesDeshabilitadosCursado",
+      JSON.stringify(botonesDeshabilitados)
+    );
   }, [botonesDeshabilitados]);
 
-  const handleClick = (materia, alumnoLogueado) =>{
-    inscribirMateria(materia, alumnoLogueado).then((respuesta) =>{
-     if(respuesta){
-       Swal.fire({
-        title: "Exito",
-        text: `Se inscribio a la materia: ${materia.nombreMateria}`,
-        icon: "success",
-        confirmButtonColor: '#ef0808'
-      });
-      setBotonesDeshabilitados([...botonesDeshabilitados, materia.id]);
-     }
-    })
-  }
-
+  const handleClick = (materia, alumnoLogueado) => {
+    inscribirMateria(materia, alumnoLogueado).then((respuesta) => {
+      if (respuesta) {
+        Swal.fire({
+          title: "Exito",
+          text: `Se inscribio a la materia: ${materia.nombreMateria}`,
+          icon: "success",
+          confirmButtonColor: "#ef0808",
+        });
+        setBotonesDeshabilitados([...botonesDeshabilitados, materia.id]);
+      }
+    });
+  };
 
   return (
     <main className="my-5">
@@ -72,15 +78,28 @@ const InscripcionCursado = ({ alumnoLogueado }) => {
                 <td>{materia.Año}</td>
                 <td>{materia.nombreMateria}</td>
                 <td>
-                  <Button type="button" className="btn btn-inscripcion"  disabled={botonesDeshabilitados.includes(materia.id)}  onClick={()=> handleClick(materia, alumnoLogueado)}>Inscribirse</Button>
+                  {habilitarMaterias ? (
+                    <Button
+                      type="button"
+                      className="btn btn-inscripcion"
+                      disabled={botonesDeshabilitados.includes(materia.id)}
+                      onClick={() => handleClick(materia, alumnoLogueado)}
+                    >
+                      Inscribirse
+                    </Button>
+                  ) : (
+                    <p>Inscripciones deshabilitadas</p>
+                  )}
                 </td>
               </tr>
             ))}
           </tbody>
         </Table>
         <section className="mt-5 text-center">
-                <NavLink type="button" className=" btn btn-volver" to={"/inicio"} >Volver</NavLink>
-          </section>
+          <NavLink type="button" className=" btn btn-volver" to={"/inicio"}>
+            Volver
+          </NavLink>
+        </section>
       </Container>
     </main>
   );

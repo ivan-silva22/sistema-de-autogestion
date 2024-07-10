@@ -10,13 +10,15 @@ import Administrador from "./components/panelAdministrador/Administrador";
 import RutasProtegidasAdmin from "./components/routes/RutasProtegidasAdmin";
 import RutasAdmin from "./components/routes/RutasAdmin";
 
-
 function App() {
   const alumno = JSON.parse(sessionStorage.getItem("alumno")) || {};
-  const habilitarExa = JSON.parse(localStorage.getItem("habilitarInscripcion")) || false;
+  const habilitarExa =
+    JSON.parse(localStorage.getItem("habilitarInscripcion")) || false;
+  const habilitarMate =
+    JSON.parse(localStorage.getItem("habilitarMaterias")) || false;
   const [alumnoLogueado, setAlumnoLogueado] = useState(alumno);
   const [habilitarExamenes, setHabilitarExamenes] = useState(habilitarExa);
-  
+  const [habilitarMaterias, setHabilitarMaterias] = useState(habilitarMate);
 
   return (
     <>
@@ -32,7 +34,12 @@ function App() {
             path="/inicioadmin/*"
             element={
               <RutasProtegidasAdmin>
-                <RutasAdmin habilitarExamenes={habilitarExamenes} setHabilitarExamenes={setHabilitarExamenes}></RutasAdmin>
+                <RutasAdmin
+                  habilitarExamenes={habilitarExamenes}
+                  setHabilitarExamenes={setHabilitarExamenes}
+                  habilitarMaterias={habilitarMaterias}
+                  setHabilitarMaterias={setHabilitarMaterias}
+                ></RutasAdmin>
               </RutasProtegidasAdmin>
             }
           />
@@ -44,6 +51,7 @@ function App() {
                   alumnoLogueado={alumnoLogueado}
                   setAlumnoLogueado={setAlumnoLogueado}
                   habilitarExamenes={habilitarExamenes}
+                  habilitarMaterias={habilitarMaterias}
                 ></RutasAlumno>
               </RutasProtegidas>
             }

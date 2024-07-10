@@ -1,14 +1,61 @@
+import { useState } from "react";
 import { Container, ListGroup } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+import Swal from "sweetalert2";
 
-const InicioAdmin = ({habilitarExamenes, setHabilitarExamenes}) => {
+const InicioAdmin = ({ habilitarExamenes, setHabilitarExamenes }) => {
 
-  const handleClick = () =>{
-    console.log("habilitar examenes")
-    setHabilitarExamenes(!habilitarExamenes);
-    localStorage.setItem("habilitarInscripcion", JSON.stringify(!habilitarExamenes));
-  }
+  const [estadoBotonInscripcion, setEstadoBotonInscripcion] = useState(true);
 
+  const habilitarInscripcion = () => {
+    Swal.fire({
+      title: "Desea habilitar las incripciones a los exames?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Confirmar!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setHabilitarExamenes(!habilitarExamenes);
+        localStorage.setItem(
+          "habilitarInscripcion",
+          JSON.stringify(!habilitarExamenes)
+        );
+        setEstadoBotonInscripcion(!estadoBotonInscripcion);
+        Swal.fire({
+          title: "Exito!",
+          text: "Las inscripciones se habilitaron.",
+          icon: "success",
+        });
+      }
+    });
+  };
+
+  const desabilitarInscripcion = () =>{
+    Swal.fire({
+      title: "Desea desabilitar las incripciones a los examenes?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Confirmar!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setHabilitarExamenes(!habilitarExamenes);
+        localStorage.setItem(
+          "habilitarInscripcion",
+          JSON.stringify(!habilitarExamenes)
+        );
+        setEstadoBotonInscripcion(!estadoBotonInscripcion);
+        Swal.fire({
+          title: "Exito!",
+          text: "Las inscripciones se habilitaron.",
+          icon: "success",
+        });
+      }
+    });
+  };
 
   return (
     <main className="my-5">
@@ -42,12 +89,17 @@ const InicioAdmin = ({habilitarExamenes, setHabilitarExamenes}) => {
                 cursando
               </NavLink>
             </ListGroup.Item>
-            <ListGroup.Item action onClick={()=> handleClick()}>
+            {estadoBotonInscripcion ? (<ListGroup.Item action onClick={() => habilitarInscripcion()}>
               <div className="nav-link">
                 <i className="bi bi-caret-right-square-fill"></i> Habilitar
                 inscripción examenes
               </div>
-            </ListGroup.Item>
+            </ListGroup.Item>): (<ListGroup.Item action onClick={() => desabilitarInscripcion()}>
+              <div className="nav-link">
+                <i className="bi bi-caret-right-square-fill"></i> Desabilitar
+                inscripción examenes
+              </div>
+            </ListGroup.Item>)}
             <ListGroup.Item action>
               <NavLink className="nav-link" to={"/inicio/correlatividadrendir"}>
                 <i className="bi bi-caret-right-square-fill"></i> Habilitar

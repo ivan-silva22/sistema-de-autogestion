@@ -1,8 +1,15 @@
 import { Container, ListGroup } from "react-bootstrap";
-import { NavLink, useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
+import { NavLink } from "react-router-dom";
 
-const InicioAdmin = () => {
+const InicioAdmin = ({habilitarExamenes, setHabilitarExamenes}) => {
+
+  const handleClick = () =>{
+    console.log("habilitar examenes")
+    setHabilitarExamenes(!habilitarExamenes);
+    localStorage.setItem("habilitarInscripcion", JSON.stringify(!habilitarExamenes));
+  }
+
+
   return (
     <main className="my-5">
       <Container>
@@ -18,37 +25,33 @@ const InicioAdmin = () => {
               </NavLink>
             </ListGroup.Item>
             <ListGroup.Item action>
-              <NavLink className="nav-link" to={"/inicioadmin/inscriptosexamen"}>
-                <i className="bi bi-caret-right-square-fill"></i> Alumnos inscriptos a examenes
+              <NavLink
+                className="nav-link"
+                to={"/inicioadmin/inscriptosexamen"}
+              >
+                <i className="bi bi-caret-right-square-fill"></i> Alumnos
+                inscriptos a examenes
               </NavLink>
             </ListGroup.Item>
             <ListGroup.Item action>
-              <NavLink className="nav-link" to={"/inicioadmin/listaalumnoscursando"}>
-                <i className="bi bi-caret-right-square-fill"></i> Alumnos cursando
+              <NavLink
+                className="nav-link"
+                to={"/inicioadmin/listaalumnoscursando"}
+              >
+                <i className="bi bi-caret-right-square-fill"></i> Alumnos
+                cursando
               </NavLink>
             </ListGroup.Item>
-            <ListGroup.Item action>
-              <NavLink className="nav-link" to={"/inicio/correlatividadcursar"}>
-                <i className="bi bi-caret-right-square-fill"></i> Correlatividad
-                para cursar
-              </NavLink>
+            <ListGroup.Item action onClick={()=> handleClick()}>
+              <div className="nav-link">
+                <i className="bi bi-caret-right-square-fill"></i> Habilitar
+                inscripción examenes
+              </div>
             </ListGroup.Item>
             <ListGroup.Item action>
               <NavLink className="nav-link" to={"/inicio/correlatividadrendir"}>
-                <i className="bi bi-caret-right-square-fill"></i> Correlatividad
-                para rendir
-              </NavLink>
-            </ListGroup.Item>
-            <ListGroup.Item action>
-              <NavLink className="nav-link" to={"/inicio/inscripcionexamen"}>
-                <i className="bi bi-caret-right-square-fill"></i> Inscripción a
-                examen
-              </NavLink>
-            </ListGroup.Item>
-            <ListGroup.Item action>
-              <NavLink className="nav-link" to={"/inicio/inscripcioncursado"}>
-                <i className="bi bi-caret-right-square-fill"></i> Inscripción a
-                cursado
+                <i className="bi bi-caret-right-square-fill"></i> Habilitar
+                inscripción de materias
               </NavLink>
             </ListGroup.Item>
             <ListGroup.Item action>

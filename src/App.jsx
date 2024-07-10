@@ -13,7 +13,10 @@ import RutasAdmin from "./components/routes/RutasAdmin";
 
 function App() {
   const alumno = JSON.parse(sessionStorage.getItem("alumno")) || {};
+  const habilitarExa = JSON.parse(localStorage.getItem("habilitarInscripcion")) || false;
   const [alumnoLogueado, setAlumnoLogueado] = useState(alumno);
+  const [habilitarExamenes, setHabilitarExamenes] = useState(habilitarExa);
+  
 
   return (
     <>
@@ -29,7 +32,7 @@ function App() {
             path="/inicioadmin/*"
             element={
               <RutasProtegidasAdmin>
-                <RutasAdmin></RutasAdmin>
+                <RutasAdmin habilitarExamenes={habilitarExamenes} setHabilitarExamenes={setHabilitarExamenes}></RutasAdmin>
               </RutasProtegidasAdmin>
             }
           />
@@ -40,6 +43,7 @@ function App() {
                 <RutasAlumno
                   alumnoLogueado={alumnoLogueado}
                   setAlumnoLogueado={setAlumnoLogueado}
+                  habilitarExamenes={habilitarExamenes}
                 ></RutasAlumno>
               </RutasProtegidas>
             }

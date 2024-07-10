@@ -4,10 +4,11 @@ import { incribirExamen, obtenerMaterias } from "./helpers/queries";
 import Swal from "sweetalert2";
 import { NavLink } from "react-router-dom";
 
-const InscripcionExamen = ({ alumnoLogueado }) => {
+const InscripcionExamen = ({ alumnoLogueado, habilitarExamenes }) => {
+  
   const [materias, setMaterias] = useState([]);
   const [botonesDeshabilitados, setBotonesDeshabilitados] = useState(() => {
-    const botonesGuardados = localStorage.getItem('botonesDeshabilitados');
+    const botonesGuardados = localStorage.getItem("botonesDeshabilitados");
     return botonesGuardados ? JSON.parse(botonesGuardados) : [];
   });
 
@@ -15,29 +16,35 @@ const InscripcionExamen = ({ alumnoLogueado }) => {
     obtenerMaterias(alumnoLogueado).then((respuesta) => {
       setMaterias(respuesta.materias);
     });
-  }, []);
+  }, [alumnoLogueado]);
 
   useEffect(() => {
-    localStorage.setItem('botonesDeshabilitados', JSON.stringify(botonesDeshabilitados));
+    localStorage.setItem(
+      "botonesDeshabilitados",
+      JSON.stringify(botonesDeshabilitados)
+    );
   }, [botonesDeshabilitados]);
 
-  const handleClick = (materiaId, materia) =>{
+  const handleClick = (materiaId, materia) => {
     setBotonesDeshabilitados([...botonesDeshabilitados, materiaId]);
-    localStorage.setItem("botonesDesabilitado" , JSON.stringify(botonesDeshabilitados));
+    localStorage.setItem(
+      "botonesDesabilitado",
+      JSON.stringify(botonesDeshabilitados)
+    );
     onSubmit(materiaId, materia);
-  }
+  };
 
-  const onSubmit =(materia ) =>{
-    incribirExamen(materia, alumnoLogueado).then((respuesta) =>{
+  const onSubmit = (materia) => {
+    incribirExamen(materia, alumnoLogueado).then((respuesta) => {
       Swal.fire({
         title: "Exito",
         text: `Se inscribio al examen final de ${materia}, suerte🍀`,
         icon: "success",
-        confirmButtonColor: '#ef0808'
+        confirmButtonColor: "#ef0808",
       });
-    })
-  }
- 
+    });
+  };
+
   return (
     <main className="my-5">
       <Container>
@@ -59,17 +66,30 @@ const InscripcionExamen = ({ alumnoLogueado }) => {
                 <td>{materia.Año}</td>
                 <td>{materia.nombreMateria}</td>
                 <td>
-                  <Button type="button" className=" btn btn-inscripcion" disabled={botonesDeshabilitados.includes(materia.id)} onClick={()=> handleClick(materia.id, materia.nombreMateria)}>Inscribirse</Button>
+                  {habilitarExamenes ? (
+                    <Button
+                      type="button"
+                      className="btn btn-inscripcion"
+                      disabled={botonesDeshabilitados.includes(materia.id)}
+                      onClick={() =>
+                        handleClick(materia.id, materia.nombreMateria)
+                      }
+                    >
+                      Inscribirse
+                    </Button>
+                  ) : (
+                    <p>Inscripciones deshabilitadas</p>
+                  )}
                 </td>
               </tr>
             ))}
-
-           
           </tbody>
         </Table>
         <section className="mt-5 text-center">
-                <NavLink type="button" className=" btn btn-volver" to={"/inicio"} >Volver</NavLink>
-          </section>
+          <NavLink type="button" className=" btn btn-volver" to={"/inicio"}>
+            Volver
+          </NavLink>
+        </section>
       </Container>
     </main>
   );

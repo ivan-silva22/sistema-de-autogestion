@@ -238,3 +238,28 @@ export const obtenerAlumnosCursando = async() =>{
     return error;
   }
 }
+
+export const cambiarPassword = async(dato) =>{
+  try {
+    const respuesta = await fetch(URLAdmin);
+    const listaAdmins = await respuesta.json();
+    const buscarAdmin = listaAdmins.find((item) => item.password === dato.passwordActual);
+    if(buscarAdmin){  
+      buscarAdmin.password = dato.passwordNuevo
+      const respuesta = await fetch(`${URLAdmin}/${buscarAdmin.id}` , {
+        method: "PUT",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(buscarAdmin),
+      })
+      return respuesta;
+    }else{
+      return null
+    }
+    
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+} 

@@ -25,6 +25,9 @@ const ListaEstudiantesCursando = () => {
     setFiltroCursado(event.target.value);
   };
 
+  const unicoAlumnos = Array.from(new Set(alumnosFiltrados.map(a => a.dni)))
+  .map(dni => alumnosFiltrados.find(a => a.dni === dni));
+
   return (
     <main className="my-4">
       <Container>
@@ -74,7 +77,7 @@ const ListaEstudiantesCursando = () => {
               </tr>
             </thead>
             <tbody>
-              {alumnosFiltrados.map((dato, index) => (
+              {unicoAlumnos.map((dato, index) => (
                 <tr key={index}>
                   <td>{index + 1}</td>
                   <td>{dato.nombres}</td>

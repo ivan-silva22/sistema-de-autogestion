@@ -7,15 +7,90 @@
       "dni": "42007328",
       "carrera": "Tecnicatura Superior en Desarrollo de Software",
       "legajo": "4150",
-      "password": "Ivansilva18",
-      "estadoAcademico": [
+      "password": "Ivansilva20",
+      "estadoAcademico": [],
+      "cursando": [
         {
-          "id": 1,
-          "Año": "1",
-          "nombreMateria": "Ciudadanía y Espacio Público",
-          "estado": "Aprobada con 9, Tomo: 1, Folio: 100"
+          "Año": 2,
+          "Dic": "Anual",
+          "nombreMateria": "Programación II",
+          "comision": 46,
+          "horarios": "18:20 - 19:45"
+        },
+        {
+          "Año": 2,
+          "Dic": "Anual",
+          "nombreMateria": "Estadistica Aplicada",
+          "comision": 46,
+          "horarios": "18:20 - 19:45"
+        },
+        {
+          "Año": 2,
+          "Dic": "Anual",
+          "nombreMateria": "Bases de Datos II",
+          "comision": 46,
+          "horarios": "18:20 - 19:45"
+        },
+        {
+          "Año": 2,
+          "Dic": "Anual",
+          "nombreMateria": "Matemática II",
+          "comision": 46,
+          "horarios": "18:20 - 19:45"
+        },
+        {
+          "Año": 2,
+          "Dic": "Anual",
+          "nombreMateria": "Sistema de Información Empresarial",
+          "comision": 46,
+          "horarios": "18:20 - 19:45"
+        },
+        {
+          "Año": 2,
+          "Dic": "Anual",
+          "nombreMateria": "Inglés Técnico II",
+          "comision": 46,
+          "horarios": "18:20 - 19:45"
+        },
+        {
+          "Año": 2,
+          "Dic": "Anual",
+          "nombreMateria": "Redes y Seguridad Informática",
+          "comision": 46,
+          "horarios": "18:20 - 19:45"
+        },
+        {
+          "Año": 2,
+          "Dic": "Anual",
+          "nombreMateria": "Análisis y Diseño de Sistemas",
+          "comision": 46,
+          "horarios": "18:20 - 19:45"
+        },
+        {
+          "Año": 2,
+          "Dic": "Anual",
+          "nombreMateria": "Laboratorio de Programación",
+          "comision": 46,
+          "horarios": "18:20 - 19:45"
+        },
+        {
+          "Año": 2,
+          "Dic": "Anual",
+          "nombreMateria": "Taller de Programación II",
+          "comision": 46,
+          "horarios": "18:20 - 19:45"
         }
-      ],
+      ]
+    },
+    {
+      "id": "b22e",
+      "nombres": "Juan ",
+      "apellido": "Gonzalez",
+      "dni": "17077370",
+      "carrera": "Tecnicatura Superior en Desarrollo de Software",
+      "legajo": "2020",
+      "password": "Ivansilva30",
+      "estadoAcademico": [],
       "cursando": [
         {
           "Año": "1",
@@ -50,60 +125,6 @@
           "Dic": "Anual",
           "nombreMateria": "Matemática I",
           "comision": 46,
-          "horarios": "18:20 - 19:45"
-        },
-        {
-          "Año": 1,
-          "Dic": "Anual",
-          "nombreMateria": "Programación I",
-          "comision": 46,
-          "horarios": "18:20 - 19:45"
-        },
-        {
-          "Año": 1,
-          "Dic": "Anual",
-          "nombreMateria": "Inglés Técnico I",
-          "comision": 46,
-          "horarios": "18:20 - 19:45"
-        },
-        {
-          "Año": "1",
-          "Dic": "Anual",
-          "nombreMateria": "Estructura de Datos y Algoritmo",
-          "comision": 46,
-          "horarios": "18:20 - 19:45"
-        },
-        {
-          "Año": 1,
-          "Dic": "Anual",
-          "nombreMateria": "Taller de Programación I",
-          "comision": 46,
-          "horarios": "18:20 - 19:45"
-        }
-      ]
-    },
-    {
-      "id": "2",
-      "nombres": "Juan Carlos",
-      "apellido": "Perez",
-      "dni": 40102394,
-      "carrera": "Tecnicatura Superior en Desarrollo de Software",
-      "legajo": 2020,
-      "password": "Juancarlos18",
-      "estadoAcademico": [
-        {
-          "id": 1,
-          "nombreMateria": "Ciudadanía y Espacio Público",
-          "estado": "Aprobada con 9, Tomo: 1, Folio: 57"
-        }
-      ],
-      "cursando": [
-        {
-          "id": "1",
-          "Año": "1",
-          "Dic": "Anual",
-          "nombreMateria": "Ciudadanía y Espacio Público",
-          "comision": "46",
           "horarios": "18:20 - 19:45"
         }
       ]
@@ -447,7 +468,7 @@
       "id": "1",
       "nombreAdmin": "Jesus",
       "email": "silvaivan280@gmail.com",
-      "password": "Ivansilva18"
+      "password": "Ivansilva20"
     }
   ]
 }

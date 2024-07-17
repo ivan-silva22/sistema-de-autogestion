@@ -3,8 +3,10 @@ import InicioAdmin from "../InicioAdmin";
 import AgregaAlumno from "../panelAdministrador/AgregaAlumno";
 import ListaEstudiantesExamenes from "../panelAdministrador/ListaEstudiantesExamenes";
 import ListaEstudiantesCursando from "../panelAdministrador/ListaEstudiantesCursando";
+import CambiarContraseña from "../panelAdministrador/CambiarContraseña";
 
 const RutasAdmin = ({
+  setAdminLogueado,
   habilitarExamenes,
   setHabilitarExamenes,
   habilitarMaterias,
@@ -18,6 +20,7 @@ const RutasAdmin = ({
           path="/"
           element={
             <InicioAdmin
+            setAdminLogueado={setAdminLogueado}
               habilitarExamenes={habilitarExamenes}
               setHabilitarExamenes={setHabilitarExamenes}
               habilitarMaterias={habilitarMaterias}
@@ -35,6 +38,11 @@ const RutasAdmin = ({
           exact
           path="/listaalumnoscursando"
           element={<ListaEstudiantesCursando />}
+        />
+        <Route
+          exact
+          path="/cambiarcontraseña"
+          element={<CambiarContraseña />}
         />
       </Routes>
     </>

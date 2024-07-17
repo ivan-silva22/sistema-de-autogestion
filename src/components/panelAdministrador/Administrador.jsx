@@ -5,7 +5,7 @@ import { loginAdmin } from "../helpers/queries";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
-const Administrador = () => {
+const Administrador = ({setAdminLogueado}) => {
 
     const {register, handleSubmit, formState: {errors}} = useForm();
 
@@ -25,6 +25,7 @@ const Administrador = () => {
                     icon: "success",
                     confirmButtonColor: '#ef0808'
                   });
+                  setAdminLogueado(respuesta);
                   navegacion("/inicioadmin");
             }
         })

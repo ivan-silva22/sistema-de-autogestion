@@ -12,11 +12,13 @@ import RutasAdmin from "./components/routes/RutasAdmin";
 
 function App() {
   const alumno = JSON.parse(sessionStorage.getItem("alumno")) || {};
+  const administrador = JSON.parse(sessionStorage.getItem("administrador")) || {};
   const habilitarExa =
     JSON.parse(localStorage.getItem("habilitarInscripcion")) || false;
   const habilitarMate =
     JSON.parse(localStorage.getItem("habilitarMaterias")) || false;
   const [alumnoLogueado, setAlumnoLogueado] = useState(alumno);
+  const [adminLogueado, setAdminLogueado] = useState(administrador);
   const [habilitarExamenes, setHabilitarExamenes] = useState(habilitarExa);
   const [habilitarMaterias, setHabilitarMaterias] = useState(habilitarMate);
 
@@ -29,12 +31,13 @@ function App() {
             path="/"
             element={<Login setAlumnoLogueado={setAlumnoLogueado} />}
           />
-          <Route exact path="/administrador" element={<Administrador />} />
+          <Route exact path="/administrador" element={<Administrador setAdminLogueado={setAdminLogueado} />} />
           <Route
             path="/inicioadmin/*"
             element={
               <RutasProtegidasAdmin>
                 <RutasAdmin
+                setAdminLogueado={setAdminLogueado}
                   habilitarExamenes={habilitarExamenes}
                   setHabilitarExamenes={setHabilitarExamenes}
                   habilitarMaterias={habilitarMaterias}

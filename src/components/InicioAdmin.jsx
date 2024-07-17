@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Container, ListGroup } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const InicioAdmin = ({
+  setAdminLogueado,
   habilitarExamenes,
   setHabilitarExamenes,
   setHabilitarMaterias,
@@ -12,6 +13,7 @@ const InicioAdmin = ({
   const [estadoBotonInscripcion, setEstadoBotonInscripcion] = useState(true);
   const [estadoBotonInscripcionMaterias, setEstadoBotonInscripcionMaterias] =
     useState(true);
+  const navegacion = useNavigate();
 
   const habilitarInscripcion = () => {
     Swal.fire({
@@ -113,6 +115,19 @@ const InicioAdmin = ({
     });
   }
 
+  const cerrarSesion = () =>{
+    sessionStorage.removeItem("administrador");
+    setAdminLogueado({});
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "Cerrando Sesión",
+      showConfirmButton: false,
+      timer: 1500
+    });
+    navegacion('/administrador');
+  }
+
   return (
     <main className="my-5">
       <Container>
@@ -183,12 +198,12 @@ const InicioAdmin = ({
             )}
 
             <ListGroup.Item action>
-              <NavLink className="nav-link" to={"/inicio/cambiarcontraseña"}>
+              <NavLink className="nav-link" to={"/inicioadmin/cambiarcontraseña"}>
                 <i className="bi bi-caret-right-square-fill"></i> Cambio de
                 contraseña
               </NavLink>
             </ListGroup.Item>
-            <ListGroup.Item action>
+            <ListGroup.Item action  onClick={cerrarSesion}>
               <i className="bi bi-caret-right-square-fill"></i> Salir
             </ListGroup.Item>
           </ListGroup>

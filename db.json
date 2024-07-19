@@ -20,63 +20,54 @@
           "Año": 2,
           "Dic": "Anual",
           "nombreMateria": "Estadistica Aplicada",
-
           "horarios": "18:20 - 19:45"
         },
         {
           "Año": 2,
           "Dic": "Anual",
           "nombreMateria": "Bases de Datos II",
-
           "horarios": "18:20 - 19:45"
         },
         {
           "Año": 2,
           "Dic": "Anual",
           "nombreMateria": "Matemática II",
-
           "horarios": "18:20 - 19:45"
         },
         {
           "Año": 2,
           "Dic": "Anual",
           "nombreMateria": "Sistema de Información Empresarial",
-
           "horarios": "18:20 - 19:45"
         },
         {
           "Año": 2,
           "Dic": "Anual",
           "nombreMateria": "Inglés Técnico II",
-
           "horarios": "18:20 - 19:45"
         },
         {
           "Año": 2,
           "Dic": "Anual",
           "nombreMateria": "Redes y Seguridad Informática",
-
           "horarios": "18:20 - 19:45"
         },
         {
           "Año": 2,
           "Dic": "Anual",
           "nombreMateria": "Análisis y Diseño de Sistemas",
-
           "horarios": "18:20 - 19:45"
         },
         {
           "Año": 2,
           "Dic": "Anual",
           "nombreMateria": "Laboratorio de Programación",
-
           "horarios": "18:20 - 19:45"
         },
         {
           "Año": 2,
           "Dic": "Anual",
           "nombreMateria": "Taller de Programación II",
-
           "horarios": "18:20 - 19:45"
         }
       ]
@@ -471,6 +462,20 @@
           "dni": "17077370",
           "carrera": "Tecnicatura Superior en Desarrollo de Software",
           "legajo": "2020"
+        }
+      ]
+    },
+    {
+      "id": "6fa2",
+      "nombreMateria": "Taller de Programación III",
+      "fecha": "19/7/2024",
+      "alumnosInscriptos": [
+        {
+          "nombres": "Iván Jesus Alberto",
+          "apellido": "Silva",
+          "dni": "42007328",
+          "carrera": "Tecnicatura Superior en Desarrollo de Software",
+          "legajo": "4150"
         }
       ]
     }

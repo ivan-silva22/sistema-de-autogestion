@@ -11,7 +11,7 @@ const CorrelatividadRendir = ({ alumnoLogueado }) => {
   useEffect(() => {
     correlatividad(alumnoLogueado).then((respuesta) => {
       setMateriasCorrelativasRendir(respuesta);
-      console.log(respuesta);
+    
     });
   }, []);
 

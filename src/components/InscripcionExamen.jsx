@@ -18,7 +18,7 @@ const InscripcionExamen = ({ alumnoLogueado, habilitarExamenes }) => {
     });
   }, [alumnoLogueado]);
 
-  console.log(alumnoLogueado)
+  
 
   useEffect(() => {
     localStorage.setItem(
@@ -28,7 +28,7 @@ const InscripcionExamen = ({ alumnoLogueado, habilitarExamenes }) => {
   }, [botonesDeshabilitados, alumnoLogueado.legajo]);
 
   const handleClick = (materiaId, materia) => {
-    console.log(materia)
+  
     setBotonesDeshabilitados([...botonesDeshabilitados, materiaId]);
     localStorage.setItem(
       `botonesDesabilitados_${alumnoLogueado.legajo}`,
@@ -38,7 +38,7 @@ const InscripcionExamen = ({ alumnoLogueado, habilitarExamenes }) => {
   };
 
   const onSubmit = (materia) => {
-    console.log(materia)
+    
     incribirExamen(materia, alumnoLogueado).then((respuesta) => {
       Swal.fire({
         title: "Exito",

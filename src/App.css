@@ -65,3 +65,9 @@ body{
   max-height: 400px;
   overflow-y: auto;
 }
+
+.btn-descargar-excel{
+  background-color: #812a2a !important;
+  color: #ffff !important;
+  border:  0;
+}

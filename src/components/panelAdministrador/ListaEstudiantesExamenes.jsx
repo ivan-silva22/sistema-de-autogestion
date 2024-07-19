@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { Container, Form, Table } from "react-bootstrap";
+import { Container, Form, Table, Button } from "react-bootstrap";
 import { obtenerExamenes } from "../helpers/queries";
 import { NavLink } from "react-router-dom";
+import * as XLSX from "xlsx";
 
 const ListaEstudiantesExamenes = () => {
   const [datosExamenes, setDatosExamenes] = useState([]);
@@ -30,6 +31,13 @@ const ListaEstudiantesExamenes = () => {
       (!filtroCarrera || alumno.carrera === filtroCarrera) &&
       (!filtroMateria || alumno.nombreMateria === filtroMateria)
   );
+
+  const handleDownloadExcel = () => {
+    const worksheet = XLSX.utils.json_to_sheet(alumnosFiltrados);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Estudiantes");
+    XLSX.writeFile(workbook, "ListaEstudiantes.xlsx");
+  };
 
   return (
     <main className="my-4">
@@ -86,6 +94,11 @@ const ListaEstudiantesExamenes = () => {
             </Form.Group>
           </Form>
         </section>
+        <section className="my-3 text-end">
+          <Button className="btn btn-descargar-excel" onClick={handleDownloadExcel} disabled={cargando}>
+            Descargar Excel
+          </Button>
+        </section>
         {cargando ? (
           <p>Cargando datos...</p>
         ) : (
@@ -93,8 +106,8 @@ const ListaEstudiantesExamenes = () => {
             <thead>
               <tr>
                 <th>#</th>
-                <th>Nombres</th>
                 <th>Apellido</th>
+                <th>Nombres</th>
                 <th>DNI</th>
                 <th>Materia</th>
                 <th>Fecha</th>
@@ -106,8 +119,8 @@ const ListaEstudiantesExamenes = () => {
                 return (
                   <tr key={index}>
                     <td>{index + 1}</td>
-                    <td>{dato.nombres}</td>
                     <td>{dato.apellido}</td>
+                    <td>{dato.nombres}</td>
                     <td>{dato.dni}</td>
                     <td>{dato.nombreMateria}</td>
                     <td>{dato.fecha}</td>

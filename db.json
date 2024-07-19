@@ -7,7 +7,7 @@
       "dni": "42007328",
       "carrera": "Tecnicatura Superior en Desarrollo de Software",
       "legajo": "4150",
-      "password": "Ivansilva20",
+      "password": "Ivansilva18",
       "estadoAcademico": [],
       "cursando": [
         {
@@ -20,63 +20,54 @@
           "Año": 2,
           "Dic": "Anual",
           "nombreMateria": "Estadistica Aplicada",
-
           "horarios": "18:20 - 19:45"
         },
         {
           "Año": 2,
           "Dic": "Anual",
           "nombreMateria": "Bases de Datos II",
-
           "horarios": "18:20 - 19:45"
         },
         {
           "Año": 2,
           "Dic": "Anual",
           "nombreMateria": "Matemática II",
-
           "horarios": "18:20 - 19:45"
         },
         {
           "Año": 2,
           "Dic": "Anual",
           "nombreMateria": "Sistema de Información Empresarial",
-
           "horarios": "18:20 - 19:45"
         },
         {
           "Año": 2,
           "Dic": "Anual",
           "nombreMateria": "Inglés Técnico II",
-
           "horarios": "18:20 - 19:45"
         },
         {
           "Año": 2,
           "Dic": "Anual",
           "nombreMateria": "Redes y Seguridad Informática",
-
           "horarios": "18:20 - 19:45"
         },
         {
           "Año": 2,
           "Dic": "Anual",
           "nombreMateria": "Análisis y Diseño de Sistemas",
-
           "horarios": "18:20 - 19:45"
         },
         {
           "Año": 2,
           "Dic": "Anual",
           "nombreMateria": "Laboratorio de Programación",
-
           "horarios": "18:20 - 19:45"
         },
         {
           "Año": 2,
           "Dic": "Anual",
           "nombreMateria": "Taller de Programación II",
-
           "horarios": "18:20 - 19:45"
         }
       ]

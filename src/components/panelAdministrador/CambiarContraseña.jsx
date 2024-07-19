@@ -2,7 +2,8 @@ import { Button, Container, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { cambiarPassword } from "../helpers/queries";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+
 
 const CambiarContraseña = () => {
 
@@ -42,6 +43,11 @@ const CambiarContraseña = () => {
         <section className="text-center"> 
           <h3>Cambiar Contraseña</h3>
           <hr />
+        </section>
+        <section className="my-3 text-end">
+          <NavLink className="btn btn-regresar" to={"/inicioadmin"}>
+            Volver
+          </NavLink>
         </section>
         <section>
           <Form onSubmit={handleSubmit(onSubmit)}>

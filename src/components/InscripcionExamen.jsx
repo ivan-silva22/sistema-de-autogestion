@@ -8,7 +8,7 @@ const InscripcionExamen = ({ alumnoLogueado, habilitarExamenes }) => {
   
   const [materias, setMaterias] = useState([]);
   const [botonesDeshabilitados, setBotonesDeshabilitados] = useState(() => {
-    const botonesGuardados = localStorage.getItem("botonesDeshabilitados");
+    const botonesGuardados = localStorage.getItem(`botonesDesabilitados_${alumnoLogueado.legajo}`);
     return botonesGuardados ? JSON.parse(botonesGuardados) : [];
   });
 
@@ -18,23 +18,27 @@ const InscripcionExamen = ({ alumnoLogueado, habilitarExamenes }) => {
     });
   }, [alumnoLogueado]);
 
+  console.log(alumnoLogueado)
+
   useEffect(() => {
     localStorage.setItem(
-      "botonesDeshabilitados",
+      `botonesDesabilitados_${alumnoLogueado.legajo}`,
       JSON.stringify(botonesDeshabilitados)
     );
-  }, [botonesDeshabilitados]);
+  }, [botonesDeshabilitados, alumnoLogueado.legajo]);
 
   const handleClick = (materiaId, materia) => {
+    console.log(materia)
     setBotonesDeshabilitados([...botonesDeshabilitados, materiaId]);
     localStorage.setItem(
-      "botonesDesabilitado",
-      JSON.stringify(botonesDeshabilitados)
+      `botonesDesabilitados_${alumnoLogueado.legajo}`,
+      JSON.stringify([...botonesDeshabilitados, materiaId])
     );
-    onSubmit(materiaId, materia);
+    onSubmit(materia);
   };
 
   const onSubmit = (materia) => {
+    console.log(materia)
     incribirExamen(materia, alumnoLogueado).then((respuesta) => {
       Swal.fire({
         title: "Exito",

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Container, ListGroup } from "react-bootstrap";
 import { NavLink, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -10,10 +10,16 @@ const InicioAdmin = ({
   setHabilitarMaterias,
   habilitarMaterias,
 }) => {
-  const [estadoBotonInscripcion, setEstadoBotonInscripcion] = useState(true);
+  const [estadoBotonInscripcion, setEstadoBotonInscripcion] = useState( JSON.parse(localStorage.getItem("habilitarInscripcion")) || false);
   const [estadoBotonInscripcionMaterias, setEstadoBotonInscripcionMaterias] =
-    useState(true);
+    useState(JSON.parse(localStorage.getItem("habilitarMaterias")) || false);
   const navegacion = useNavigate();
+
+  useEffect(() => {
+    setEstadoBotonInscripcion(habilitarExamenes);
+    setEstadoBotonInscripcionMaterias(habilitarMaterias);
+  }, [habilitarExamenes, habilitarMaterias]);
+  
 
   const habilitarInscripcion = () => {
     Swal.fire({
@@ -25,12 +31,12 @@ const InicioAdmin = ({
       confirmButtonText: "Confirmar!",
     }).then((result) => {
       if (result.isConfirmed) {
-        setHabilitarExamenes(!habilitarExamenes);
+        setHabilitarExamenes(true);
         localStorage.setItem(
           "habilitarInscripcion",
-          JSON.stringify(!habilitarExamenes)
+          JSON.stringify(true)
         );
-        setEstadoBotonInscripcion(!estadoBotonInscripcion);
+        setEstadoBotonInscripcion(true);
         Swal.fire({
           title: "Exito!",
           text: "Las inscripciones se habilitaron.",
@@ -50,12 +56,12 @@ const InicioAdmin = ({
       confirmButtonText: "Confirmar!",
     }).then((result) => {
       if (result.isConfirmed) {
-        setHabilitarExamenes(!habilitarExamenes);
+        setHabilitarExamenes(false);
         localStorage.setItem(
           "habilitarInscripcion",
-          JSON.stringify(!habilitarExamenes)
+          JSON.stringify(false)
         );
-        setEstadoBotonInscripcion(!estadoBotonInscripcion);
+        setEstadoBotonInscripcion(false);
         Swal.fire({
           title: "Exito!",
           text: "Las inscripciones se habilitaron.",
@@ -75,12 +81,12 @@ const InicioAdmin = ({
       confirmButtonText: "Confirmar!",
     }).then((result) => {
       if (result.isConfirmed) {
-        setHabilitarMaterias(!habilitarMaterias);
+        setHabilitarMaterias(true);
         localStorage.setItem(
           "habilitarMaterias",
-          JSON.stringify(!habilitarMaterias)
+          JSON.stringify(true)
         );
-        setEstadoBotonInscripcionMaterias(!estadoBotonInscripcionMaterias);
+        setEstadoBotonInscripcionMaterias(true);
         Swal.fire({
           title: "Exito!",
           text: "Las inscripciones se habilitaron.",
@@ -100,12 +106,12 @@ const InicioAdmin = ({
       confirmButtonText: "Confirmar!",
     }).then((result) => {
       if (result.isConfirmed) {
-        setHabilitarMaterias(!habilitarMaterias);
+        setHabilitarMaterias(false);
         localStorage.setItem(
           "habilitarMaterias",
-          JSON.stringify(!habilitarMaterias)
+          JSON.stringify(false)
         );
-        setEstadoBotonInscripcionMaterias(!estadoBotonInscripcionMaterias);
+        setEstadoBotonInscripcionMaterias(false);
         Swal.fire({
           title: "Exito!",
           text: "Las inscripciones se desabilitaron.",
@@ -160,7 +166,7 @@ const InicioAdmin = ({
                 cursando
               </NavLink>
             </ListGroup.Item>
-            {estadoBotonInscripcion ? (
+            {!estadoBotonInscripcion ? (
               <ListGroup.Item action onClick={() => habilitarInscripcion()}>
                 <div className="nav-link">
                   <i className="bi bi-caret-right-square-fill"></i> Habilitar
@@ -175,7 +181,7 @@ const InicioAdmin = ({
                 </div>
               </ListGroup.Item>
             )}
-            {estadoBotonInscripcionMaterias ? (
+            {!estadoBotonInscripcionMaterias ? (
               <ListGroup.Item
                 action
                 onClick={() => habilitarMateriasCursando()}

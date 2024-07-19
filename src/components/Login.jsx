@@ -14,10 +14,12 @@ const Login = ({setAlumnoLogueado}) => {
 
   const onSubmit = (alumno) =>{
   login(alumno).then((respuesta) =>{
+    console.log(respuesta)
     if(respuesta){
       const datosAlumno = {
         nombres: respuesta.nombres,
         apellido: respuesta.apellido,
+        dni: respuesta.dni,
         legajo: respuesta.legajo,
         carrera: respuesta.carrera,
         estadoAcademico: respuesta.estadoAcademico,

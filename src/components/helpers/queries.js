@@ -59,6 +59,7 @@ const obtenerFecha = () => {
   return `${dia}/${mes}/${anio}`;
 };
 
+
 export const incribirExamen = async (materia, alumno) => {
   let datosExamen = {
     nombreMateria: materia,

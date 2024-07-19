@@ -26,7 +26,6 @@ const Cursando = ({ alumnoLogueado }) => {
             <tr>
               <th>Año</th>
               <th>Materia</th>
-              <th>Comisión</th>
               <th>Horarios</th>
             </tr>
           </thead>
@@ -35,7 +34,6 @@ const Cursando = ({ alumnoLogueado }) => {
               <tr key={index}>
                 <td>{materia.Año}</td>
                 <td>{materia.nombreMateria}</td>
-                <td>{materia.comision}</td>
                 <td>{materia.horarios}</td>
               </tr>
             ))}

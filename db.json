@@ -14,70 +14,69 @@
           "Año": 2,
           "Dic": "Anual",
           "nombreMateria": "Programación II",
-          "comision": 46,
           "horarios": "18:20 - 19:45"
         },
         {
           "Año": 2,
           "Dic": "Anual",
           "nombreMateria": "Estadistica Aplicada",
-          "comision": 46,
+
           "horarios": "18:20 - 19:45"
         },
         {
           "Año": 2,
           "Dic": "Anual",
           "nombreMateria": "Bases de Datos II",
-          "comision": 46,
+
           "horarios": "18:20 - 19:45"
         },
         {
           "Año": 2,
           "Dic": "Anual",
           "nombreMateria": "Matemática II",
-          "comision": 46,
+
           "horarios": "18:20 - 19:45"
         },
         {
           "Año": 2,
           "Dic": "Anual",
           "nombreMateria": "Sistema de Información Empresarial",
-          "comision": 46,
+
           "horarios": "18:20 - 19:45"
         },
         {
           "Año": 2,
           "Dic": "Anual",
           "nombreMateria": "Inglés Técnico II",
-          "comision": 46,
+
           "horarios": "18:20 - 19:45"
         },
         {
           "Año": 2,
           "Dic": "Anual",
           "nombreMateria": "Redes y Seguridad Informática",
-          "comision": 46,
+
           "horarios": "18:20 - 19:45"
         },
         {
           "Año": 2,
           "Dic": "Anual",
           "nombreMateria": "Análisis y Diseño de Sistemas",
-          "comision": 46,
+
           "horarios": "18:20 - 19:45"
         },
         {
           "Año": 2,
           "Dic": "Anual",
           "nombreMateria": "Laboratorio de Programación",
-          "comision": 46,
+
           "horarios": "18:20 - 19:45"
         },
         {
           "Año": 2,
           "Dic": "Anual",
           "nombreMateria": "Taller de Programación II",
-          "comision": 46,
+
           "horarios": "18:20 - 19:45"
         }
       ]
@@ -392,24 +391,51 @@
   ],
   "examenes": [
     {
-      "id": "1",
+      "id": "cd8b",
+      "nombreMateria": "Ciudadanía y Espacio Público",
+      "fecha": "17/7/2024",
+      "alumnosInscriptos": [
+        {
+          "nombres": "Iván Jesus Alberto",
+          "apellido": "Silva",
+          "dni": "42007328",
+          "carrera": "Tecnicatura Superior en Desarrollo de Software",
+          "legajo": "4150"
+        }
+      ]
+    },
+    {
+      "id": "cd08",
+      "nombreMateria": "Introducción a la Informática",
+      "fecha": "17/7/2024",
+      "alumnosInscriptos": [
+        {
+          "nombres": "Iván Jesus Alberto",
+          "apellido": "Silva",
+          "dni": "42007328",
+          "carrera": "Tecnicatura Superior en Desarrollo de Software",
+          "legajo": "4150"
+        }
+      ]
+    },
+    {
+      "id": "ae92",
+      "nombreMateria": "Introducción a Redes",
+      "fecha": "17/7/2024",
+      "alumnosInscriptos": [
+        {
+          "nombres": "Iván Jesus Alberto",
+          "apellido": "Silva",
+          "dni": "42007328",
+          "carrera": "Tecnicatura Superior en Desarrollo de Software",
+          "legajo": "4150"
+        }
+      ]
+    },
+    {
+      "id": "4ac2",
       "nombreMateria": "Bases de Datos I",
-      "fecha": "7/7/2024",
-      "alumnosInscriptos": [
-        {
-          "id": 1,
-          "nombres": "Iván Jesus Alberto",
-          "apellido": "Silva",
-          "dni": "42007328",
-          "carrera": "Tecnicatura Superior en Desarrollo de Software",
-          "lejago": 4150
-        }
-      ]
-    },
-    {
-      "id": "79f5",
-      "nombreMateria": "Desarrollo Empresarial",
-      "fecha": "7/7/2024",
+      "fecha": "17/7/2024",
       "alumnosInscriptos": [
         {
           "nombres": "Iván Jesus Alberto",
@@ -421,44 +447,30 @@
       ]
     },
     {
-      "id": "9e53",
-      "nombreMateria": "Programación I",
-      "fecha": "7/7/2024",
+      "id": "69f9",
+      "nombreMateria": "Ciudadanía y Espacio Público",
+      "fecha": "17/7/2024",
       "alumnosInscriptos": [
         {
-          "nombres": "Iván Jesus Alberto",
-          "apellido": "Silva",
-          "dni": "42007328",
+          "nombres": "Juan ",
+          "apellido": "Gonzalez",
+          "dni": "17077370",
           "carrera": "Tecnicatura Superior en Desarrollo de Software",
-          "legajo": "4150"
+          "legajo": "2020"
         }
       ]
     },
     {
-      "id": "d10c",
-      "nombreMateria": "Taller de Programación I",
-      "fecha": "7/7/2024",
+      "id": "c815",
+      "nombreMateria": "Introducción a la Informática",
+      "fecha": "17/7/2024",
       "alumnosInscriptos": [
         {
-          "nombres": "Iván Jesus Alberto",
-          "apellido": "Silva",
-          "dni": "42007328",
+          "nombres": "Juan ",
+          "apellido": "Gonzalez",
+          "dni": "17077370",
           "carrera": "Tecnicatura Superior en Desarrollo de Software",
-          "legajo": "4150"
-        }
-      ]
-    },
-    {
-      "id": "01c7",
-      "nombreMateria": "Taller de Programación III",
-      "fecha": "7/7/2024",
-      "alumnosInscriptos": [
-        {
-          "nombres": "Iván Jesus Alberto",
-          "apellido": "Silva",
-          "dni": "42007328",
-          "carrera": "Tecnicatura en Agroindustria de los Alimentos",
-          "legajo": "4150"
+          "legajo": "2020"
         }
       ]
     }

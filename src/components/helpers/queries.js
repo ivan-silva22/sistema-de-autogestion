@@ -264,3 +264,26 @@ export const cambiarPassword = async(dato) =>{
     return false;
   }
 } 
+
+export const cambiarPasswordAlumno = async(dato)=>{
+  try {
+    const respuesta = await fetch(URLAlumno);
+    const listaAlumnos = await respuesta.json();
+    const buscarAlumno = listaAlumnos.find((item) => item.password === dato.passwordActual);
+    if(buscarAlumno){  
+      buscarAlumno.password = dato.passwordNuevo
+      const respuesta = await fetch(`${URLAlumno}/${buscarAlumno.id}` , {
+        method: "PUT",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(buscarAlumno),
+      })
+      return respuesta;
+    }else{
+      return null
+    }
+  } catch (error) {
+    
+  }
+}

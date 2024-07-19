@@ -67,7 +67,7 @@ const Inicio = ({alumnoLogueado, setAlumnoLogueado}) => {
               </NavLink>
             </ListGroup.Item>
             <ListGroup.Item action>
-              <NavLink className="nav-link" to={"/inicio/cambiarcontraseña"}>
+              <NavLink className="nav-link" to={"/inicio/cambiarpassword"}>
                 <i className="bi bi-caret-right-square-fill"></i> Cambio de
                 contraseña
               </NavLink>

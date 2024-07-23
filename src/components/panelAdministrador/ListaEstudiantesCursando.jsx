@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react";
-import { Container, Form, Table } from "react-bootstrap";
+import { Container, Form, Table, Modal, Button } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
-import { obtenerAlumnosCursando } from "../helpers/queries";
+import { actualizarEstadoAcademico, obtenerAlumnosCursando } from "../helpers/queries";
+import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
+
 
 const ListaEstudiantesCursando = () => {
   const [alumnosCursando, setAlumnosCursando] = useState([]);
   const [filtroCursado, setFiltroCursado] = useState("");
   const [cargando, setCargando] = useState(true);
+  const [show, setShow] = useState(false);
+  const [idAlumno, setIdAlumno] = useState("");
 
   useEffect(() => {
     obtenerAlumnosCursando().then((respuesta) => {
@@ -27,6 +32,40 @@ const ListaEstudiantesCursando = () => {
 
   const unicoAlumnos = Array.from(new Set(alumnosFiltrados.map(a => a.dni)))
   .map(dni => alumnosFiltrados.find(a => a.dni === dni));
+
+  const handleShow = (dni) => {
+    setShow(true);
+    setIdAlumno(dni)
+  }  
+
+  const handleClose = () => setShow(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset
+  } = useForm();
+
+  const onSubmit = (EstadoAcademico) =>{
+    actualizarEstadoAcademico(EstadoAcademico, idAlumno).then((respuesta) =>{
+      if(respuesta){
+        Swal.fire({
+          title: "Exito!",
+          text: "El estado academico del alumno se actualizo correctamente!",
+          icon: "success"
+        });
+        reset()
+      }else{
+        Swal.fire({
+          title: "Error!",
+          text: "El estado academico del alumno no se actualizo correctamente, intente nuevamente más tarde!",
+          icon: "error"
+        });
+      }
+    })
+  } 
+
 
   return (
     <main className="my-4">
@@ -74,6 +113,7 @@ const ListaEstudiantesCursando = () => {
                 <th>DNI</th>
                 <th>Año</th>
                 <th>Carrera</th>
+                <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
@@ -85,12 +125,94 @@ const ListaEstudiantesCursando = () => {
                   <td>{dato.dni}</td>
                   <td>{dato.Año}</td>
                   <td>{dato.carrera}</td>
+                  <td>
+                  <Button variant="warning" onClick={() =>{handleShow(dato.dni)}}>
+                      Actualizar Estado Académico
+                    </Button>
+                  </td>
                 </tr>
               ))}
             </tbody>
           </Table>
         )}
       </Container>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Actualizar Estado Académico</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form onSubmit={handleSubmit(onSubmit)}>
+          <Form.Group className="mb-3">
+              <Form.Label>Nombre Materia</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Matemática"
+              
+                {...register("nombreMateria", {
+                  required: "El nombre de la materia es obligatorio",
+                  minLength: {
+                    value: 2,
+                    message: "La cantidad minima de caracteres es de 2 digitos",
+                  },
+                  maxLength: {
+                    value: 200,
+                    message: "La cantidad maxima de caracteres es de 200 digitos",
+                  },
+                })}
+              />
+              <Form.Text className="text-danger">
+              {errors.nombreMateria?.message}
+            </Form.Text>
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Año</Form.Label>
+              <Form.Control
+                type="number"
+               placeholder="1"
+                
+                {...register("anio", {
+                  required: "El año es obligatorio",
+                  min: {
+                    value: 1,
+                    message: "La cantidad minima es 1"
+                  },
+                  max: {
+                    value: 3
+                  }
+                })}
+              />
+              <Form.Text className="text-danger">
+              {errors.anio?.message}
+            </Form.Text>
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Estado</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Aprobo 9, Folio 30, Tomo 40"
+               
+                {...register("estado", {
+                  required: "El estado es obligatorio",
+                  minLength: {
+                    value: 2,
+                    message: "La cantidad minima de caracteres es de 2 digitos",
+                  },
+                  maxLength: {
+                    value: 500,
+                    message: "La cantidad maxima de caracteres es de 500 digitos",
+                  },
+                })}
+              />
+               <Form.Text className="text-danger">
+              {errors.estado?.message}
+            </Form.Text>
+            </Form.Group>
+            <Button variant="danger" type="submit">
+              Guardar Cambios
+            </Button>
+          </Form>
+        </Modal.Body>
+      </Modal>
     </main>
   );
 };

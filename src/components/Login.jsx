@@ -14,7 +14,6 @@ const Login = ({setAlumnoLogueado}) => {
 
   const onSubmit = (alumno) =>{
   login(alumno).then((respuesta) =>{
-    console.log(respuesta)
     if(respuesta){
       const datosAlumno = {
         nombres: respuesta.nombres,

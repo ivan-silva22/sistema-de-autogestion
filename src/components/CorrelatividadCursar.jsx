@@ -11,7 +11,6 @@ const CorrelatividadCursar = ({ alumnoLogueado }) => {
   useEffect(() => {
     correlatividad(alumnoLogueado).then((respuesta) => {
       setMateriasCorrelativasCursar(respuesta);
-      console.log(respuesta);
     });
   }, []);
 

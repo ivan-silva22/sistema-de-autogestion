@@ -8,7 +8,18 @@
       "carrera": "Tecnicatura Superior en Desarrollo de Software",
       "legajo": "4150",
       "password": "Ivansilva18",
-      "estadoAcademico": [],
+      "estadoAcademico": [
+        {
+          "nombreMateria": "Base de Datos I",
+          "anio": "1",
+          "estado": "Aprobo 6, Folio 10, Libro 24"
+        },
+        {
+          "nombreMateria": "Programación I",
+          "anio": "1",
+          "estado": "Aprobo 10, Folio 100, Libro 50"
+        }
+      ],
       "cursando": [
         {
           "Año": 2,
@@ -80,7 +91,13 @@
       "carrera": "Tecnicatura Superior en Desarrollo de Software",
       "legajo": "2020",
       "password": "Ivansilva30",
-      "estadoAcademico": [],
+      "estadoAcademico": [
+        {
+          "nombreMateria": "Bases de Datos II",
+          "anio": "1",
+          "estado": "Aprobo con 9; Folio 57; Tomo 40"
+        }
+      ],
       "cursando": [
         {
           "Año": "1",

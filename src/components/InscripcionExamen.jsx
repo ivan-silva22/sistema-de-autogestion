@@ -18,7 +18,7 @@ const InscripcionExamen = ({ alumnoLogueado, habilitarExamenes }) => {
     });
   }, [alumnoLogueado]);
 
-
+  
 
   useEffect(() => {
     localStorage.setItem(
@@ -38,7 +38,6 @@ const InscripcionExamen = ({ alumnoLogueado, habilitarExamenes }) => {
   };
 
   const onSubmit = (materia) => {
-    console.log(materia)
     incribirExamen(materia, alumnoLogueado).then((respuesta) => {
       Swal.fire({
         title: "Exito",

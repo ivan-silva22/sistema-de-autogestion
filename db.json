@@ -135,6 +135,88 @@
           "horarios": "18:20 - 19:45"
         }
       ]
+    },
+    {
+      "id": "e48b",
+      "nombres": "Jose",
+      "apellido": "Perez",
+      "dni": "41083124",
+      "carrera": "Tecnicatura Superior en Desarrollo de Software",
+      "legajo": "3030",
+      "password": "Joseperez30",
+      "estadoAcademico": [],
+      "cursando": [
+        {
+          "Año": "1",
+          "Dic": "Anual",
+          "nombreMateria": "Ciudadanía y Espacio Público",
+          "comision": 46,
+          "horarios": "18:20 - 19:45"
+        },
+        {
+          "Año": "1",
+          "Dic": "Anual",
+          "nombreMateria": "Introducción a la Informática",
+          "comision": 46,
+          "horarios": "18:20 - 19:45"
+        },
+        {
+          "Año": 1,
+          "Dic": "Anual",
+          "nombreMateria": "Introducción a Redes",
+          "comision": 46,
+          "horarios": "18:20 - 19:45"
+        },
+        {
+          "Año": 1,
+          "Dic": "Anual",
+          "nombreMateria": "Bases de Datos I",
+          "comision": 46,
+          "horarios": "18:20 - 19:45"
+        },
+        {
+          "Año": 1,
+          "Dic": "Anual",
+          "nombreMateria": "Matemática I",
+          "comision": 46,
+          "horarios": "18:20 - 19:45"
+        },
+        {
+          "Año": 1,
+          "Dic": "Anual",
+          "nombreMateria": "Programación I",
+          "comision": 46,
+          "horarios": "18:20 - 19:45"
+        },
+        {
+          "Año": 1,
+          "Dic": "Anual",
+          "nombreMateria": "Inglés Técnico I",
+          "comision": 46,
+          "horarios": "18:20 - 19:45"
+        },
+        {
+          "Año": "1",
+          "Dic": "Anual",
+          "nombreMateria": "Estructura de Datos y Algoritmo",
+          "comision": 46,
+          "horarios": "18:20 - 19:45"
+        },
+        {
+          "Año": 1,
+          "Dic": "Anual",
+          "nombreMateria": "Taller de Programación I",
+          "comision": 46,
+          "horarios": "18:20 - 19:45"
+        },
+        {
+          "Año": 2,
+          "Dic": "Anual",
+          "nombreMateria": "Bases de Datos II",
+          "comision": 46,
+          "horarios": "18:20 - 19:45"
+        }
+      ]
     }
   ],
   "carreras": [

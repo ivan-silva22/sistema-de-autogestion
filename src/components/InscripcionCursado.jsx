@@ -7,16 +7,16 @@ import { NavLink } from "react-router-dom";
 const InscripcionCursado = ({ alumnoLogueado, habilitarMaterias }) => {
   const [materias, setMaterias] = useState([]);
   const [botonesDeshabilitados, setBotonesDeshabilitados] = useState(() => {
-    const botonesGuardados = localStorage.getItem('botonesDeshabilitadosCursado');
+    const botonesGuardados = localStorage.getItem(`botonesDesabilitados_${alumnoLogueado.legajo}`);
     return botonesGuardados ? JSON.parse(botonesGuardados) : [];
   });
   
   useEffect(() => {
-    const botonesGuardados = localStorage.getItem('botonesDeshabilitadosCursado');
+    const botonesGuardados = localStorage.getItem(`botonesDeshabilitadosCursado_${alumnoLogueado.legajo}`);
     if (botonesGuardados) {
       setBotonesDeshabilitados(JSON.parse(botonesGuardados));
     }
-  }, []);
+  }, [alumnoLogueado.legajo]);
 
   useEffect(() => {
     obtenerMaterias(alumnoLogueado).then((respuesta) => {
@@ -30,11 +30,11 @@ const InscripcionCursado = ({ alumnoLogueado, habilitarMaterias }) => {
         );
       }
     });
-  }, []);
+  }, [alumnoLogueado]);
 
   useEffect(() => {
-    localStorage.setItem('botonesDeshabilitadosCursado', JSON.stringify(botonesDeshabilitados));
-  }, [botonesDeshabilitados]);
+    localStorage.setItem(`botonesDeshabilitadosCursado_${alumnoLogueado.legajo}`, JSON.stringify(botonesDeshabilitados));
+  }, [botonesDeshabilitados, alumnoLogueado.legajo]);
 
   const handleClick = (materia, alumnoLogueado) =>{
     inscribirMateria(materia, alumnoLogueado).then((respuesta) =>{
@@ -49,7 +49,6 @@ const InscripcionCursado = ({ alumnoLogueado, habilitarMaterias }) => {
      }
     })
   }
-
 
   return (
     <main className="my-5">

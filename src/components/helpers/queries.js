@@ -36,10 +36,10 @@ export const obtenerMaterias = async (alumno) => {
       const respuesta = await fetch(URLCarrera);
       const listaCarreras = await respuesta.json();
       const buscarCarrera = listaCarreras.find(
-        (carrera) => carrera.nombreCarrera === buscarAlumno.carrera
+        (carrera) => carrera.nombreCarrera.toLowerCase() === buscarAlumno.carrera.toLowerCase()
       );
       if (buscarCarrera) {
-        return buscarCarrera;
+        return buscarCarrera
       } else {
         return null;
       }

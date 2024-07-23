@@ -287,3 +287,32 @@ export const cambiarPasswordAlumno = async(dato)=>{
     
   }
 }
+
+export const actualizarEstadoAcademico = async(estadoAcademico, dni) =>{
+  try {
+    const actualizarEstado = {
+      nombreMateria: estadoAcademico.nombreMateria,
+      anio: estadoAcademico.anio,
+      estado: estadoAcademico.estado
+    }
+    const respuesta = await fetch(URLAlumno);
+    const listaAlumnos = await respuesta.json();
+    const buscarAlumno = listaAlumnos.find((itemAlumno) => itemAlumno.dni === dni);
+    if(buscarAlumno){
+      buscarAlumno.estadoAcademico.push(actualizarEstado);
+      const respuesta = await fetch(`${URLAlumno}/${buscarAlumno.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(buscarAlumno),
+      });
+      return respuesta;
+    }else{
+      return null;
+    }
+  } catch (error) {
+    console.log(error)
+    return false;
+  }
+}

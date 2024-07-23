@@ -123,7 +123,7 @@ const AgregaAlumno = () => {
               <option value="Tecnicatura en Agroindustria de los Alimentos">
                 Tecnicatura en Agroindustria de los Alimentos
               </option>
-              <option value="Tecnicatura en Desarrollo de Software">
+              <option value="Tecnicatura Superior en Desarrollo de Software">
                 Tecnicatura en Desarrollo de Software
               </option>
             </Form.Select>

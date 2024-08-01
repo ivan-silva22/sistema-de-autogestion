@@ -337,3 +337,15 @@ export const actualizarEstadoAcademico = async (estadoAcademico, dni) => {
     return false;
   }
 };
+
+export const eliminarDatosExamenes = async() =>{
+  try {
+    const respuesta = await fetch(URLExamen + "/" + "eliminar",{
+      method: "DELETE",
+    })
+    return respuesta;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+}

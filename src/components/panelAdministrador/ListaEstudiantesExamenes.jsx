@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { Container, Form, Table, Button } from "react-bootstrap";
-import { obtenerExamenes } from "../helpers/queries";
+import { eliminarDatosExamenes, obtenerExamenes } from "../helpers/queries";
 import { NavLink } from "react-router-dom";
 import * as XLSX from "xlsx";
+import Swal from "sweetalert2";
 
 const ListaEstudiantesExamenes = () => {
   const [datosExamenes, setDatosExamenes] = useState([]);
@@ -38,6 +39,32 @@ const ListaEstudiantesExamenes = () => {
     XLSX.utils.book_append_sheet(workbook, worksheet, "Estudiantes");
     XLSX.writeFile(workbook, "ListaEstudiantes.xlsx");
   };
+
+  const eliminarDatos = () =>{
+    Swal.fire({
+      title: "Estas seguro desea borrar todos los datos?",
+      text: "No se puede revertir este proceso!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      confirmButtonText: "Borrar",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        eliminarDatosExamenes().then((respuesta) => {
+          if(respuesta){
+            Swal.fire({
+              title: "Eliminado!",
+              text: "Los datos fueron eliminados correctamente.",
+              icon: "success"
+            });
+          }
+        })
+        
+      }
+    });
+  }
+
 
   return (
     <main className="my-4">
@@ -97,6 +124,9 @@ const ListaEstudiantesExamenes = () => {
         <section className="my-3 text-end">
           <Button className="btn btn-descargar-excel" onClick={handleDownloadExcel} disabled={cargando}>
             Descargar Excel
+          </Button>
+          <Button className="btn btn-eliminar mx-2" onClick={eliminarDatos}>
+            Eliminar todos los datos
           </Button>
         </section>
         {cargando ? (

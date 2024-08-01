@@ -67,7 +67,13 @@ body{
 }
 
 .btn-descargar-excel{
-  background-color: #812a2a !important;
+  background-color: #0a7108 !important;
+  color: #ffff !important;
+  border:  0;
+}
+
+.btn-eliminar{
+  background-color: #9a0d0d !important;
   color: #ffff !important;
   border:  0;
 }

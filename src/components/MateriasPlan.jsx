@@ -38,10 +38,10 @@ const MateriasPlan = ({ alumnoLogueado }) => {
             </tr>
           </thead>
           <tbody>
-            {materias.map((materia) => (
-              <tr key={materia.id}>
-                <td>{materia.Año}</td>
-                <td>{materia.Dic}</td>
+            {materias.map((materia, index) => (
+              <tr key={index}>
+                <td>{materia.anio}</td>
+                <td>{materia.dic}</td>
                 <td>{materia.nombreMateria}</td>
                 <td>{materia.Acreditacion}</td>
               </tr>

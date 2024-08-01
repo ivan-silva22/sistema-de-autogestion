@@ -114,10 +114,10 @@ const AgregaAlumno = () => {
               <option value="Profesorado en Historia">
                 Profesorado en Historia
               </option>
-              <option value="Profesorado en Matemática">
+              <option value="Profesorado en Matematica">
                 Profesorado en Matemática
               </option>
-              <option value="Tecnicatura en Gestión Agropecuaria">
+              <option value="Tecnicatura en Gestion Agropecuaria">
                 Tecnicatura en Gestión Agropecuaria
               </option>
               <option value="Tecnicatura en Agroindustria de los Alimentos">

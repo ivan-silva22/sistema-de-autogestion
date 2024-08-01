@@ -4,13 +4,13 @@ import { cambiarPasswordAlumno } from "../components/helpers/queries";
 import Swal from "sweetalert2";
 import { NavLink, useNavigate } from "react-router-dom";
 
-const CambiarPassword = () => {
+const CambiarPassword = ({alumnoLogueado}) => {
   const {register, handleSubmit, formState: {errors}, reset} = useForm(); 
 
   const navegacion = useNavigate();
 
   const onSubmit  = (datos) =>{
-    cambiarPasswordAlumno(datos).then((respuesta) =>{
+    cambiarPasswordAlumno(datos, alumnoLogueado.legajo).then((respuesta) =>{
           if(respuesta){
               Swal.fire({
                   title: "Exito!",

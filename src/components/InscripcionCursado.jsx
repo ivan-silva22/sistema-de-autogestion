@@ -7,16 +7,9 @@ import { NavLink } from "react-router-dom";
 const InscripcionCursado = ({ alumnoLogueado, habilitarMaterias }) => {
   const [materias, setMaterias] = useState([]);
   const [botonesDeshabilitados, setBotonesDeshabilitados] = useState(() => {
-    const botonesGuardados = localStorage.getItem(`botonesDesabilitados_${alumnoLogueado.legajo}`);
+    const botonesGuardados = localStorage.getItem(`botonesDeshabilitadosCursado_${alumnoLogueado.legajo}`);
     return botonesGuardados ? JSON.parse(botonesGuardados) : [];
   });
-  
-  useEffect(() => {
-    const botonesGuardados = localStorage.getItem(`botonesDeshabilitadosCursado_${alumnoLogueado.legajo}`);
-    if (botonesGuardados) {
-      setBotonesDeshabilitados(JSON.parse(botonesGuardados));
-    }
-  }, [alumnoLogueado.legajo]);
 
   useEffect(() => {
     obtenerMaterias(alumnoLogueado).then((respuesta) => {
@@ -38,6 +31,7 @@ const InscripcionCursado = ({ alumnoLogueado, habilitarMaterias }) => {
 
   const handleClick = (materia, alumnoLogueado) =>{
     inscribirMateria(materia, alumnoLogueado).then((respuesta) =>{
+      console.log(respuesta)
      if(respuesta){
        Swal.fire({
         title: "Exito",
@@ -45,7 +39,7 @@ const InscripcionCursado = ({ alumnoLogueado, habilitarMaterias }) => {
         icon: "success",
         confirmButtonColor: '#ef0808'
       });
-      setBotonesDeshabilitados([...botonesDeshabilitados, materia.id]);
+      setBotonesDeshabilitados((prev) => [...prev, materia.nombreMateria]);
      }
     })
   }
@@ -66,12 +60,12 @@ const InscripcionCursado = ({ alumnoLogueado, habilitarMaterias }) => {
             </tr>
           </thead>
           <tbody>
-            {materias.map((materia) => (
-              <tr key={materia.id}>
-                <td>{materia.Año}</td>
+            {materias.map((materia, index) => (
+              <tr key={index}>
+                <td>{materia.anio}</td>
                 <td>{materia.nombreMateria}</td>
                 <td>
-                  {habilitarMaterias ? (<Button type="button" className="btn btn-inscripcion"  disabled={botonesDeshabilitados.includes(materia.id)}  onClick={()=> handleClick(materia, alumnoLogueado)}>Inscribirse</Button>): ( <p>Inscripciones deshabilitadas</p>)}
+                  {habilitarMaterias ? (<Button type="button" className="btn btn-inscripcion"  disabled={botonesDeshabilitados.includes(materia.nombreMateria)}  onClick={()=> handleClick(materia, alumnoLogueado)}>Inscribirse</Button>): ( <p>Inscripciones deshabilitadas</p>)}
                 </td>
               </tr>
             ))}

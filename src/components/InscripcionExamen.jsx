@@ -5,49 +5,61 @@ import Swal from "sweetalert2";
 import { NavLink } from "react-router-dom";
 
 const InscripcionExamen = ({ alumnoLogueado, habilitarExamenes }) => {
-  
   const [materias, setMaterias] = useState([]);
   const [botonesDeshabilitados, setBotonesDeshabilitados] = useState(() => {
-    const botonesGuardados = localStorage.getItem(`botonesDesabilitados_${alumnoLogueado.legajo}`);
+    const botonesGuardados = localStorage.getItem(
+      `botonesDeshabilitadosExamen_${alumnoLogueado.legajo}`
+    );
     return botonesGuardados ? JSON.parse(botonesGuardados) : [];
   });
 
   useEffect(() => {
     obtenerMaterias(alumnoLogueado).then((respuesta) => {
-      setMaterias(respuesta.materias);
+      if (respuesta) {
+        setMaterias(respuesta.materias);
+      } else {
+        Swal.fire(
+          "Ocurrió un error",
+          "No se pueden mostrar las materias, intente nuevamente más tarde",
+          "error"
+        );
+      }
     });
   }, [alumnoLogueado]);
 
-  
-
   useEffect(() => {
     localStorage.setItem(
-      `botonesDesabilitados_${alumnoLogueado.legajo}`,
+      `botonesDeshabilitadosExamen_${alumnoLogueado.legajo}`,
       JSON.stringify(botonesDeshabilitados)
     );
   }, [botonesDeshabilitados, alumnoLogueado.legajo]);
 
-  const handleClick = (materiaId, materia) => {
-  
-    setBotonesDeshabilitados([...botonesDeshabilitados, materiaId]);
-    localStorage.setItem(
-      `botonesDesabilitados_${alumnoLogueado.legajo}`,
-      JSON.stringify([...botonesDeshabilitados, materiaId])
-    );
-    onSubmit(materia);
+  const handleClick = (materia) => {
+    const nombreMateria = materia.nombreMateria;
+
+    if (!botonesDeshabilitados.includes(nombreMateria)) {
+      setBotonesDeshabilitados((prev) => [...prev, nombreMateria]);
+      localStorage.setItem(
+        `botonesDeshabilitadosExamen_${alumnoLogueado.legajo}`,
+        JSON.stringify([...botonesDeshabilitados, nombreMateria])
+      );
+      onSubmit(materia);
+    }
   };
 
   const onSubmit = (materia) => {
     incribirExamen(materia, alumnoLogueado).then((respuesta) => {
-      Swal.fire({
-        title: "Exito",
-        text: `Se inscribio al examen final de ${materia}, suerte🍀`,
-        icon: "success",
-        confirmButtonColor: "#ef0808",
-      });
+      if(respuesta){
+        Swal.fire({
+          title: "Éxito",
+          text: `Te has inscrito al examen final de ${materia.nombreMateria}, ¡suerte! 🍀`,
+          icon: "success",
+          confirmButtonColor: "#ef0808",
+        });
+      }
+      
     });
   };
-
   return (
     <main className="my-5">
       <Container>
@@ -64,18 +76,20 @@ const InscripcionExamen = ({ alumnoLogueado, habilitarExamenes }) => {
             </tr>
           </thead>
           <tbody>
-            {materias.map((materia) => (
-              <tr key={materia.id}>
-                <td>{materia.Año}</td>
+            {materias.map((materia, index) => (
+              <tr key={index}>
+                <td>{materia.anio}</td>
                 <td>{materia.nombreMateria}</td>
                 <td>
                   {habilitarExamenes ? (
                     <Button
                       type="button"
                       className="btn btn-inscripcion"
-                      disabled={botonesDeshabilitados.includes(materia.id)}
+                      disabled={botonesDeshabilitados.includes(
+                        materia.nombreMateria
+                      )}
                       onClick={() =>
-                        handleClick(materia.id, materia.nombreMateria)
+                        handleClick(materia, materia.nombreMateria)
                       }
                     >
                       Inscribirse

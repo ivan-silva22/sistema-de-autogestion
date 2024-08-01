@@ -13,7 +13,6 @@ const Cursando = ({ alumnoLogueado }) => {
   }, []);
 
   
-
   return (
     <main className="my-5">
       <Container>
@@ -26,15 +25,15 @@ const Cursando = ({ alumnoLogueado }) => {
             <tr>
               <th>Año</th>
               <th>Materia</th>
-              <th>Horarios</th>
+              <th>Dic</th>
             </tr>
           </thead>
           <tbody>
             {materiasCursando.map((materia, index) => (
               <tr key={index}>
-                <td>{materia.Año}</td>
+                <td>{materia.anio}</td>
                 <td>{materia.nombreMateria}</td>
-                <td>{materia.horarios}</td>
+                <td>{materia.dic}</td>
               </tr>
             ))}
           </tbody>

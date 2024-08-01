@@ -56,12 +56,18 @@ const ListaEstudiantesCursando = () => {
           icon: "success"
         });
         reset()
+      }else if(respuesta === false){
+        Swal.fire({
+          title: "Error!",
+          text: "La materia ya existe!",
+          icon: "error"
+        });
       }else{
         Swal.fire({
           title: "Error!",
-          text: "El estado academico del alumno no se actualizo correctamente, intente nuevamente más tarde!",
+          text: "El estado academico del alumno no se actualizo correctamente, intente nuevamente más tarde",
           icon: "error"
-        });
+        })
       }
     })
   } 
@@ -123,7 +129,7 @@ const ListaEstudiantesCursando = () => {
                   <td>{dato.nombres}</td>
                   <td>{dato.apellido}</td>
                   <td>{dato.dni}</td>
-                  <td>{dato.Año}</td>
+                  <td>{dato.anio}</td>
                   <td>{dato.carrera}</td>
                   <td>
                   <Button variant="warning" onClick={() =>{handleShow(dato.dni)}}>

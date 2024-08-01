@@ -13,7 +13,7 @@ const Administrador = ({setAdminLogueado}) => {
 
     const onSubmit = (usuario) =>{
         loginAdmin(usuario).then((respuesta) =>{
-            if(respuesta){
+            if(respuesta && respuesta.status === 200){
                 const datosAdmin = {
                     email: respuesta.email,
                     nombreAdmin: respuesta.nombreAdmin,

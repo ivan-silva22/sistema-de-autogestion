@@ -14,6 +14,7 @@ const CorrelatividadCursar = ({ alumnoLogueado }) => {
     });
   }, []);
 
+
   return (
     <main className="my-5">
       <Container>
@@ -30,12 +31,13 @@ const CorrelatividadCursar = ({ alumnoLogueado }) => {
             </tr>
           </thead>
           <tbody>
-            {materiasCorrelativasCursar.map((materia) => (
-              <tr key={materia.id}>
-                <td>{materia.Año}</td>
-                <td>{materia.nombreMateria}</td>
-                <td>{materia.correlatividadCursar}</td>
-              </tr>
+            {materiasCorrelativasCursar.map((materia, index) => (
+              console.log(materia)
+              // <tr key={index}>
+              //   <td>{materia.anio}</td>
+              //   <td>{materia.nombreMateria}</td>
+              //   <td>{materia.correlatividadCursar}</td>
+              // </tr>
             ))}
           </tbody>
         </Table>

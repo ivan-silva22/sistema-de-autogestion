@@ -47,7 +47,7 @@ const RutasAlumno = ({ alumnoLogueado, setAlumnoLogueado, habilitarExamenes, hab
           path="/inscripcioncursado"
           element={<InscripcionCursado alumnoLogueado={alumnoLogueado} habilitarMaterias={habilitarMaterias} />}
         />
-        <Route exact path="/cambiarpassword" element={<CambiarPassword />} />
+        <Route exact path="/cambiarpassword" element={<CambiarPassword alumnoLogueado={alumnoLogueado} />} />
         <Route exact path="/inicio-admin" element={<InicioAdmin/>}/>
       </Routes>
     </>

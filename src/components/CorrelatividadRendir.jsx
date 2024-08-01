@@ -11,7 +11,6 @@ const CorrelatividadRendir = ({ alumnoLogueado }) => {
   useEffect(() => {
     correlatividad(alumnoLogueado).then((respuesta) => {
       setMateriasCorrelativasRendir(respuesta);
-      console.log(respuesta);
     });
   }, []);
 
@@ -31,9 +30,9 @@ const CorrelatividadRendir = ({ alumnoLogueado }) => {
             </tr>
           </thead>
           <tbody>
-            {materiasCorrelativasRendir.map((materia) => (
-              <tr key={materia.id}>
-                <td>{materia.Año}</td>
+            {materiasCorrelativasRendir.map((materia, index) => (
+              <tr key={index}>
+                <td>{materia.anio}</td>
                 <td>{materia.nombreMateria}</td>
                 <td>{materia.correlatividadRendir}</td>
               </tr>

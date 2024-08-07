@@ -44,7 +44,6 @@ export const obtenerMaterias = async (alumno) => {
           carrera.nombreCarrera.toLowerCase() ===
           buscarAlumno.carrera.toLowerCase()
       );
-      console.log(buscarCarrera);
       if (buscarCarrera) {
         return buscarCarrera;
       } else {

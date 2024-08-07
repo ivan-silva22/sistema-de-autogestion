@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Container, Table } from "react-bootstrap";
+import { Button, Container, Table, Spinner } from "react-bootstrap";
 import { incribirExamen, obtenerMaterias } from "./helpers/queries";
 import Swal from "sweetalert2";
 import { NavLink } from "react-router-dom";
@@ -12,11 +12,14 @@ const InscripcionExamen = ({ alumnoLogueado, habilitarExamenes }) => {
     );
     return botonesGuardados ? JSON.parse(botonesGuardados) : [];
   });
+  const [mostrarSpinner, setMostrarSpinner] = useState(true);
 
   useEffect(() => {
     obtenerMaterias(alumnoLogueado).then((respuesta) => {
       if (respuesta) {
+        setMostrarSpinner(true);
         setMaterias(respuesta.materias);
+        setMostrarSpinner(false);
       } else {
         Swal.fire(
           "Ocurrió un error",
@@ -67,41 +70,50 @@ const InscripcionExamen = ({ alumnoLogueado, habilitarExamenes }) => {
           <h3>Inscripción a examenes finales</h3>
           <hr />
         </section>
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>Año</th>
-              <th>Materia</th>
-              <th>Incripción</th>
-            </tr>
-          </thead>
-          <tbody>
-            {materias.map((materia, index) => (
-              <tr key={index}>
-                <td>{materia.anio}</td>
-                <td>{materia.nombreMateria}</td>
-                <td>
-                  {habilitarExamenes ? (
-                    <Button
-                      type="button"
-                      className="btn btn-inscripcion"
-                      disabled={botonesDeshabilitados.includes(
-                        materia.nombreMateria
-                      )}
-                      onClick={() =>
-                        handleClick(materia, materia.nombreMateria)
-                      }
-                    >
-                      Inscribirse
-                    </Button>
-                  ) : (
-                    <p>Inscripciones deshabilitadas</p>
-                  )}
-                </td>
+        {
+          mostrarSpinner ? (
+            <div className="text-center my-5">
+            <Spinner animation="border" variant="dark" />
+          </div>
+          ) : (
+            <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>Año</th>
+                <th>Materia</th>
+                <th>Incripción</th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
+            </thead>
+            <tbody>
+              {materias.map((materia, index) => (
+                <tr key={index}>
+                  <td>{materia.anio}</td>
+                  <td>{materia.nombreMateria}</td>
+                  <td>
+                    {habilitarExamenes ? (
+                      <Button
+                        type="button"
+                        className="btn btn-inscripcion"
+                        disabled={botonesDeshabilitados.includes(
+                          materia.nombreMateria
+                        )}
+                        onClick={() =>
+                          handleClick(materia, materia.nombreMateria)
+                        }
+                      >
+                        Inscribirse
+                      </Button>
+                    ) : (
+                      <p>Inscripciones deshabilitadas</p>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+          )
+        }
+       
         <section className="mt-5 text-center">
           <NavLink type="button" className=" btn btn-volver" to={"/inicio"}>
             Volver

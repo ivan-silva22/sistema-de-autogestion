@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Container, Form, Table, Modal, Button } from "react-bootstrap";
+import { Container, Form, Table, Modal, Button,Spinner } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import { actualizarEstadoAcademico, obtenerAlumnosCursando } from "../helpers/queries";
 import { useForm } from "react-hook-form";
@@ -12,12 +12,15 @@ const ListaEstudiantesCursando = () => {
   const [cargando, setCargando] = useState(true);
   const [show, setShow] = useState(false);
   const [idAlumno, setIdAlumno] = useState("");
+  const [mostrarSpinner, setMostrarSpinner] = useState(true);
 
   useEffect(() => {
     obtenerAlumnosCursando().then((respuesta) => {
       if (respuesta) {
+        setMostrarSpinner(true);
         setAlumnosCursando(respuesta);
         setCargando(false);
+        setMostrarSpinner(false);
       }
     });
   }, []);
@@ -107,40 +110,47 @@ const ListaEstudiantesCursando = () => {
             </Form.Group>
           </Form>
         </section>
-        {cargando ? (
-          <p>Cargando datos...</p>
-        ) : (
-          <Table striped bordered hover responsive className="table-scroll">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Nombres</th>
-                <th>Apellido</th>
-                <th>DNI</th>
-                <th>Año</th>
-                <th>Carrera</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              {unicoAlumnos.map((dato, index) => (
-                <tr key={index}>
-                  <td>{index + 1}</td>
-                  <td>{dato.nombres}</td>
-                  <td>{dato.apellido}</td>
-                  <td>{dato.dni}</td>
-                  <td>{dato.anio}</td>
-                  <td>{dato.carrera}</td>
-                  <td>
-                  <Button variant="warning" onClick={() =>{handleShow(dato.dni)}}>
-                      Actualizar Estado Académico
-                    </Button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        )}
+        {
+            mostrarSpinner ? (
+              <div className="text-center my-5">
+                <Spinner animation="border" variant="dark" />
+              </div>
+            ): (<> {cargando ? (
+              <p>Cargando datos...</p>
+            ) : (
+              <Table striped bordered hover responsive className="table-scroll">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Nombres</th>
+                    <th>Apellido</th>
+                    <th>DNI</th>
+                    <th>Año</th>
+                    <th>Carrera</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {unicoAlumnos.map((dato, index) => (
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>{dato.nombres}</td>
+                      <td>{dato.apellido}</td>
+                      <td>{dato.dni}</td>
+                      <td>{dato.anio}</td>
+                      <td>{dato.carrera}</td>
+                      <td>
+                      <Button variant="warning" onClick={() =>{handleShow(dato.dni)}}>
+                          Actualizar Estado Académico
+                        </Button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            )}</>) 
+          }
+       
       </Container>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>

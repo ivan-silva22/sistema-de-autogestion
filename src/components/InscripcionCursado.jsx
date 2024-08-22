@@ -22,10 +22,11 @@ const InscripcionCursado = ({ alumnoLogueado, habilitarMaterias }) => {
         setMostrarSpinner(false);
       } else {
         Swal.fire(
-          "Ocurrio un error",
-          "No se puede mostrar las materias, intente nuevamente más tarde",
+          "Ocurrió un error",
+          "No se pueden mostrar las materias, intente nuevamente más tarde",
           "error"
         );
+        setMostrarSpinner(false);
       }
     });
   }, [alumnoLogueado]);
@@ -37,17 +38,22 @@ const InscripcionCursado = ({ alumnoLogueado, habilitarMaterias }) => {
     );
   }, [botonesDeshabilitados, alumnoLogueado.legajo]);
 
-  const handleClick = (materia, alumnoLogueado) => {
+  const handleClick = (materia) => {
     inscribirMateria(materia, alumnoLogueado).then((respuesta) => {
-      console.log(respuesta);
       if (respuesta) {
         Swal.fire({
-          title: "Exito",
-          text: `Se inscribio a la materia: ${materia.nombreMateria}`,
+          title: "Éxito",
+          text: `Te inscribiste a la materia: ${materia.nombreMateria}`,
           icon: "success",
           confirmButtonColor: "#ef0808",
         });
         setBotonesDeshabilitados((prev) => [...prev, materia.nombreMateria]);
+      } else {
+        Swal.fire(
+          "Error",
+          "Hubo un problema al intentar inscribirse, intenta nuevamente.",
+          "error"
+        );
       }
     });
   };
@@ -64,17 +70,17 @@ const InscripcionCursado = ({ alumnoLogueado, habilitarMaterias }) => {
             <Spinner animation="border" variant="dark" />
           </div>
         ) : (
-          <Table striped bordered hover>
-            <thead>
+          <Table responsive striped bordered hover>
+            <thead className="text-center">
               <tr>
                 <th>Año</th>
                 <th>Materia</th>
-                <th>Incripción</th>
+                <th>Inscripción</th>
               </tr>
             </thead>
             <tbody>
               {materias.map((materia, index) => (
-                <tr key={index}>
+                <tr key={index} className="text-center">
                   <td>{materia.anio}</td>
                   <td>{materia.nombreMateria}</td>
                   <td>
@@ -85,7 +91,7 @@ const InscripcionCursado = ({ alumnoLogueado, habilitarMaterias }) => {
                         disabled={botonesDeshabilitados.includes(
                           materia.nombreMateria
                         )}
-                        onClick={() => handleClick(materia, alumnoLogueado)}
+                        onClick={() => handleClick(materia)}
                       >
                         Inscribirse
                       </Button>
@@ -100,7 +106,7 @@ const InscripcionCursado = ({ alumnoLogueado, habilitarMaterias }) => {
         )}
 
         <section className="mt-5 text-center">
-          <NavLink type="button" className=" btn btn-volver" to={"/inicio"}>
+          <NavLink type="button" className="btn btn-volver" to={"/inicio"}>
             Volver
           </NavLink>
         </section>

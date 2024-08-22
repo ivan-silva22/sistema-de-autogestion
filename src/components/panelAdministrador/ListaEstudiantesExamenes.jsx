@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Container, Form, Table, Button } from "react-bootstrap";
+import { Container, Form, Table, Button, Spinner } from "react-bootstrap";
 import { eliminarDatosExamenes, obtenerExamenes } from "../helpers/queries";
 import { NavLink } from "react-router-dom";
 import * as XLSX from "xlsx";
@@ -10,11 +10,14 @@ const ListaEstudiantesExamenes = () => {
   const [filtroCarrera, setFiltroCarrera] = useState("");
   const [filtroMateria, setFiltroMateria] = useState("");
   const [cargando, setCargando] = useState(true);
+  const [mostrarSpinner, setMostrarSpinner] = useState(true);
 
   useEffect(() => {
     obtenerExamenes().then((respuesta) => {
+      setMostrarSpinner(true);
       setDatosExamenes(respuesta);
       setCargando(false);
+      setMostrarSpinner(false);
     });
   }, []);
 
@@ -40,7 +43,7 @@ const ListaEstudiantesExamenes = () => {
     XLSX.writeFile(workbook, "ListaEstudiantes.xlsx");
   };
 
-  const eliminarDatos = () =>{
+  const eliminarDatos = () => {
     Swal.fire({
       title: "Estas seguro desea borrar todos los datos?",
       text: "No se puede revertir este proceso!",
@@ -52,19 +55,17 @@ const ListaEstudiantesExamenes = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         eliminarDatosExamenes().then((respuesta) => {
-          if(respuesta){
+          if (respuesta) {
             Swal.fire({
               title: "Eliminado!",
               text: "Los datos fueron eliminados correctamente.",
-              icon: "success"
+              icon: "success",
             });
           }
-        })
-        
+        });
       }
     });
-  }
-
+  };
 
   return (
     <main className="my-4">
@@ -122,44 +123,56 @@ const ListaEstudiantesExamenes = () => {
           </Form>
         </section>
         <section className="my-3 text-end">
-          <Button className="btn btn-descargar-excel" onClick={handleDownloadExcel} disabled={cargando}>
+          <Button
+            className="btn btn-descargar-excel"
+            onClick={handleDownloadExcel}
+            disabled={cargando}
+          >
             Descargar Excel
           </Button>
           <Button className="btn btn-eliminar mx-2" onClick={eliminarDatos}>
             Eliminar todos los datos
           </Button>
         </section>
-        {cargando ? (
-          <p>Cargando datos...</p>
+        {mostrarSpinner ? (
+          <div className="text-center my-5">
+            <Spinner animation="border" variant="dark" />
+          </div>
         ) : (
-          <Table striped bordered hover responsive className="table-scroll">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Apellido</th>
-                <th>Nombres</th>
-                <th>DNI</th>
-                <th>Materia</th>
-                <th>Fecha</th>
-                <th>Carrera</th>
-              </tr>
-            </thead>
-            <tbody>
-              {alumnosFiltrados.map((dato, index) => {
-                return (
-                  <tr key={index}>
-                    <td>{index + 1}</td>
-                    <td>{dato.apellido}</td>
-                    <td>{dato.nombres}</td>
-                    <td>{dato.dni}</td>
-                    <td>{dato.nombreMateria}</td>
-                    <td>{dato.fecha}</td>
-                    <td>{dato.carrera}</td>
+          <>
+            {cargando ? (
+              <p>Cargando datos...</p>
+            ) : (
+              <Table striped bordered hover responsive className="table-scroll">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Apellido</th>
+                    <th>Nombres</th>
+                    <th>DNI</th>
+                    <th>Materia</th>
+                    <th>Fecha</th>
+                    <th>Carrera</th>
                   </tr>
-                );
-              })}
-            </tbody>
-          </Table>
+                </thead>
+                <tbody>
+                  {alumnosFiltrados.map((dato, index) => {
+                    return (
+                      <tr key={index}>
+                        <td>{index + 1}</td>
+                        <td>{dato.apellido}</td>
+                        <td>{dato.nombres}</td>
+                        <td>{dato.dni}</td>
+                        <td>{dato.nombreMateria}</td>
+                        <td>{dato.fecha}</td>
+                        <td>{dato.carrera}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </Table>
+            )}
+          </>
         )}
       </Container>
     </main>

@@ -85,17 +85,19 @@ export const inscribirExamen = async (materia, alumno) => {
     const buscarAlumno = listaAlumnos.find(
       (itemAlumno) => itemAlumno.legajo === alumno.legajo
     );
-    if(buscarAlumno){
-      const estadoMateria = buscarAlumno.estadoAcademico.find((estado) => estado.nombreMateria === materia.nombre);
-      if(!estadoMateria || estadoMateria.estado.includes("Aprobo")){
+    if (buscarAlumno) {
+      const estadoMateria = buscarAlumno.estadoAcademico.find(
+        (estado) => estado.nombreMateria === materia.nombre
+      );
+      if (!estadoMateria || estadoMateria.estado.includes("Aprobo")) {
         return {
-          mensaje: 'aprobado'
+          mensaje: "aprobado",
         };
       }
-      if(estadoMateria.estado !== 'Regular'){
+      if (estadoMateria.estado !== "Regular") {
         return {
-          mensaje: 'no regular'
-        }
+          mensaje: "no regular",
+        };
       }
       const respuesta = await fetch(URLExamen + "/" + "finales", {
         method: "POST",
@@ -123,24 +125,33 @@ export const inscribirMateria = async (materia, alumno) => {
     const buscarAlumno = listaAlumnos.find(
       (itemAlumno) => itemAlumno.legajo === alumno.legajo
     );
-    console.log(buscarAlumno);
     if (buscarAlumno) {
-      buscarAlumno.cursando.push(nuevaMateria);
-      const respuesta = await fetch(
-        URLAlumno + "/" + "materia" + "/" + buscarAlumno._id,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(buscarAlumno),
-        }
+      const materiaExiste = buscarAlumno.estadoAcademico.some(
+        (estado) =>
+          estado.nombreMateria === nuevaMateria.nombreMateria
       );
-      console.log(respuesta);
-      return respuesta;
+      if (!materiaExiste) {
+        buscarAlumno.cursando.push(nuevaMateria);
+        const respuesta = await fetch(
+          URLAlumno + "/" + "materia" + "/" + buscarAlumno._id,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(buscarAlumno),
+          }
+        );
+        return respuesta
+      } else {
+        return {
+          mensaje: 'si existe'
+        };
+      }
     }
   } catch (error) {
     console.log(error);
+    return false;
   }
 };
 
@@ -332,8 +343,10 @@ export const actualizarEstadoAcademico = async (estadoAcademico, dni) => {
       (itemAlumno) => itemAlumno.dni === dni
     );
     if (buscarAlumno) {
-      const indiceMateria = buscarAlumno.cursando.findIndex((materia) => materia.nombreMateria === actualizarEstado.nombreMateria);
-      if(indiceMateria != -1){
+      const indiceMateria = buscarAlumno.cursando.findIndex(
+        (materia) => materia.nombreMateria === actualizarEstado.nombreMateria
+      );
+      if (indiceMateria != -1) {
         buscarAlumno.cursando.splice(indiceMateria, 1);
       }
       buscarAlumno.estadoAcademico.push(actualizarEstado);
@@ -357,28 +370,28 @@ export const actualizarEstadoAcademico = async (estadoAcademico, dni) => {
   }
 };
 
-export const eliminarDatosExamenes = async() =>{
+export const eliminarDatosExamenes = async () => {
   try {
-    const respuesta = await fetch(URLExamen + "/" + "eliminar",{
+    const respuesta = await fetch(URLExamen + "/" + "eliminar", {
       method: "DELETE",
-    })
+    });
     return respuesta;
   } catch (error) {
     console.log(error);
     return false;
   }
-}
+};
 
-export const obtenerMateriasPrimerAnio = async() =>{
+export const obtenerMateriasPrimerAnio = async () => {
   try {
-    const respuesta = await fetch(URLCarrera + "/carreras")
-    const datos = await respuesta.json()
-    const materiasPrimerAnio = datos.flatMap(carrera => 
-      carrera.materias.filter(materia => materia.anio === 1)
+    const respuesta = await fetch(URLCarrera + "/carreras");
+    const datos = await respuesta.json();
+    const materiasPrimerAnio = datos.flatMap((carrera) =>
+      carrera.materias.filter((materia) => materia.anio === 1)
     );
-    return materiasPrimerAnio;    
+    return materiasPrimerAnio;
   } catch (error) {
     console.log(error);
-    return false
+    return false;
   }
-}
+};

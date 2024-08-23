@@ -40,6 +40,14 @@ const InscripcionCursado = ({ alumnoLogueado, habilitarMaterias }) => {
 
   const handleClick = (materia) => {
     inscribirMateria(materia, alumnoLogueado).then((respuesta) => {
+      if(respuesta.mensaje === 'si existe'){
+        Swal.fire(
+          "Error",
+          "La materia ya está aprobada. No es necesario inscribirse nuevamente.",
+          "error"
+        );
+        return;
+      }
       if (respuesta) {
         Swal.fire({
           title: "Éxito",

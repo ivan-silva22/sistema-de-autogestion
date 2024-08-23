@@ -65,7 +65,7 @@ const obtenerFecha = () => {
   return `${dia}/${mes}/${anio}`;
 };
 
-export const incribirExamen = async (materia, alumno) => {
+export const inscribirExamen = async (materia, alumno) => {
   let datosExamen = {
     nombreMateria: materia.nombreMateria,
     fecha: obtenerFecha(),
@@ -80,15 +80,32 @@ export const incribirExamen = async (materia, alumno) => {
     ],
   };
   try {
-    const respuesta = await fetch(URLExamen + "/" + "finales", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(datosExamen),
-    });
-
-    return respuesta;
+    const respuesta = await fetch(URLAlumno + "/" + "alumnos");
+    const listaAlumnos = await respuesta.json();
+    const buscarAlumno = listaAlumnos.find(
+      (itemAlumno) => itemAlumno.legajo === alumno.legajo
+    );
+    if(buscarAlumno){
+      const estadoMateria = buscarAlumno.estadoAcademico.find((estado) => estado.nombreMateria === materia.nombre);
+      if(!estadoMateria || estadoMateria.estado.includes("Aprobo")){
+        return {
+          mensaje: 'aprobado'
+        };
+      }
+      if(estadoMateria.estado !== 'Regular'){
+        return {
+          mensaje: 'no regular'
+        }
+      }
+      const respuesta = await fetch(URLExamen + "/" + "finales", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(datosExamen),
+      });
+      return respuesta;
+    }
   } catch (error) {
     console.log(error);
   }
@@ -316,6 +333,10 @@ export const actualizarEstadoAcademico = async (estadoAcademico, dni) => {
       (itemAlumno) => itemAlumno.dni === dni
     );
     if (buscarAlumno) {
+      const indiceMateria = buscarAlumno.cursando.findIndex((materia) => materia.nombreMateria === actualizarEstado.nombreMateria);
+      if(indiceMateria != -1){
+        buscarAlumno.cursando.splice(indiceMateria, 1);
+      }
       buscarAlumno.estadoAcademico.push(actualizarEstado);
       const respuesta = await fetch(
         URLAlumno + "/" + "estado" + "/" + buscarAlumno._id,

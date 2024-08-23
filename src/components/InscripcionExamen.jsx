@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Button, Container, Table, Spinner } from "react-bootstrap";
-import { inscribirExamen, obtenerMaterias } from "./helpers/queries";
 import Swal from "sweetalert2";
 import { NavLink } from "react-router-dom";
+import { inscribirExamen, obtenerMaterias } from "./helpers/queries";
 
 const InscripcionExamen = ({ alumnoLogueado, habilitarExamenes }) => {
   const [materias, setMaterias] = useState([]);
@@ -53,9 +53,24 @@ const InscripcionExamen = ({ alumnoLogueado, habilitarExamenes }) => {
 
     if (!botonesDeshabilitados.includes(nombreMateria)) {
       try {
-        setBotonesDeshabilitados((prev) => [...prev, nombreMateria]);
         const respuesta = await inscribirExamen(materia, alumnoLogueado);
-
+        if(respuesta.mensaje === 'aprobado'){
+          Swal.fire({
+            title: "Error!",
+            text: "La inscripción no es posible. La materia ya está aprobada o no está registrada en el estado académico.!",
+            icon: "error"
+          });
+          return;
+        }
+        if(respuesta.mensaje === 'no regular'){
+          Swal.fire({
+            title: "Error!",
+            text: "La inscripción no es posible. El estado de la materia no es 'Regular'.!",
+            icon: "error",
+            confirmButtonColor: "#ef0808",
+          });
+          return;
+        }
         if (respuesta) {
           Swal.fire({
             title: "Éxito",
@@ -63,6 +78,7 @@ const InscripcionExamen = ({ alumnoLogueado, habilitarExamenes }) => {
             icon: "success",
             confirmButtonColor: "#ef0808",
           });
+          setBotonesDeshabilitados((prev) => [...prev, nombreMateria]);
         } else {
           throw new Error("No se pudo completar la inscripción");
         }

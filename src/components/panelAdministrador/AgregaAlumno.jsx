@@ -15,7 +15,12 @@ const AgregaAlumno = () => {
   const [materiasPrimerAnio, setMateriasPrimerAnio] = useState([]);
 
   const onSubmit = (alumno) => {
-    crearAlumno(alumno, materiasPrimerAnio).then((respuesta) => {
+    if(alumno.esPrimerAño === "si"){
+      alumno.cursando = materiasPrimerAnio;
+    }else{
+      alumno.cursando = [];
+    }
+    crearAlumno(alumno).then((respuesta) => {
       if (respuesta) {
         Swal.fire({
           title: "Exito",

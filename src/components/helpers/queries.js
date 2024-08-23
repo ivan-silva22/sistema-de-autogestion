@@ -202,7 +202,7 @@ export const loginAdmin = async (usuario) => {
   }
 };
 
-export const crearAlumno = async (alumno, materiasPrimerAnio) => {
+export const crearAlumno = async (alumno) => {
   let datosAlumno = {
     nombres: alumno.nombres,
     apellido: alumno.apellido,
@@ -211,7 +211,6 @@ export const crearAlumno = async (alumno, materiasPrimerAnio) => {
     legajo: alumno.legajo,
     password: alumno.password,
     estadoAcademico: [],
-    cursando: materiasPrimerAnio,
   };
   try {
     const respuesta = await fetch(URLAlumno + "/" + "alumnos", {

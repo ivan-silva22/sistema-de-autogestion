@@ -202,7 +202,7 @@ export const loginAdmin = async (usuario) => {
   }
 };
 
-export const crearAlumno = async (alumno) => {
+export const crearAlumno = async (alumno, materiasPrimerAnio) => {
   let datosAlumno = {
     nombres: alumno.nombres,
     apellido: alumno.apellido,
@@ -211,7 +211,7 @@ export const crearAlumno = async (alumno) => {
     legajo: alumno.legajo,
     password: alumno.password,
     estadoAcademico: [],
-    cursando: [],
+    cursando: materiasPrimerAnio,
   };
   try {
     const respuesta = await fetch(URLAlumno + "/" + "alumnos", {
@@ -367,5 +367,19 @@ export const eliminarDatosExamenes = async() =>{
   } catch (error) {
     console.log(error);
     return false;
+  }
+}
+
+export const obtenerMateriasPrimerAnio = async() =>{
+  try {
+    const respuesta = await fetch(URLCarrera + "/carreras")
+    const datos = await respuesta.json()
+    const materiasPrimerAnio = datos.flatMap(carrera => 
+      carrera.materias.filter(materia => materia.anio === 1)
+    );
+    return materiasPrimerAnio;    
+  } catch (error) {
+    console.log(error);
+    return false
   }
 }

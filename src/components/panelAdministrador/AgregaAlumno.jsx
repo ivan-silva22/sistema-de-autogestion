@@ -1,9 +1,9 @@
 import { Button, Col, Container, Form, Row, Modal } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { crearAlumno, obtenerMateriasPrimerAnio } from "../helpers/queries";
+import { crearAlumno } from "../helpers/queries";
 import Swal from "sweetalert2";
 import { NavLink } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const AgregaAlumno = () => {
   const {
@@ -12,7 +12,16 @@ const AgregaAlumno = () => {
     formState: { errors },
     reset,
   } = useForm();
-  const [materiasPrimerAnio, setMateriasPrimerAnio] = useState([]);
+
+  const {
+    register: registerMaterias,
+    handleSubmit: handleSubmitMaterias,
+    formState: { errors: errorsMaterias },
+    reset: resetMaterias,
+  } = useForm();
+
+  const [materiasInscritas, setMateriasInscritas] = useState([]);
+
   const [documentos, setDocumentos] = useState({
     siAdeuda: false,
     noAdeuda: false,
@@ -26,15 +35,13 @@ const AgregaAlumno = () => {
     constanciaCuil: false,
   });
 
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const onSubmit = (alumno) => {
-    if (alumno.esPrimerAño === "si") {
-      alumno.cursando = materiasPrimerAnio;
-    } else {
-      alumno.cursando = [];
-    }
-    console.log(alumno);
-    console.log(documentos);
-    crearAlumno(alumno, documentos).then((respuesta) => {
+    crearAlumno(alumno, documentos,materiasInscritas).then((respuesta) => {
+      console.log(respuesta)
       if (respuesta) {
         Swal.fire({
           title: "Exito",
@@ -54,14 +61,6 @@ const AgregaAlumno = () => {
     });
   };
 
-  useEffect(() => {
-    obtenerMateriasPrimerAnio().then((respuesta) => {
-      if (respuesta) {
-        setMateriasPrimerAnio(respuesta);
-      }
-    });
-  }, []);
-
   const handleCheckboxChange = (e) => {
     const { id, checked } = e.target;
     setDocumentos((prevState) => ({
@@ -69,6 +68,17 @@ const AgregaAlumno = () => {
       [id]: checked,
     }));
   };
+
+  const agregarMateria = (materia) =>{
+    setMateriasInscritas((prevMaterias) => [...prevMaterias, materia]);
+    Swal.fire({
+      title: "Exito!",
+      text: "La materia se agrego correctamente!",
+      icon: "success",
+      confirmButtonColor: "#9a0d0d",
+    });
+    resetMaterias();
+  }
 
   return (
     <main className="my-3">
@@ -353,21 +363,8 @@ const AgregaAlumno = () => {
               {errors.carrera?.message}
             </Form.Text>
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicEsPrimerAnio">
-            <Form.Label>¿Es de 1er Año?*</Form.Label>
-            <Form.Select
-              aria-label="Selecciona una opción"
-              {...register("esPrimerAño", {
-                required: "Este campo es obligatorio",
-              })}
-            >
-              <option value="">Selecciona una opción</option>
-              <option value="sí">Sí</option>
-              <option value="no">No</option>
-            </Form.Select>
-            <Form.Text className="text-danger">
-              {errors.esPrimerAño?.message}
-            </Form.Text>
+          <Form.Group className="mb-3" controlId="formBasicInscribirMaterias">
+            <Button className="btn btn-danger" onClick={handleShow} >Inscibir a materias para cursar</Button>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Contraseña*</Form.Label>
@@ -575,6 +572,84 @@ const AgregaAlumno = () => {
           </Button>
         </Form>
       </Container>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Agregar Materia</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <Form onSubmit={handleSubmitMaterias(agregarMateria)}>
+            <Form.Group className="mb-3">
+              <Form.Label>Año</Form.Label>
+              <Form.Control
+                type="number"
+               placeholder="1"
+                
+                {...registerMaterias("anio", {
+                  required: "El año es obligatorio",
+                  min: {
+                    value: 1,
+                    message: "La cantidad minima es 1"
+                  },
+                  max: {
+                    value: 5,
+                    message: "La cantidad maxima es 5"
+                  }
+                })}
+              />
+              <Form.Text className="text-danger">
+              {errorsMaterias.anio?.message}
+            </Form.Text>
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Dic</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Anual"
+               
+                {...registerMaterias("dic", {
+                  required: "El campo es obligatorio",
+                  minLength: {
+                    value: 2,
+                    message: "La cantidad minima de caracteres es de 2 digitos",
+                  },
+                  maxLength: {
+                    value: 500,
+                    message: "La cantidad maxima de caracteres es de 500 digitos",
+                  },
+                })}
+              />
+               <Form.Text className="text-danger">
+              {errorsMaterias.dic?.message}
+            </Form.Text>
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Nombre Materia</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Matemática"
+              
+                {...registerMaterias("nombreMateria", {
+                  required: "El nombre de la materia es obligatorio",
+                  minLength: {
+                    value: 2,
+                    message: "La cantidad minima de caracteres es de 2 digitos",
+                  },
+                  maxLength: {
+                    value: 200,
+                    message: "La cantidad maxima de caracteres es de 200 digitos",
+                  },
+                })}
+              />
+              <Form.Text className="text-danger">
+              {errorsMaterias.nombreMateria?.message}
+            </Form.Text>
+            </Form.Group>
+            <Button variant="danger" type="submit">
+              Agregar
+            </Button>
+          </Form>  
+        </Modal.Body>
+      </Modal>
     </main>
   );
 };

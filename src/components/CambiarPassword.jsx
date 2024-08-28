@@ -10,7 +10,7 @@ const CambiarPassword = ({alumnoLogueado}) => {
   const navegacion = useNavigate();
 
   const onSubmit  = (datos) =>{
-    cambiarPasswordAlumno(datos, alumnoLogueado.legajo).then((respuesta) =>{
+    cambiarPasswordAlumno(datos, alumnoLogueado.dni).then((respuesta) =>{
           if(respuesta){
               Swal.fire({
                   title: "Exito!",

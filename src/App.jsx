@@ -21,6 +21,7 @@ function App() {
   const [adminLogueado, setAdminLogueado] = useState(administrador);
   const [habilitarExamenes, setHabilitarExamenes] = useState(habilitarExa);
   const [habilitarMaterias, setHabilitarMaterias] = useState(habilitarMate);
+  
 
   return (
     <>

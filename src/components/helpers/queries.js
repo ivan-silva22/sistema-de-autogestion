@@ -18,7 +18,6 @@ export const login = async (alumno) => {
       nombres: listaUsuarios.nombres,
       apellido: listaUsuarios.apellido,
       dni: listaUsuarios.dni,
-      legajo: listaUsuarios.legajo,
       carrera: listaUsuarios.carrera,
       estadoAcademico: listaUsuarios.estadoAcademico,
       cursando: listaUsuarios.cursando,
@@ -34,7 +33,7 @@ export const obtenerMaterias = async (alumno) => {
     const respuesta = await fetch(URLAlumno + "/" + "alumnos");
     const listaAlumnos = await respuesta.json();
     const buscarAlumno = listaAlumnos.find(
-      (itemAlumno) => itemAlumno.legajo === alumno.legajo
+      (itemAlumno) => itemAlumno.dni === alumno.dni
     );
     if (buscarAlumno) {
       const respuesta = await fetch(URLCarrera + "/" + "carreras");
@@ -75,7 +74,6 @@ export const inscribirExamen = async (materia, alumno) => {
         apellido: alumno.apellido,
         dni: alumno.dni,
         carrera: alumno.carrera,
-        legajo: alumno.legajo,
       },
     ],
   };
@@ -83,7 +81,7 @@ export const inscribirExamen = async (materia, alumno) => {
     const respuesta = await fetch(URLAlumno + "/" + "alumnos");
     const listaAlumnos = await respuesta.json();
     const buscarAlumno = listaAlumnos.find(
-      (itemAlumno) => itemAlumno.legajo === alumno.legajo
+      (itemAlumno) => itemAlumno.dni === alumno.dni
     );
     if (buscarAlumno) {
       const estadoMateria = buscarAlumno.estadoAcademico.find(
@@ -123,7 +121,7 @@ export const inscribirMateria = async (materia, alumno) => {
     const respuesta = await fetch(URLAlumno + "/" + "alumnos");
     const listaAlumnos = await respuesta.json();
     const buscarAlumno = listaAlumnos.find(
-      (itemAlumno) => itemAlumno.legajo === alumno.legajo
+      (itemAlumno) => itemAlumno.dni === alumno.dni
     );
     if (buscarAlumno) {
       const materiaExiste = buscarAlumno.estadoAcademico.some(
@@ -160,7 +158,7 @@ export const obtenerMateriasCursando = async (alumno) => {
     const respuesta = await fetch(URLAlumno + "/" + "alumnos");
     const listaAlumnos = await respuesta.json();
     const buscarAlumno = listaAlumnos.find(
-      (itemAlumno) => itemAlumno.legajo === alumno.legajo
+      (itemAlumno) => itemAlumno.dni === alumno.dni
     );
     if (buscarAlumno) {
       return buscarAlumno.cursando;
@@ -175,7 +173,7 @@ export const correlatividad = async (alumno) => {
     const respuesta = await fetch(URLAlumno + "/" + "alumnos");
     const listaAlumnos = await respuesta.json();
     const buscarAlumno = listaAlumnos.find(
-      (itemAlumno) => itemAlumno.legajo === alumno.legajo
+      (itemAlumno) => itemAlumno.dni === alumno.dni
     );
     if (buscarAlumno) {
       const respuesta = await fetch(URLCarrera + "/" + "carreras");
@@ -213,7 +211,7 @@ export const loginAdmin = async (usuario) => {
   }
 };
 
-export const crearAlumno = async (alumno, documentos) => {
+export const crearAlumno = async (alumno, documentos, materiasInscripto) => {
   let datosAlumno = {
     nombres: alumno.nombres,
     apellido: alumno.apellido,
@@ -241,16 +239,17 @@ export const crearAlumno = async (alumno, documentos) => {
     presentoPsicoFisico: documentos.psicoFisico,
     presentoConstanciaCuil: documentos.constanciaCuil,
     estadoAcademico: [],
+    cursando: materiasInscripto,
   };
   try {
-    // const respuesta = await fetch(URLAlumno + "/" + "alumnos", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(datosAlumno),
-    // });
-    // return respuesta;
+    const respuesta = await fetch(URLAlumno + "/" + "alumnos", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(datosAlumno),
+    });
+    return respuesta;
     console.log(datosAlumno)
   } catch (error) {
     console.log(error);
@@ -286,7 +285,7 @@ export const obtenerAlumnosCursando = async () => {
         nombres: dato.nombres,
         apellido: dato.apellido,
         dni: dato.dni,
-        Año: item.Año,
+        anio: item.anio,
         carrera: dato.carrera,
       }))
     );
@@ -307,7 +306,7 @@ export const cambiarPassword = async (dato) => {
     if (buscarAdmin) {
       buscarAdmin.password = dato.passwordNuevo;
       const respuesta = await fetch(
-        `${URLAdmin} / "admin" /${buscarAdmin.id}`,
+        `${URLAdmin} / "admin" /${buscarAdmin._id}`,
         {
           method: "PUT",
           headers: {
@@ -330,7 +329,7 @@ export const cambiarPasswordAlumno = async (dato, legajo) => {
   try {
     const respuesta = await fetch(URLAlumno + "/" + "alumnos");
     const listaAlumnos = await respuesta.json();
-    const buscarAlumno = listaAlumnos.find((item) => item.legajo === legajo);
+    const buscarAlumno = listaAlumnos.find((item) => item.dni === legajo);
     if (buscarAlumno) {
       buscarAlumno.password = dato.passwordNuevo;
       const respuesta = await fetch(

@@ -24,7 +24,6 @@ const Login = ({ setAlumnoLogueado }) => {
           nombres: respuesta.nombres,
           apellido: respuesta.apellido,
           dni: respuesta.dni,
-          legajo: respuesta.legajo,
           carrera: respuesta.carrera,
           estadoAcademico: respuesta.estadoAcademico,
           cursando: respuesta.cursando,
@@ -41,7 +40,7 @@ const Login = ({ setAlumnoLogueado }) => {
       } else {
         Swal.fire({
           title: "Error",
-          text: "Legajo o contraseña incorrecto.",
+          text: "DNI o contraseña incorrecto.",
           icon: "error",
           confirmButtonColor: "#ef0808",
         });
@@ -60,21 +59,21 @@ const Login = ({ setAlumnoLogueado }) => {
           <Row>
             <Col className="col-md-6 col-sm-12 mb-5">
               <Form className="mx-auto" onSubmit={handleSubmit(onSubmit)}>
-                <Form.Group className="mb-3" controlId="formBasicLegajo">
-                  <Form.Label>N° Legajo:</Form.Label>
+                <Form.Group className="mb-3" controlId="formBasicDNI">
+                  <Form.Label>DNI:</Form.Label>
                   <Form.Control
                     type="number"
                     placeholder="Ingrese su número de legajo"
-                    {...register("legajo", {
-                      required: "El legajo es un campo obligatorio",
-                      minLength: {
-                        value: 4,
-                        message: "El legajo es un numero de 4 caracteres",
+                    {...register("dni", {
+                      required: "El DNI es un campo obligatorio",
+                      maxLength: {
+                        value: 10,
+                        message: "El DNI es un numero de 10 caracteres",
                       },
                     })}
                   />
                   <Form.Text className="text-danger">
-                    {errors.legajo?.message}
+                    {errors.dni?.message}
                   </Form.Text>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicPassword">

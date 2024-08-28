@@ -211,7 +211,8 @@ export const loginAdmin = async (usuario) => {
   }
 };
 
-export const crearAlumno = async (alumno, documentos, materiasInscripto) => {
+export const crearAlumno = async (alumno, materiasInscritas, documentos) => {
+  console.log(alumno)
   let datosAlumno = {
     nombres: alumno.nombres,
     apellido: alumno.apellido,
@@ -227,19 +228,21 @@ export const crearAlumno = async (alumno, documentos, materiasInscripto) => {
     periodoLectivo: alumno.periodoLectivo, 
     carrera: alumno.carrera,
     password: alumno.password,
+    estadoAcademico: [],
+    cursando: materiasInscritas,
     titulo: alumno.titulo,
     escuela: alumno.escuela,
-    siAdeudaMaterias: documentos.siAdeuda,
-    noAdeudaMaterias: documentos.noAdeuda,
-    presentoTituloSecundario: documentos.tituloSec,
-    presentoFotoCarnet: documentos.fotos,
-    presentoActaNacimiento: documentos.actaNacimiento,
-    presentoConstanciaEstudio: documentos.constanciaEstudio,
-    presentoCopiaDNI: documentos.copiaDNI,
-    presentoPsicoFisico: documentos.psicoFisico,
-    presentoConstanciaCuil: documentos.constanciaCuil,
-    estadoAcademico: [],
-    cursando: materiasInscripto,
+    siAdeuda: documentos.siAdeuda,
+    noAdeuda: documentos.noAdeuda,
+    nombreMateriaAdeuda: alumno.NombreMateriaAdeuda,
+    tituloSec: documentos.tituloSec,
+    fotos: documentos.fotos,
+    actaNacimiento: documentos.actaNacimiento,
+    constanciaEstudio: documentos.constanciaEstudio,
+    copiaDNI: documentos.copiaDNI,
+    copiaTitulo: documentos.copiaTitulo,
+    psicoFisico: documentos.psicoFisico,
+    constanciaCuil: documentos.constanciaCuil,    
   };
   try {
     const respuesta = await fetch(URLAlumno + "/" + "alumnos", {
@@ -250,7 +253,6 @@ export const crearAlumno = async (alumno, documentos, materiasInscripto) => {
       body: JSON.stringify(datosAlumno),
     });
     return respuesta;
-    console.log(datosAlumno)
   } catch (error) {
     console.log(error);
     return false;
@@ -287,6 +289,13 @@ export const obtenerAlumnosCursando = async () => {
         dni: dato.dni,
         anio: item.anio,
         carrera: dato.carrera,
+        presentoTituloSecundario: dato.presentoTituloSecundario,
+        presentoFotoCarnet: dato.fotos,
+        presentoActaNacimiento: dato.actaNacimiento,
+        presentoConstanciaEstudio: dato.constanciaEstudio,
+        presentoCopiaDNI: dato.copiaDNI,
+        presentoPsicoFisico: dato.psicoFisico,
+        presentoConstanciaCuil: dato.constanciaCuil,
       }))
     );
     return datos;
@@ -401,16 +410,62 @@ export const eliminarDatosExamenes = async () => {
   }
 };
 
-export const obtenerMateriasPrimerAnio = async () => {
+
+export const editarAlumno = async(alumno, materiasInscritas, documentos, codigo)=>{
+  let datosAlumno = {
+    nombres: alumno.nombres,
+    apellido: alumno.apellido,
+    dni: alumno.dni,
+    cuil: alumno.cuil,
+    fechaNac: alumno.fechaNac,
+    provincia: alumno.provincia,
+    domicilio: alumno.domicilio,
+    localidad: alumno.localidad,
+    celuPersonal: alumno.celuPersonal,
+    celuEmergencia: alumno.celuEmergencia,
+    email: alumno.email,
+    periodoLectivo: alumno.periodoLectivo, 
+    carrera: alumno.carrera,
+    password: alumno.password,
+    estadoAcademico: [],
+    cursando: materiasInscritas,
+    titulo: alumno.titulo,
+    escuela: alumno.escuela,
+    siAdeuda: documentos.siAdeuda,
+    noAdeuda: documentos.noAdeuda,
+    nombreMateriaAdeuda: alumno.NombreMateriaAdeuda,
+    tituloSec: documentos.tituloSec,
+    fotos: documentos.fotos,
+    actaNacimiento: documentos.actaNacimiento,
+    constanciaEstudio: documentos.constanciaEstudio,
+    copiaDNI: documentos.copiaDNI,
+    copiaTitulo: documentos.copiaTitulo,
+    psicoFisico: documentos.psicoFisico,
+    constanciaCuil: documentos.constanciaCuil,    
+  };
   try {
-    const respuesta = await fetch(URLCarrera + "/carreras");
-    const datos = await respuesta.json();
-    const materiasPrimerAnio = datos.flatMap((carrera) =>
-      carrera.materias.filter((materia) => materia.anio === 1)
-    );
-    return materiasPrimerAnio;
+    const respuesta = await fetch(`${URLAlumno}/${codigo}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(datosAlumno),
+    });
+    return respuesta;
   } catch (error) {
     console.log(error);
     return false;
   }
-};
+}
+
+export const obtenerAlumno = async (id) =>{
+  try {
+    const respuesta = await fetch(URLAlumno + "/" + "alumnos" + "/" + id);
+    const alumno = respuesta.json();
+    console.log(alumno)
+    return alumno
+  } catch (error) {
+    console.log(error);
+    return false;    
+  }
+}

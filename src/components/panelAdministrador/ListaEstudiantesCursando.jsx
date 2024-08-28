@@ -1,10 +1,19 @@
 import { useEffect, useState } from "react";
-import { Container, Form, Table, Modal, Button,Spinner } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
-import { actualizarEstadoAcademico, obtenerAlumnosCursando } from "../helpers/queries";
+import {
+  Container,
+  Form,
+  Table,
+  Modal,
+  Button,
+  Spinner,
+} from "react-bootstrap";
+import { Link, NavLink } from "react-router-dom";
+import {
+  actualizarEstadoAcademico,
+  obtenerAlumnosCursando,
+} from "../helpers/queries";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
-
 
 const ListaEstudiantesCursando = () => {
   const [alumnosCursando, setAlumnosCursando] = useState([]);
@@ -33,13 +42,24 @@ const ListaEstudiantesCursando = () => {
     setFiltroCursado(event.target.value);
   };
 
-  const unicoAlumnos = Array.from(new Set(alumnosFiltrados.map(a => a.dni)))
-  .map(dni => alumnosFiltrados.find(a => a.dni === dni));
+  const unicoAlumnos = Array.from(
+    new Set(alumnosFiltrados.map((a) => a.dni))
+  ).map((dni) => alumnosFiltrados.find((a) => a.dni === dni));
+
+  const documentacion = unicoAlumnos.map(
+    (alumno) =>
+      alumno.tituloSec === true ||
+      alumno.fotos === true ||
+      alumno.actaNacimiento === true ||
+      alumno.copiaDNI === true ||
+      alumno.psicoFisico === true ||
+      alumno.constanciaCuil === true
+  );
 
   const handleShow = (dni) => {
     setShow(true);
-    setIdAlumno(dni)
-  }  
+    setIdAlumno(dni);
+  };
 
   const handleClose = () => setShow(false);
 
@@ -47,44 +67,45 @@ const ListaEstudiantesCursando = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset
+    reset,
   } = useForm();
 
-  const onSubmit = (EstadoAcademico) =>{
-    actualizarEstadoAcademico(EstadoAcademico, idAlumno).then((respuesta) =>{
-      if(respuesta){
+  const onSubmit = (EstadoAcademico) => {
+    actualizarEstadoAcademico(EstadoAcademico, idAlumno).then((respuesta) => {
+      if (respuesta) {
         Swal.fire({
           title: "Exito!",
           text: "El estado academico del alumno se actualizo correctamente!",
-          icon: "success"
+          icon: "success",
         });
-        reset()
-      }else if(respuesta === false){
+        reset();
+      } else if (respuesta === false) {
         Swal.fire({
           title: "Error!",
           text: "La materia ya existe!",
-          icon: "error"
+          icon: "error",
         });
-      }else{
+      } else {
         Swal.fire({
           title: "Error!",
           text: "El estado academico del alumno no se actualizo correctamente, intente nuevamente más tarde",
-          icon: "error"
-        })
+          icon: "error",
+        });
       }
-    })
-  } 
-
+    });
+  };
 
   return (
     <main className="my-4">
       <Container>
         <section>
-          <h3 className="text-center">Lista de alumnos inscriptos en las carreras</h3>
+          <h3 className="text-center">
+            Lista de alumnos inscriptos en las carreras
+          </h3>
           <hr />
         </section>
         <section className="my-3 text-end">
-          <NavLink className="btn btn-regresar" to={"/inicioadmin"}>
+          <NavLink className="btn btn-regresar" to={"/inicioadmin/listaalumnoscursando"}>
             Volver
           </NavLink>
         </section>
@@ -110,12 +131,14 @@ const ListaEstudiantesCursando = () => {
             </Form.Group>
           </Form>
         </section>
-        {
-            mostrarSpinner ? (
-              <div className="text-center my-5">
-                <Spinner animation="border" variant="dark" />
-              </div>
-            ): (<> {cargando ? (
+        {mostrarSpinner ? (
+          <div className="text-center my-5">
+            <Spinner animation="border" variant="dark" />
+          </div>
+        ) : (
+          <>
+            {" "}
+            {cargando ? (
               <p>Cargando datos...</p>
             ) : (
               <Table striped bordered hover responsive className="table-scroll">
@@ -127,6 +150,7 @@ const ListaEstudiantesCursando = () => {
                     <th>DNI</th>
                     <th>Año</th>
                     <th>Carrera</th>
+                    <th>Documentación</th>
                     <th>Acciones</th>
                   </tr>
                 </thead>
@@ -140,17 +164,41 @@ const ListaEstudiantesCursando = () => {
                       <td>{dato.anio}</td>
                       <td>{dato.carrera}</td>
                       <td>
-                      <Button variant="warning" onClick={() =>{handleShow(dato.dni)}}>
+                        {documentacion ? (
+                          <>
+                            <p>
+                            Documentación completa 
+                            </p>
+                            
+                          </>
+                        ) : (
+                          <>
+                            <p className="text-danger">
+                              Adeuda documentación
+                            </p>
+                          </>
+                        )}
+                      </td>
+                      <td>
+                        <Button
+                          variant="warning"
+                          onClick={() => {
+                            handleShow(dato.dni);
+                          }}
+                        >
                           Actualizar Estado Académico
                         </Button>
+                        <Link to={'/inicioadmin/editaralumno/'  + dato.dni}  className="mt-2 btn btn-warning">
+                          Editar datos
+                        </Link>
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </Table>
-            )}</>) 
-          }
-       
+            )}
+          </>
+        )}
       </Container>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -158,12 +206,11 @@ const ListaEstudiantesCursando = () => {
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit(onSubmit)}>
-          <Form.Group className="mb-3">
+            <Form.Group className="mb-3">
               <Form.Label>Nombre Materia</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Matemática"
-              
                 {...register("nombreMateria", {
                   required: "El nombre de la materia es obligatorio",
                   minLength: {
@@ -172,41 +219,40 @@ const ListaEstudiantesCursando = () => {
                   },
                   maxLength: {
                     value: 200,
-                    message: "La cantidad maxima de caracteres es de 200 digitos",
+                    message:
+                      "La cantidad maxima de caracteres es de 200 digitos",
                   },
                 })}
               />
               <Form.Text className="text-danger">
-              {errors.nombreMateria?.message}
-            </Form.Text>
+                {errors.nombreMateria?.message}
+              </Form.Text>
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Año</Form.Label>
               <Form.Control
                 type="number"
-               placeholder="1"
-                
+                placeholder="1"
                 {...register("anio", {
                   required: "El año es obligatorio",
                   min: {
                     value: 1,
-                    message: "La cantidad minima es 1"
+                    message: "La cantidad minima es 1",
                   },
                   max: {
-                    value: 3
-                  }
+                    value: 3,
+                  },
                 })}
               />
               <Form.Text className="text-danger">
-              {errors.anio?.message}
-            </Form.Text>
+                {errors.anio?.message}
+              </Form.Text>
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Estado</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Aprobo 9, Folio 30, Tomo 40"
-               
                 {...register("estado", {
                   required: "El estado es obligatorio",
                   minLength: {
@@ -215,13 +261,14 @@ const ListaEstudiantesCursando = () => {
                   },
                   maxLength: {
                     value: 500,
-                    message: "La cantidad maxima de caracteres es de 500 digitos",
+                    message:
+                      "La cantidad maxima de caracteres es de 500 digitos",
                   },
                 })}
               />
-               <Form.Text className="text-danger">
-              {errors.estado?.message}
-            </Form.Text>
+              <Form.Text className="text-danger">
+                {errors.estado?.message}
+              </Form.Text>
             </Form.Group>
             <Button variant="danger" type="submit">
               Guardar Cambios

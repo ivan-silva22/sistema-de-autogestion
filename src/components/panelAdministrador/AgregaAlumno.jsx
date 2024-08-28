@@ -40,7 +40,7 @@ const AgregaAlumno = () => {
   const handleShow = () => setShow(true);
 
   const onSubmit = (alumno) => {
-    crearAlumno(alumno, documentos,materiasInscritas).then((respuesta) => {
+    crearAlumno(alumno, materiasInscritas, documentos).then((respuesta) => {
       console.log(respuesta)
       if (respuesta) {
         Swal.fire({
@@ -67,6 +67,7 @@ const AgregaAlumno = () => {
       ...prevState,
       [id]: checked,
     }));
+    reset();
   };
 
   const agregarMateria = (materia) =>{
@@ -260,12 +261,10 @@ const AgregaAlumno = () => {
               placeholder="Ingrese un número de telefono"
               {...register("celuPersonal", {
                 required: "El campo telefono es obligatorio",
-                pattern: {
-                  maxLength: {
-                    value: 10,
-                    message:
-                      "La cantidad máxima de caracteres es de 10 dígitos",
-                  },
+                maxLength: {
+                  value: 10,
+                  message:
+                    "La cantidad máxima de caracteres es de 10 dígitos",
                 },
               })}
             />
@@ -280,12 +279,10 @@ const AgregaAlumno = () => {
               placeholder="Ingrese un número de telefono"
               {...register("celuEmergencia", {
                 required: "El campo telefono es obligatorio",
-                pattern: {
-                  maxLength: {
-                    value: 10,
-                    message:
-                      "La cantidad máxima de caracteres es de 10 dígitos",
-                  },
+                maxLength: {
+                  value: 10,
+                  message:
+                    "La cantidad máxima de caracteres es de 10 dígitos",
                 },
               })}
             />
@@ -318,15 +315,13 @@ const AgregaAlumno = () => {
               placeholder="Ingrese el periodo lectivo"
               {...register("periodoLectivo", {
                 required: "El campo periodo Lectivo es obligatorio",
-                pattern: {
-                  min: {
-                    value: 1,
-                    message: "La cantidad minima es 1",
-                  },
-                  maxLength: {
-                    value: 5,
-                    message: "La cantidad máxima de caracteres es de 5 dígitos",
-                  },
+                min: {
+                  value: 1,
+                  message: "La cantidad minima es 1",
+                },
+                maxLength: {
+                  value: 5,
+                  message: "La cantidad máxima de caracteres es de 5 dígitos",
                 },
               })}
             />
@@ -398,16 +393,14 @@ const AgregaAlumno = () => {
               placeholder="Ingrese el titulo"
               {...register("titulo", {
                 required: "El campo titulo es obligatorio",
-                pattern: {
-                  minLength: {
-                    value: 5,
-                    message: "La cantidad minima de caracteres es de 5 dígitos",
-                  },
-                  maxLength: {
-                    value: 800,
-                    message:
-                      "La cantidad máxima de caracteres es de 800 dígitos",
-                  },
+                minLength: {
+                  value: 5,
+                  message: "La cantidad minima de caracteres es de 5 dígitos",
+                },
+                maxLength: {
+                  value: 800,
+                  message:
+                    "La cantidad máxima de caracteres es de 800 dígitos",
                 },
               })}
             />
@@ -422,16 +415,14 @@ const AgregaAlumno = () => {
               placeholder="Ingrese el nombre de la Escuela"
               {...register("escuela", {
                 required: "El campo es obligatorio",
-                pattern: {
-                  minLength: {
-                    value: 5,
-                    message: "La cantidad minima de caracteres es de 5 dígitos",
-                  },
-                  maxLength: {
-                    value: 800,
-                    message:
-                      "La cantidad máxima de caracteres es de 800 dígitos",
-                  },
+                minLength: {
+                  value: 5,
+                  message: "La cantidad minima de caracteres es de 5 dígitos",
+                },
+                maxLength: {
+                  value: 800,
+                  message:
+                    "La cantidad máxima de caracteres es de 800 dígitos",
                 },
               })}
             />
@@ -475,7 +466,20 @@ const AgregaAlumno = () => {
                 Ingrese las materias separadas por una ","
               </span>
             </Form.Label>
-            <Form.Control />
+            <Form.Control
+              type="text"
+              placeholder="Ingrese la/s materia/s"
+              {...register("nombreMateriaAdeuda", {
+                minLength: {
+                  value: 2,
+                  message: "La cantidad minima de caracteres es de 2 dígitos",
+                },
+                maxLength: {
+                  value: 1000,
+                  message:
+                    "La cantidad máxima de caracteres es de 1000 dígitos",
+                },
+              })} />
           </Form.Group>
           <section className="mt-5">
             <h5>Documentación que adjunta:</h5>

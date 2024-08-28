@@ -4,6 +4,7 @@ import AgregaAlumno from "../panelAdministrador/AgregaAlumno";
 import ListaEstudiantesExamenes from "../panelAdministrador/ListaEstudiantesExamenes";
 import ListaEstudiantesCursando from "../panelAdministrador/ListaEstudiantesCursando";
 import CambiarContraseña from "../panelAdministrador/CambiarContraseña";
+import EditarAlumno from "../panelAdministrador/EditarAlumno";
 
 const RutasAdmin = ({
   setAdminLogueado,
@@ -29,6 +30,7 @@ const RutasAdmin = ({
           }
         />
         <Route exact path="/agregaralumno" element={<AgregaAlumno />} />
+        <Route exact path="/editaralumno/:id" element={<EditarAlumno/>}/>
         <Route
           exact
           path="/inscriptosexamen"

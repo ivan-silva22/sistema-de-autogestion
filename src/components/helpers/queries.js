@@ -213,25 +213,45 @@ export const loginAdmin = async (usuario) => {
   }
 };
 
-export const crearAlumno = async (alumno) => {
+export const crearAlumno = async (alumno, documentos) => {
   let datosAlumno = {
     nombres: alumno.nombres,
     apellido: alumno.apellido,
     dni: alumno.dni,
+    cuil: alumno.cuil,
+    fechaNac: alumno.fechaNac,
+    provincia: alumno.provincia,
+    domicilio: alumno.domicilio,
+    localidad: alumno.localidad,
+    celuPersonal: alumno.celuPersonal,
+    celuEmergencia: alumno.celuEmergencia,
+    email: alumno.email,
+    periodoLectivo: alumno.periodoLectivo, 
     carrera: alumno.carrera,
-    legajo: alumno.legajo,
     password: alumno.password,
+    titulo: alumno.titulo,
+    escuela: alumno.escuela,
+    siAdeudaMaterias: documentos.siAdeuda,
+    noAdeudaMaterias: documentos.noAdeuda,
+    presentoTituloSecundario: documentos.tituloSec,
+    presentoFotoCarnet: documentos.fotos,
+    presentoActaNacimiento: documentos.actaNacimiento,
+    presentoConstanciaEstudio: documentos.constanciaEstudio,
+    presentoCopiaDNI: documentos.copiaDNI,
+    presentoPsicoFisico: documentos.psicoFisico,
+    presentoConstanciaCuil: documentos.constanciaCuil,
     estadoAcademico: [],
   };
   try {
-    const respuesta = await fetch(URLAlumno + "/" + "alumnos", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(datosAlumno),
-    });
-    return respuesta;
+    // const respuesta = await fetch(URLAlumno + "/" + "alumnos", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(datosAlumno),
+    // });
+    // return respuesta;
+    console.log(datosAlumno)
   } catch (error) {
     console.log(error);
     return false;

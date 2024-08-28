@@ -14,6 +14,8 @@ const AgregaAlumno = () => {
   } = useForm();
   const [materiasPrimerAnio, setMateriasPrimerAnio] = useState([]);
   const [documentos, setDocumentos] = useState({
+    siAdeuda: false,
+    noAdeuda: false,
     copiaTitulo: false,
     tituloSec: false,
     fotos: false,
@@ -21,7 +23,7 @@ const AgregaAlumno = () => {
     constanciaEstudio: false,
     copiaDNI: false,
     psicoFisico: false,
-    constanciaCuil: false
+    constanciaCuil: false,
   });
 
   const onSubmit = (alumno) => {
@@ -30,9 +32,9 @@ const AgregaAlumno = () => {
     } else {
       alumno.cursando = [];
     }
-    console.log(alumno)
-    console.log(documentos)
-    crearAlumno(alumno).then((respuesta) => {
+    console.log(alumno);
+    console.log(documentos);
+    crearAlumno(alumno, documentos).then((respuesta) => {
       if (respuesta) {
         Swal.fire({
           title: "Exito",
@@ -60,14 +62,13 @@ const AgregaAlumno = () => {
     });
   }, []);
 
-   const handleCheckboxChange = (e) => {
+  const handleCheckboxChange = (e) => {
     const { id, checked } = e.target;
     setDocumentos((prevState) => ({
       ...prevState,
       [id]: checked,
     }));
   };
-
 
   return (
     <main className="my-3">
@@ -192,8 +193,7 @@ const AgregaAlumno = () => {
                 },
                 maxLength: {
                   value: 400,
-                  message:
-                    "La cantidad máxima de caracteres es de 400 dígitos",
+                  message: "La cantidad máxima de caracteres es de 400 dígitos",
                 },
               })}
             />
@@ -214,8 +214,7 @@ const AgregaAlumno = () => {
                 },
                 maxLength: {
                   value: 800,
-                  message:
-                    "La cantidad máxima de caracteres es de 800 dígitos",
+                  message: "La cantidad máxima de caracteres es de 800 dígitos",
                 },
               })}
             />
@@ -236,8 +235,7 @@ const AgregaAlumno = () => {
                 },
                 maxLength: {
                   value: 800,
-                  message:
-                    "La cantidad máxima de caracteres es de 800 dígitos",
+                  message: "La cantidad máxima de caracteres es de 800 dígitos",
                 },
               })}
             />
@@ -393,7 +391,10 @@ const AgregaAlumno = () => {
             <h5>Datos de la Educación Secundaria</h5>
             <hr />
           </section>
-          <Form.Group className="mb-3" controlId="formBasicNombreTituloSecundario">
+          <Form.Group
+            className="mb-3"
+            controlId="formBasicNombreTituloSecundario"
+          >
             <Form.Label>Titulo de Nivel Secundario*</Form.Label>
             <Form.Control
               type="text"
@@ -452,10 +453,22 @@ const AgregaAlumno = () => {
           </section>
           <div className="d-flex justify-content-around">
             <Form.Group className="mb-4" controlId="formBasicSiAdeuda">
-              <Form.Check aria-label="option 1" id="" label="Si" />
+              <Form.Check
+                aria-label="option 1"
+                id="siAdeuda"
+                label="Si"
+                checked={documentos.siAdeuda}
+                onChange={handleCheckboxChange}
+              />
             </Form.Group>
             <Form.Group className="mb-4" controlId="formBasicNoAdeuda">
-              <Form.Check aria-label="option 2" id="" label="No" />
+              <Form.Check
+                aria-label="option 2"
+                id="noAdeuda"
+                label="No"
+                checked={documentos.noAdeuda}
+                onChange={handleCheckboxChange}
+              />
             </Form.Group>
           </div>
           <Form.Group className="mb-4" controlId="formBasicNombreMateriaAdeuda">
@@ -465,94 +478,94 @@ const AgregaAlumno = () => {
                 Ingrese las materias separadas por una ","
               </span>
             </Form.Label>
-            <Form.Control/>
-            <Form.Text className="text-danger">
-              {errors.materiasAdeuda?.message}
-            </Form.Text>
+            <Form.Control />
           </Form.Group>
           <section className="mt-5">
             <h5>Documentación que adjunta:</h5>
             <hr />
           </section>
           <Row md={4} className="justify-content-center mx-auto mb-5">
-        <Col className="mx-auto">
-          <Form.Group className="mb-3" controlId="formBasicTituloSec">
-            <Form.Check
-              aria-label="option 1"
-              id="tituloSec"
-              label="Titulo de Nivel Secundario"
-              checked={documentos.tituloSec}
-              onChange={handleCheckboxChange}
-            />
-          </Form.Group>
-        </Col>
-        <Col className="mx-auto">
-          <Form.Group className="mb-3" controlId="formBasicFotos">
-            <Form.Check
-              aria-label="option 2"
-              id="fotos"
-              label="3 Fotos Carnet"
-              checked={documentos.fotos}
-              onChange={handleCheckboxChange}
-            />
-          </Form.Group>
-        </Col>
-        <Col className="mx-auto">
-          <Form.Group className="mb-3" controlId="formBasicActanacimiento">
-            <Form.Check
-              aria-label="option 3"
-              id="actaNacimiento"
-              label="Acta Nacimiento"
-              checked={documentos.actaNacimiento}
-              onChange={handleCheckboxChange}
-            />
-          </Form.Group>
-        </Col>
-        <Col className="mx-auto">
-          <Form.Group className="mb-3" controlId="formBasicConstanciaEstudio">
-            <Form.Check
-              aria-label="option 4"
-              id="constanciaEstudio"
-              label="Constancia de Cert. de Estudio en Trámite"
-              checked={documentos.constanciaEstudio}
-              onChange={handleCheckboxChange}
-            />
-          </Form.Group>
-        </Col>
-        <Col className="mx-auto">
-          <Form.Group className="mb-3" controlId="formBasicCopiaDNI">
-            <Form.Check
-              aria-label="option 5"
-              id="copiaDNI"
-              label="Fotocopia de DNI"
-              checked={documentos.copiaDNI}
-              onChange={handleCheckboxChange}
-            />
-          </Form.Group>
-        </Col>
-        <Col className="mx-auto">
-          <Form.Group className="mb-3" controlId="formBasicPsicoFisico">
-            <Form.Check
-              aria-label="option 6"
-              id="psicoFisico"
-              label="Certf. Psico-Fisico"
-              checked={documentos.psicoFisico}
-              onChange={handleCheckboxChange}
-            />
-          </Form.Group>
-        </Col>
-        <Col className="mx-auto">
-          <Form.Group className="mb-3" controlId="formBasicConstanciaCuil">
-            <Form.Check
-              aria-label="option 7"
-              id="constanciaCuil"
-              label="Constancia de CUIL"
-              checked={documentos.constanciaCuil}
-              onChange={handleCheckboxChange}
-            />
-          </Form.Group>
-        </Col>
-      </Row>
+            <Col className="mx-auto">
+              <Form.Group className="mb-3" controlId="formBasicTituloSec">
+                <Form.Check
+                  aria-label="option 1"
+                  id="tituloSec"
+                  label="Titulo de Nivel Secundario"
+                  checked={documentos.tituloSec}
+                  onChange={handleCheckboxChange}
+                />
+              </Form.Group>
+            </Col>
+            <Col className="mx-auto">
+              <Form.Group className="mb-3" controlId="formBasicFotos">
+                <Form.Check
+                  aria-label="option 2"
+                  id="fotos"
+                  label="3 Fotos Carnet"
+                  checked={documentos.fotos}
+                  onChange={handleCheckboxChange}
+                />
+              </Form.Group>
+            </Col>
+            <Col className="mx-auto">
+              <Form.Group className="mb-3" controlId="formBasicActanacimiento">
+                <Form.Check
+                  aria-label="option 3"
+                  id="actaNacimiento"
+                  label="Acta Nacimiento"
+                  checked={documentos.actaNacimiento}
+                  onChange={handleCheckboxChange}
+                />
+              </Form.Group>
+            </Col>
+            <Col className="mx-auto">
+              <Form.Group
+                className="mb-3"
+                controlId="formBasicConstanciaEstudio"
+              >
+                <Form.Check
+                  aria-label="option 4"
+                  id="constanciaEstudio"
+                  label="Constancia de Cert. de Estudio en Trámite"
+                  checked={documentos.constanciaEstudio}
+                  onChange={handleCheckboxChange}
+                />
+              </Form.Group>
+            </Col>
+            <Col className="mx-auto">
+              <Form.Group className="mb-3" controlId="formBasicCopiaDNI">
+                <Form.Check
+                  aria-label="option 5"
+                  id="copiaDNI"
+                  label="Fotocopia de DNI"
+                  checked={documentos.copiaDNI}
+                  onChange={handleCheckboxChange}
+                />
+              </Form.Group>
+            </Col>
+            <Col className="mx-auto">
+              <Form.Group className="mb-3" controlId="formBasicPsicoFisico">
+                <Form.Check
+                  aria-label="option 6"
+                  id="psicoFisico"
+                  label="Certf. Psico-Fisico"
+                  checked={documentos.psicoFisico}
+                  onChange={handleCheckboxChange}
+                />
+              </Form.Group>
+            </Col>
+            <Col className="mx-auto">
+              <Form.Group className="mb-3" controlId="formBasicConstanciaCuil">
+                <Form.Check
+                  aria-label="option 7"
+                  id="constanciaCuil"
+                  label="Constancia de CUIL"
+                  checked={documentos.constanciaCuil}
+                  onChange={handleCheckboxChange}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
           <Button
             variant="danger"
             type="submit"

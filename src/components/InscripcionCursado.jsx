@@ -8,7 +8,7 @@ const InscripcionCursado = ({ alumnoLogueado, habilitarMaterias }) => {
   const [materias, setMaterias] = useState([]);
   const [botonesDeshabilitados, setBotonesDeshabilitados] = useState(() => {
     const botonesGuardados = localStorage.getItem(
-      `botonesDeshabilitadosCursado_${alumnoLogueado.legajo}`
+      `botonesDeshabilitadosCursado_${alumnoLogueado.dni}`
     );
     return botonesGuardados ? JSON.parse(botonesGuardados) : [];
   });
@@ -33,10 +33,10 @@ const InscripcionCursado = ({ alumnoLogueado, habilitarMaterias }) => {
 
   useEffect(() => {
     localStorage.setItem(
-      `botonesDeshabilitadosCursado_${alumnoLogueado.legajo}`,
+      `botonesDeshabilitadosCursado_${alumnoLogueado.dni}`,
       JSON.stringify(botonesDeshabilitados)
     );
-  }, [botonesDeshabilitados, alumnoLogueado.legajo]);
+  }, [botonesDeshabilitados, alumnoLogueado.dni]);
 
   const handleClick = (materia) => {
     inscribirMateria(materia, alumnoLogueado).then((respuesta) => {

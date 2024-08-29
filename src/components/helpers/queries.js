@@ -334,11 +334,11 @@ export const cambiarPassword = async (dato) => {
   }
 };
 
-export const cambiarPasswordAlumno = async (dato, legajo) => {
+export const cambiarPasswordAlumno = async (dato, dni) => {
   try {
     const respuesta = await fetch(URLAlumno + "/" + "alumnos");
     const listaAlumnos = await respuesta.json();
-    const buscarAlumno = listaAlumnos.find((item) => item.dni === legajo);
+    const buscarAlumno = listaAlumnos.find((item) => item.dni === dni);
     if (buscarAlumno) {
       buscarAlumno.password = dato.passwordNuevo;
       const respuesta = await fetch(
@@ -462,7 +462,6 @@ export const obtenerAlumno = async (id) =>{
   try {
     const respuesta = await fetch(URLAlumno + "/" + "alumnos" + "/" + id);
     const alumno = respuesta.json();
-    console.log(alumno)
     return alumno
   } catch (error) {
     console.log(error);

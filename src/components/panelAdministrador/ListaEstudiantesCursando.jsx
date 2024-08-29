@@ -105,7 +105,7 @@ const ListaEstudiantesCursando = () => {
           <hr />
         </section>
         <section className="my-3 text-end">
-          <NavLink className="btn btn-regresar" to={"/inicioadmin/listaalumnoscursando"}>
+          <NavLink className="btn btn-regresar" to={"/inicioadmin"}>
             Volver
           </NavLink>
         </section>

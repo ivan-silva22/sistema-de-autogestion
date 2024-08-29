@@ -63,7 +63,7 @@ const Login = ({ setAlumnoLogueado }) => {
                   <Form.Label>DNI:</Form.Label>
                   <Form.Control
                     type="number"
-                    placeholder="Ingrese su número de legajo"
+                    placeholder="Ingrese su número de DNI"
                     {...register("dni", {
                       required: "El DNI es un campo obligatorio",
                       maxLength: {

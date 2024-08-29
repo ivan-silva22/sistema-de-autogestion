@@ -100,9 +100,20 @@ const EditarAlumno = () => {
         setValue("password", respuesta.password);
         setValue("titulo", respuesta.titulo);
         setValue("escuela", respuesta.escuela);
-   
-        })
-      },[])
+        setDocumentos({
+          siAdeuda: respuesta.siAdeuda || false,
+          noAdeuda: respuesta.noAdeuda || false,
+          copiaTitulo: respuesta.copiaTitulo || false,
+          tituloSec: respuesta.tituloSec || false,
+          fotos: respuesta.fotos || false,
+          actaNacimiento: respuesta.actaNacimiento || false,
+          constanciaEstudio: respuesta.constanciaEstudio || false,
+          copiaDNI: respuesta.copiaDNI || false,
+          psicoFisico: respuesta.psicoFisico || false,
+          constanciaCuil: respuesta.constanciaCuil || false,
+        });
+      });
+      },[id, setValue])
 
     
     return (
@@ -113,7 +124,7 @@ const EditarAlumno = () => {
             <hr />
           </section>
           <section className="my-3 text-end">
-            <NavLink className="btn btn-regresar" to={"/inicioadmin"}>
+            <NavLink className="btn btn-regresar" to={"/inicioadmin/listaalumnoscursando"}>
               Volver
             </NavLink>
           </section>
@@ -388,6 +399,7 @@ const EditarAlumno = () => {
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label>Contraseña*</Form.Label>
               <Form.Control
+               disabled
                 type="password"
                 placeholder="********"
                 {...register("password", {

@@ -8,7 +8,7 @@ const InscripcionExamen = ({ alumnoLogueado, habilitarExamenes }) => {
   const [materias, setMaterias] = useState([]);
   const [botonesDeshabilitados, setBotonesDeshabilitados] = useState(() => {
     const botonesGuardados = localStorage.getItem(
-      `botonesDeshabilitadosExamen_${alumnoLogueado.legajo}`
+      `botonesDeshabilitadosExamen_${alumnoLogueado.dni}`
     );
     return botonesGuardados ? JSON.parse(botonesGuardados) : [];
   });
@@ -43,10 +43,10 @@ const InscripcionExamen = ({ alumnoLogueado, habilitarExamenes }) => {
 
   useEffect(() => {
     localStorage.setItem(
-      `botonesDeshabilitadosExamen_${alumnoLogueado.legajo}`,
+      `botonesDeshabilitadosExamen_${alumnoLogueado.dni}`,
       JSON.stringify(botonesDeshabilitados)
     );
-  }, [botonesDeshabilitados, alumnoLogueado.legajo]);
+  }, [botonesDeshabilitados, alumnoLogueado.dni]);
 
   const handleClick = async (materia) => {
     const nombreMateria = materia.nombreMateria;

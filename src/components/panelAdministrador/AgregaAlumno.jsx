@@ -50,6 +50,7 @@ const AgregaAlumno = () => {
           confirmButtonColor: "#ef0808",
         });
         reset();
+        resetDocumentos()
       } else {
         Swal.fire({
           title: "Error",
@@ -67,7 +68,6 @@ const AgregaAlumno = () => {
       ...prevState,
       [id]: checked,
     }));
-    reset();
   };
 
   const agregarMateria = (materia) =>{
@@ -80,6 +80,21 @@ const AgregaAlumno = () => {
     });
     resetMaterias();
   }
+
+  const resetDocumentos = () => {
+    setDocumentos({
+      siAdeuda: false,
+      noAdeuda: false,
+      copiaTitulo: false,
+      tituloSec: false,
+      fotos: false,
+      actaNacimiento: false,
+      constanciaEstudio: false,
+      copiaDNI: false,
+      psicoFisico: false,
+      constanciaCuil: false,
+    });
+  };
 
   return (
     <main className="my-3">

@@ -41,7 +41,6 @@ const AgregaAlumno = () => {
 
   const onSubmit = (alumno) => {
     crearAlumno(alumno, materiasInscritas, documentos).then((respuesta) => {
-      console.log(respuesta)
       if (respuesta) {
         Swal.fire({
           title: "Exito",

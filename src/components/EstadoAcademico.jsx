@@ -12,8 +12,6 @@ const EstadoAcademico = ({ alumnoLogueado }) => {
     setMostrarSpinner(false);
   }, []);
 
-  console.log(alumnoLogueado.estadoAcademico)
-
   return (
     <main className="my-5">
       <Container>
